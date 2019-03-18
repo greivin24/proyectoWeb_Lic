@@ -1,0 +1,18 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a [routerLink]="[ '/home' ]" routerLinkActive="active">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li *ngFor="let item of navbarOpcs" class="nav-item" routerLinkActive="active">
+                <a *ngIf="checkisIn" class="nav-link" [routerLink]="item.router_link">{{ item.nombre }}</a>
+            </li>
+        </ul>
+        <span class="navbar-text">
+          <a *ngIf="!checkisIn" class="btn btn-outline-success" [routerLink]="[ 'login' ]">Ingresar</a>
+          <button *ngIf="checkisIn" class="btn btn-outline-success" (click)="btnSalir()">Salir</button>
+      </span>
+    </div>
+</nav>
