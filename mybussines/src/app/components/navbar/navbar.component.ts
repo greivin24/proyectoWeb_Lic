@@ -9,6 +9,7 @@ import { NavbarOpc } from '../../interfaces/interface';
 })
 export class NavbarComponent implements OnInit {
 
+  
  //Navbar opcions
   navbarOpcs:NavbarOpc[]=[
   { nombre: "Noticias", router_link: "noticias" },
