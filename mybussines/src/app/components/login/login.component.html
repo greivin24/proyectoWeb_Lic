@@ -3,10 +3,8 @@
         <label for=""></label>
         <input type="text" name="nombre" [(ngModel)]="usuario.nombre" required class="form-control" placeholder="">
         <small id="helpId" class="text-muted">Nombre</small>
-
         <input type="text" name="apellido" [(ngModel)]="usuario.apellido" required class="form-control" placeholder="">
         <small id="helpId" class="text-muted">Apellido</small><br>
-
         <button class="btn btn-outline-primary" [disabled]="!forma.valid">Agregar a FireBase</button>
     </div>
 </form>
