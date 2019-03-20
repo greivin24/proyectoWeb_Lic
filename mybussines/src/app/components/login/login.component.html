@@ -1,5 +1,4 @@
 <form (ngSubmit)="guardarUser()" #forma="ngForm">
-
     <div class="form-group">
         <label for=""></label>
         <input type="text" name="nombre" [(ngModel)]="usuario.nombre" required class="form-control" placeholder="">
@@ -10,5 +9,4 @@
 
         <button class="btn btn-outline-primary" [disabled]="!forma.valid">Agregar a FireBase</button>
     </div>
-
 </form>
