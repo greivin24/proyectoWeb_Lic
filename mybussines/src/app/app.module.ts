@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +17,9 @@ import { ServiciosComponent } from './components/servicios/servicios.component';
 import { CentrosTuristicosComponent } from './components/centros-turisticos/centros-turisticos.component';
 import { CentroTuristicoComponent } from './components/centro-turistico/centro-turistico.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+
+//Servicios
+import { UsuariosService } from './services/usuarios.service';
 
 
 @NgModule({
@@ -37,9 +41,12 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     BrowserModule,
     AppRoutingModule, 
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule, 
+    FormsModule
   ],
-  providers: [],
+  providers: [
+    UsuariosService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavbarOpc } from '../../interfaces/interface';
 
 
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -9,14 +10,15 @@ import { NavbarOpc } from '../../interfaces/interface';
 })
 export class NavbarComponent implements OnInit {
 
-  
+
  //Navbar opcions
   navbarOpcs:NavbarOpc[]=[
   { nombre: "Noticias", router_link: "noticias" },
   { nombre: "Quienes Somos", router_link: "quienes-somos" },
   { nombre: "Contactenos", router_link: "contactenos" },
   { nombre: "Servicios", router_link: "Servicios" },
-  { nombre: "Centros Turisticos", router_link: "centros-turisticos" }
+  { nombre: "Centros Turisticos", router_link: "centros-turisticos" },
+  { nombre: "Login", router_link: "login" }
 ];
 
   checkisIn: boolean= true;
