@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavbarOpc } from '../../interfaces/interface';
-
+import { DataStorageService } from '../../localstorage/data-storage.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,21 +10,14 @@ import { NavbarOpc } from '../../interfaces/interface';
 })
 export class NavbarComponent implements OnInit {
 
-
- //Navbar opcions
-  navbarOpcs:NavbarOpc[]=[
-  { nombre: "Noticias", router_link: "noticias" },
-  { nombre: "Quienes Somos", router_link: "quienes-somos" },
-  { nombre: "Contactenos", router_link: "contactenos" },
-  { nombre: "Servicios", router_link: "Servicios" },
-  { nombre: "Centros Turisticos", router_link: "centros-turisticos" },
-  { nombre: "Login", router_link: "login" }
-];
-
-  checkisIn: boolean= true;
-  constructor() { }
+  constructor(private dataStorageService:DataStorageService, private router:Router) { }
 
   ngOnInit() {
+  }
+
+  btnSalir(){
+    this.dataStorageService.deleteObjectValue("online");
+    this.router.navigate(['/landing-page']);
   }
 
 }

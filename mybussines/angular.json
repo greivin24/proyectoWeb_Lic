@@ -26,12 +26,18 @@
                             "src/styles.css",
                             "node_modules/bootstrap/dist/css/bootstrap.css",
                             "node_modules/bootstrap/dist/css/bootstrap-reboot.css",
-                            "node_modules/bootstrap/dist/css/bootstrap-grid.css"
+                            "node_modules/bootstrap/dist/css/bootstrap-grid.css",
+                            "node_modules/hover.css/css/hover-min.css",
+                            "node_modules/alertifyjs/build/css/alertify.min.css",
+                            "node_modules/alertifyjs/build/css/themes/default.min.css",
+                            "node_modules/aos/dist/aos.css"
                         ],
                         "scripts": [
                             "node_modules/jquery/dist/jquery.js",
                             "node_modules/bootstrap/dist/js/bootstrap.js",
-                            "node_modules/jquery/dist/jquery.js"
+                            "node_modules/jquery/dist/jquery.js",
+                            "node_modules/alertifyjs/build/alertify.js",
+                            "node_modules/aos/dist/aos.js"
                         ],
                         "es5BrowserSupport": true
                     },

@@ -17,10 +17,34 @@ import { ServiciosComponent } from './components/servicios/servicios.component';
 import { CentrosTuristicosComponent } from './components/centros-turisticos/centros-turisticos.component';
 import { CentroTuristicoComponent } from './components/centro-turistico/centro-turistico.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
 
 //Servicios
 import { UsuariosService } from './services/usuarios.service';
 
+//Local Storage
+import { DataStorageService } from './localstorage/data-storage.service';
+
+//Auth Guard
+import { AuthGuard } from './guards/auth-guard.service';
+import { AuthAdminGuardService } from './guards/auth-admin-guard.service';
+
+
+// Firebase
+import { AngularFireModule } from "@angular/fire";
+import { AngularFireAuthModule } from "@angular/fire/auth";
+import { PerfilComponent } from './components/perfil/perfil.component';
+
+
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyALBVTT556hh7Jg1sCdA6eOE4G4zNyBxeA",
+  authDomain: "angular-crud-firebase-d60e1.firebaseapp.com",
+  databaseURL: "https://angular-crud-firebase-d60e1.firebaseio.com",
+  projectId: "angular-crud-firebase-d60e1",
+  storageBucket: "angular-crud-firebase-d60e1.appspot.com",
+  messagingSenderId: "151666909009"
+};
 
 @NgModule({
   declarations: [
@@ -35,7 +59,9 @@ import { UsuariosService } from './services/usuarios.service';
     ServiciosComponent,
     CentrosTuristicosComponent,
     CentroTuristicoComponent,
-    DashboardComponent
+    DashboardComponent,
+    LandingPageComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +71,10 @@ import { UsuariosService } from './services/usuarios.service';
     FormsModule
   ],
   providers: [
-    UsuariosService
+    UsuariosService, 
+    DataStorageService, 
+    AuthGuard, 
+    AuthAdminGuardService
   ],
   bootstrap: [AppComponent]
 })

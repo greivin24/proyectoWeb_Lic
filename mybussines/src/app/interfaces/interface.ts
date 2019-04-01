@@ -4,7 +4,12 @@ export interface NavbarOpc{
   }
 
 export interface Usuario{
-   key$?:string,
    nombre:string,
-   apellido:string
+   apellido:string,
+}
+
+export interface User{
+  key$?:string,
+  correo:string,
+  rol:string
 }

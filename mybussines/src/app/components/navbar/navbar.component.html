@@ -6,13 +6,21 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li *ngFor="let item of navbarOpcs" class="nav-item" routerLinkActive="active">
-                <a *ngIf="checkisIn" class="nav-link" [routerLink]="item.router_link">{{ item.nombre }}</a>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" [routerLink]="[ '/home/quienes-somos' ]">Quienes-somos</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" [routerLink]="[ '/home/servicios' ]">Servicios</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" [routerLink]="[ '/home/centros-turisticos' ]">Centros Turisticos</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" [routerLink]="[ '/home/dashboard' ]">Panel de Control</a>
             </li>
         </ul>
         <span class="navbar-text">
-          <a *ngIf="!checkisIn" class="btn btn-outline-success" [routerLink]="[ 'login' ]">Ingresar</a>
-          <button *ngIf="checkisIn" class="btn btn-outline-success" (click)="btnSalir()">Salir</button>
+          <button class="btn btn-outline-primary" (click)="btnSalir()">Cerrar sesion</button>
       </span>
     </div>
 </nav>
