@@ -20,16 +20,18 @@ import { AuthAdminGuardService } from './guards/auth-admin-guard.service';
 const routes: Routes = [
   { path: 'landing-page', component: LandingPageComponent},
   { path: 'login', component: LoginComponent},
-  {path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
         { path: 'noticias', component: NoticiasComponent },
-        { path: 'noticia', component: NoticiaComponent },
+        { path: 'noticia/:id', component: NoticiaComponent },
         { path: 'quienes-somos', component: QuienesSomosComponent },
         { path: 'contactenos', component: ContactenosComponent },
         { path: 'servicios', component: ServiciosComponent },
         { path: 'centros-turisticos', component: CentrosTuristicosComponent },
-        { path: 'centro-turistico', component: CentroTuristicoComponent },
+        { path: 'centro-turistico/:id', component: CentroTuristicoComponent },
 
-        { path: 'dashboard', component: DashboardComponent, canActivate: [AuthAdminGuardService]}
+        { path: 'dashboard', component: DashboardComponent, canActivate: [AuthAdminGuardService], children: [
+          { path: 'perfil', component:  PerfilComponent}, 
+        ]}
   ]},
   { path: '**',redirectTo: "home/noticias"}
 ];

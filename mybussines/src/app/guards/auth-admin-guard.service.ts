@@ -1,5 +1,5 @@
 import { DataStorageService } from '../localstorage/data-storage.service';
-import { User } from '../interfaces/interface';
+import { UserAuth } from '../interfaces/interface';
 
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
@@ -13,7 +13,7 @@ export class AuthAdminGuardService implements CanActivate {
   constructor(private dataStorageService: DataStorageService, private _router: Router) {
   }
 
-  user:User;
+  user:UserAuth;
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     this.user = this.dataStorageService.getObjectValue("online")
     if (this.user.rol == "Admin") {

@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { DataService } from '../../services/data/data.service';
+
+import * as AOS from 'aos';
 
 @Component({
   selector: 'app-noticia',
@@ -7,9 +12,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NoticiaComponent implements OnInit {
 
-  constructor() { }
+  noticia:any ={};
+  constructor(private activatedRouter: ActivatedRoute, private dataService:DataService) { 
+
+    this.activatedRouter.params.subscribe( params =>{
+      this.noticia = this.dataService.getNoticia(params['id']);
+      console.log(this.noticia);
+    })
+
+  }
 
   ngOnInit() {
+    AOS.init();
   }
 
 }

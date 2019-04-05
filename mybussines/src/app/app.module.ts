@@ -2,10 +2,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import {NgxPaginationModule} from 'ngx-pagination';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+// n imports
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+import {NgxPaginationModule} from 'ngx-pagination';
+
+//Components
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
@@ -18,9 +23,10 @@ import { CentrosTuristicosComponent } from './components/centros-turisticos/cent
 import { CentroTuristicoComponent } from './components/centro-turistico/centro-turistico.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 
 //Servicios
-import { UsuariosService } from './services/usuarios.service';
+import { FirebaseService } from './services/firebase.service';
 
 //Local Storage
 import { DataStorageService } from './localstorage/data-storage.service';
@@ -31,20 +37,12 @@ import { AuthAdminGuardService } from './guards/auth-admin-guard.service';
 
 
 // Firebase
-import { AngularFireModule } from "@angular/fire";
-import { AngularFireAuthModule } from "@angular/fire/auth";
-import { PerfilComponent } from './components/perfil/perfil.component';
+import { FirebaseModule } from './extra-module/firebase.module';
 
 
-// Initialize Firebase
-var config = {
-  apiKey: "AIzaSyALBVTT556hh7Jg1sCdA6eOE4G4zNyBxeA",
-  authDomain: "angular-crud-firebase-d60e1.firebaseapp.com",
-  databaseURL: "https://angular-crud-firebase-d60e1.firebaseio.com",
-  projectId: "angular-crud-firebase-d60e1",
-  storageBucket: "angular-crud-firebase-d60e1.appspot.com",
-  messagingSenderId: "151666909009"
-};
+//DataService Local
+import { DataService } from './services/data/data.service';
+
 
 @NgModule({
   declarations: [
@@ -68,11 +66,16 @@ var config = {
     AppRoutingModule, 
     HttpClientModule,
     NgxPaginationModule, 
-    FormsModule
+    FormsModule, 
+    CarouselModule,
+    FirebaseModule
+    
+    
   ],
   providers: [
-    UsuariosService, 
-    DataStorageService, 
+    FirebaseService, 
+    DataStorageService,
+    DataService, 
     AuthGuard, 
     AuthAdminGuardService
   ],

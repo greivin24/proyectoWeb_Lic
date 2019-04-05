@@ -1,4 +1,4 @@
-<form (ngSubmit)="guardarUser()" #forma="ngForm">
+<!-- <form (ngSubmit)="guardarUser()" #forma="ngForm">
     <div class="form-group">
         <label for=""></label>
         <input type="text" name="nombre" [(ngModel)]="usuario.nombre" required class="form-control" placeholder="">
@@ -7,7 +7,77 @@
         <small id="helpId" class="text-muted">Apellido</small><br>
         <button class="btn btn-outline-primary" [disabled]="!forma.valid">Agregar a FireBase</button>
     </div>
-</form>
+</form> -->
+<section class="headerTop pt-5 pb-5 mt-0 align-items-center">
+    <div class="container-fluid">
+        <div data-aos="flip-right" class="animated fadeIn col-sm-10 offset-sm-2 col-md-6 offset-md-3 col-lg-5 offset-lg-3 col-xl-4 offset-xl-4">
+            <div class="login-card-light p-3 shadow-lg rounded">
+                <div class="pt-3 text-center">
+                    <h2 class="text-danger">Ingresar al Sistema</h2>
+                </div>
+                <form class="mt-5" #forma="ngForm">
+                    <label for="email"><i class="fa fa-envelope"></i><strong> Correo</strong></label>
+                    <div class="form-group">
+                        <input type="email" name="email" ngModel required #email="ngModel" class="form-control form-control-sm" placeholder="Email Id">
+                    </div>
+                    <label for="pass"><i class="fa  fa-unlock-alt"></i><strong> Contraseña</strong></label>
+                    <div class="form-group mb-5">
+                        <input type="password" name="pass" ngModel required #pass="ngModel" class="form-control form-control-sm" min="8" minlength="6" maxlength="20" placeholder="Password">
+                    </div>
 
-<button class="btn btn-outline-primary" (click)="btnLoginAnonimo()">Anonimo</button>
-<button class="btn btn-outline-primary" (click)="btnLogin()">Administrador</button>
+                    <div class="mt-5">
+                        <button [disabled]="!forma.valid" (click)="btnLogin(forma)" class="btn  btn-danger col">Ingresar</button>
+                    </div>
+                    <p>{{forma.valid}}</p>
+
+                    <div class="text-center mt-2">
+                        <a><img (click)="btnLoginGoogle()" src="../../../assets/img/002-google-plus.png" alt="img_google"></a>
+                    </div>
+
+                    <div class=" mt-2">
+                        <button class="btn btn-sm btn-outline-secondary" (click)="btnLoginAnonimo()"><i class="fa fa-user-secret"></i> Ingresar Anonimo</button>
+                    </div>
+
+                    <div class="mt-5">
+                        <p class="text-center">
+                            Don't have an account?
+                            <a href="#">Click here to register</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- <div *ngIf="authService.user$ | async as user">
+    <h2>Hola {{ user.displayName }}</h2>
+    <img [src]="user.photoURL" alt="">
+    <p>UID: {{ user.uid }}</p>
+    <p>something: {{user.something}}</p>
+    <button class="btn btn-primary" (click)="btnLogout()">logout</button>
+</div> -->
+
+
+<!-- <div *ngIf="authService.user$ | async; then authenticated else guest">
+
+    </div>
+
+    <ng-template #guess>
+        <div class="text-center mt-2">
+            <a><img (click)="btnLoginGoogle()" src="../../../assets/img/002-google-plus.png" alt="img_google"></a>
+        </div>
+    </ng-template>
+
+    <ng-template #authenticated>
+        <div *ngIf="authService.user$ | async as user">
+            <h2>Hola {{ user.displayName }}</h2>
+            <img [src]="user.photoURL" alt="">
+            <p>UID: {{ user.uid }}</p>
+            <p>something: {{user.something}}</p>
+        </div>
+    </ng-template> -->
+
+
+<!-- <button class="btn btn-outline-primary" (click)="btnLoginAnonimo()">Anonimo</button>
+<button class="btn btn-outline-primary" (click)="btnLogin()">Administrador</button> -->

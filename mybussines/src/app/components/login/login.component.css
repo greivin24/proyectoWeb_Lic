@@ -1,0 +1,9 @@
+.login-card-light {
+    background: linear-gradient(145deg, #eee, #fff);
+}
+
+.headerTop {
+    height: 100vh;
+    background-size: cover;
+    background-image: url("../../../assets/img/slider.png");
+}

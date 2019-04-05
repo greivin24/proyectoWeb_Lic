@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../../services/data/data.service';
+
+
 
 @Component({
   selector: 'app-noticias',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NoticiasComponent implements OnInit {
 
-  constructor() { }
+  public noticias_list:any[] = [];
+
+  constructor(private dataService:DataService) { }
 
   ngOnInit() {
+    this.noticias_list = this.dataService.getNoticiasList();
   }
 
 }

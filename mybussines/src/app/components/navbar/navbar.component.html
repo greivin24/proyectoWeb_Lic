@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a [routerLink]="[ '/home' ]" routerLinkActive="active">Navbar</a>
+    <a [routerLink]="[ '/home/noticias' ]" routerLinkActive="active">Noticias</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -17,6 +17,9 @@
             </li>
             <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link" [routerLink]="[ '/home/dashboard' ]">Panel de Control</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" [routerLink]="[ '/home/dashboard/perfil' ]"><img class="rounded-circle" src="{{activeUser.photoURL}}" alt="" width="30px" height="30px"> {{activeUser.displayName}}</a>
             </li>
         </ul>
         <span class="navbar-text">

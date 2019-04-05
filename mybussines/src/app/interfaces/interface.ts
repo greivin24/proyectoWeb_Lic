@@ -8,8 +8,10 @@ export interface Usuario{
    apellido:string,
 }
 
-export interface User{
-  key$?:string,
-  correo:string,
-  rol:string
+export interface UserAuth{
+  uid?:string,
+  email:string,
+  photoURL?:string,
+  displayName?: string,
+  rol?:string
 }
