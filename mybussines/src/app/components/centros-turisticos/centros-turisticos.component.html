@@ -1,3 +1,13 @@
-<p>
-  centros-turisticos works!
-</p>
+<div class="container">
+    <div class="row mt-3">
+        <div class="col-12">
+            <input class="form-control mr-sm-2" type="search" placeholder="Buscar Centro" aria-label="Search" (keyup)="btnSearchCentro(buscarCentro.value)" #buscarCentro>
+        </div>
+        <div class="col-12">
+            <button class="btn btn-outline-success my-2 my-sm-0 d-none d-sm-block" type="button" (click)="btnSearchCentro(buscarCentro.value)">Buscar</button>
+        </div>
+
+
+
+    </div>
+</div>
