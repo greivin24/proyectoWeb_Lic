@@ -3,6 +3,10 @@
     position: relative;
 }
 
+.descripcionFondo {
+    background-color: rgba(135, 145, 145, 0.13);
+}
+
 body {
     margin: 0 3px;
     font-family: 'Lato', sans-serif;
@@ -223,4 +227,40 @@ img {
             color: #fff;
         }
     }
+}
+
+
+/* ---------------------------CSS COMENTARIOS-------------------- */
+
+.scroll_text {
+    height: 180px;
+    overflow: auto;
+    padding: 0px 15px;
+}
+
+.scroll_text::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scroll_text::-webkit-scrollbar-track {
+    background-color: #E7E7E7
+}
+
+.scroll_text::-webkit-scrollbar-thumb {
+    background-color: rgba(53, 143, 202, 0.596);
+    border: 1px solid rgba(92, 92, 92, 0.5);
+    border-radius: 10px;
+}
+
+.scroll_text::-webkit-scrollbar-thumb:hover {
+    background-color: #000;
+}
+
+textarea {
+    width: 100%;
+}
+
+.comentarioFondo {
+    background-color: rgba(155, 203, 226, 0.089);
+    color: rgba(61, 60, 60, 0.829);
 }

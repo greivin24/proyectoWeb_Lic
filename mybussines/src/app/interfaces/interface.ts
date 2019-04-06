@@ -15,3 +15,8 @@ export interface UserAuth{
   displayName?: string,
   rol?:string
 }
+
+export class Comment{
+  comentario:string;
+  imagen:string;
+}
