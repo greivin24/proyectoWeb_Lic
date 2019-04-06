@@ -1,13 +1,19 @@
-<div class="container">
+<div class="container animated fadeIn">
     <div class="row mt-3">
         <div class="col-12">
-            <input class="form-control mr-sm-2" type="search" placeholder="Buscar Centro" aria-label="Search" (keyup)="btnSearchCentro(buscarCentro.value)" #buscarCentro>
+            <input type="text" class="form-control" placeholder="Buscar Centro" (keyup)="btnSearch(keyword.value)" #keyword>
         </div>
-        <div class="col-12">
-            <button class="btn btn-outline-success my-2 my-sm-0 d-none d-sm-block" type="button" (click)="btnSearchCentro(buscarCentro.value)">Buscar</button>
+    </div>
+
+    <div class="card-columns mt-3">
+        <div class="card text-center " *ngFor="let item of centros_list">
+            <img src="../../../assets/centros/{{item.ruta}}/1.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title ">{{item.nombre}}</h5>
+                <p>Rank <small title="Valoración: {{item.valoraciones}}" style="color: rgba(142, 150, 33, 0.904)"><ngb-rating [(rate)]="item.valoraciones"></ngb-rating></small></p>
+                <p class="card-text">Dirección: <small>{{item.direccion}}</small></p>
+                <button [routerLink]="[ '/home/centro-turistico/', item.id ]" class="btn btn-outline-primary btn-block">Visitar </button>
+            </div>
         </div>
-
-
-
     </div>
 </div>

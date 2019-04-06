@@ -6,9 +6,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-// n imports
+// npm imports
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { EmbedVideo } from 'ngx-embed-video';
 
 //Components
 import { HomeComponent } from './components/home/home.component';
@@ -59,18 +61,20 @@ import { DataService } from './services/data/data.service';
     CentroTuristicoComponent,
     DashboardComponent,
     LandingPageComponent,
-    PerfilComponent
+    PerfilComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule, 
     HttpClientModule,
-    NgxPaginationModule, 
+    NgxPaginationModule,
+    NgbModule, 
     FormsModule, 
     CarouselModule,
-    FirebaseModule
-    
-    
+    FirebaseModule,
+    EmbedVideo
+     
   ],
   providers: [
     FirebaseService, 

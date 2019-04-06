@@ -1,3 +1,84 @@
-<p>
-  centro-turistico works!
-</p>
+<div class="animated fadeIn">
+    <div class="container text-center mt-3">
+        <h2>{{centro.nombre}} <i title="Suscribirme" class="fa fa-thumbs-o-up"></i></h2>
+    </div>
+    <div class="container mt-3">
+        <div class="wrapper">
+            <div class="news-item hero-item">
+                <div class="thumbnail">
+                    <div class="image-wrapper">
+                        <picture>
+                            <source media="(max-width: 1000px)" srcset="../../../assets/centros/{{centro.ruta}}/1.jpg">
+                            <source media="(min-width: 1100px)" srcset="../../../assets/centros/{{centro.ruta}}/1.jpg">
+                            <img src="../../../assets/centros/{{centro.ruta}}/1.jpg" alt="Divinity" class="responsive-img">
+                        </picture>
+                    </div>
+                    <div class="caption">
+                        <span class="tag">Direccion</span>
+                        <small><h1 class="title">{{centro.direccion}}</h1></small>
+                    </div>
+                </div>
+            </div>
+            <div class="news-item standard-item">
+                <div class="thumbnail">
+                    <div class="image-wrapper">
+                        <picture>
+                            <source media="(max-width: 599px)" srcset="../../../assets/centros/{{centro.ruta}}/2.jpg">
+                            <source media="(min-width: 600px)" srcset="../../../assets/centros/{{centro.ruta}}/2.jpg">
+                            <img src="../../../assets/centros/{{centro.ruta}}/2.jpg" alt="Resident Evil 7" class="responsive-img">
+                        </picture>
+                    </div>
+                    <div class="caption">
+                        <span class="tag">Horarios</span>
+                        <small><h1 class="title">{{centro.horarios}}</h1></small>
+                    </div>
+                </div>
+            </div>
+            <div class="news-item standard-item">
+                <div class="thumbnail">
+                    <div class="image-wrapper">
+                        <picture>
+                            <source media="(max-width: 599px)" srcset="../../../assets/centros/{{centro.ruta}}/3.jpg">
+                            <source media="(min-width: 600px)" srcset="../../../assets/centros/{{centro.ruta}}/3.jpg">
+                            <img src="../../../assets/centros/{{centro.ruta}}/3.jpg" alt="Bioshock 2" class="responsive-img">
+                        </picture>
+                    </div>
+                    <div class="caption">
+                        <span class="tag">Valoraciones</span>
+                        <small><h1 class="title">Seguidores: {{centro.seguidores}}</h1> <i class="fa fa-thumbs-o-up"></i></small>
+                        <span class="author"><p>Rank <small title="Valoración: {{centro.valoraciones}}" style="color: rgba(142, 150, 33, 0.904)"><ngb-rating [(rate)]="centro.valoraciones"></ngb-rating></small></p></span>
+                    </div>
+                </div>
+            </div>
+            <div class="news-item standard-item">
+                <div class="thumbnail">
+                    <div class="image-wrapper">
+                        <picture>
+                            <source media="(max-width: 1000px)" srcset="../../../assets/centros/{{centro.ruta}}/4.jpg">
+                            <source media="(min-width: 1100px)" srcset="../../../assets/centros/{{centro.ruta}}/4.jpg">
+                            <img src="../../../assets/centros/{{centro.ruta}}/4.jpg" alt="Tomb Raider" class="responsive-img">
+                        </picture>
+                    </div>
+                    <div class="caption">
+                        <span class="tag">Telefono</span>
+                        <small><h1 class="title">{{centro.telefono}}</h1></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container text-center mt-3">
+        <p class="text-justify">{{centro.descripcion}} <button [routerLink]="[ '/home/centros-turisticos' ]" class="btn btn-outline-primary">Volver Centros Turisticos</button></p>
+    </div>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-6">
+                <div [innerHtml]="youtube_iframe_html"></div>
+            </div>
+            <div class="col-6">
+                <p>Comentarios <i class="fa fa-list"></i></p>
+            </div>
+        </div>
+
+    </div>
+</div>

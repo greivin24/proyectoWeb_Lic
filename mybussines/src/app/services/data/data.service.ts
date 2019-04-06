@@ -47,7 +47,48 @@ public list_noticia:any = [{
 
 
 
-public list_centros:any;
+public list_centros:any = [{
+  "id":0,
+ "nombre": "Centro Turístico Guachipelín",
+ "imagen": "1.jpg",
+ "direccion":"Heredia, San José",
+ "ruta": "c1",
+ "telefono":"2269 9975",
+ "horarios":"Lunes a Domingo de	8:00–16:00",
+ "valoraciones":"4",
+ "seguidores":"335",
+ "video":"https://www.youtube.com/watch?v=CY_lqgVh_68",
+  "descripcion": "El acceso es público, por lo que se sugiere principalmente para días entre semana y algunos sábados. Se cuenta con un rancho para grupos pequeños y un salón de eventos para grupos de 40 participantes en adelante. Entrada general ¢1500 y parqueo ¢1000. La soda abre fines de semana, feriados y vacaciones. El bar abre de jueves a lunes con horario ampliado (ingreso de menores solo con acompañante)"
+  
+},{
+  "id":1,
+ "nombre": "Complejo Turistico la Laguna",
+ "imagen": "1.jpg",
+ "direccion":"San José, Chirraca de Acosta",
+ "ruta": "c2",
+ "telefono":"2410 0056",
+ "horarios":"Lunes a Domingo de	9:00–21:00",
+ "valoraciones":"3",
+ "seguidores":"520",
+ "video":"https://www.youtube.com/watch?v=yvdl_aSa5Yo",
+  "descripcion": "El complejo Turistico la Laguna es un balneario de vertientes naturales de agua, con hermosas cascadas y paisajes, donde grupos familiares y amigos pueden disfrutar de un ambiente natural que ofrece los servicios de bar, restaurante, canchas deportivas de futbol, boly, juegos de obstaculos, musica y mas. Asi como tambien pueden nadar junto a los peces y hermosas cascadas que cuenta la laguna.Las instalaciones de la LAGUNA ofrece varios paquetes todo incluido para grupos de integracion familiar, agasajos para empresas, instituciones educativa para escuelas, colegios, universidades entre otros… En el area de restaurante ofrecemos variedad de platos tipicos de la zona a base de asados a leña asi como tambien una esquisita tilapia frita, maito y variedad de picaditas a precios comodos."
+  
+  
+},{
+  "id":2,
+ "nombre": "Centro Turístico La Libia",
+ "imagen": "1.jpg",
+ "direccion":"San José, San Lorenzo",
+ "ruta": "c3",
+ "telefono":"2410 0056",
+ "horarios":"Lunes a Viernes de	10:00–22:00",
+ "valoraciones":"5",
+ "seguidores":"767",
+ "video":"https://www.youtube.com/watch?v=u5SLOus_u98",
+  "descripcion": "Este lugar se caracteriza por sus zonas verdes  distribuidas en 11 hectáreas que se recorren en 2 km de senderos,. Tiene además un jardín japonés que ha sido el preferido de muchos. Las orquídeas son una de las principales atracciones de las cuales tiene más de 1200 especies, así  como colecciones de palmas, helechos, bromelias y heliconias y otras variedades.  Es una de las instituciones botánicas más activas e importantes del Neotrópico."
+  
+  
+} ];
 
 
 public showedList:any;
@@ -65,6 +106,8 @@ constructor() { }
 //----------------------------------------------------------- FUNCIONES Centros
   public getCentrosList = () => this.list_centros;
 
+  public getCentro = (idx:string) => this.list_centros[idx];
+
   public searchCentro = (term: string) => {
     if (!term) {
       this.showedList = [];
@@ -72,7 +115,7 @@ constructor() { }
       term=term.toLowerCase();
       this.showedList = [];
       this.list_centros.forEach(  (item) => { 
-        if (item.nombre.toLowerCase().includes(term) || item.id.toLowerCase().includes(term)) {
+        if (item.nombre.toLowerCase().includes(term) || item.direccion.toLowerCase().includes(term)) {
           this.showedList.push(item);
         }
       });
@@ -80,5 +123,6 @@ constructor() { }
     }
 
   }
+
 }
 
