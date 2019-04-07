@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-
+import { AngularFireDatabase } from '@angular/fire/database';
 import { UserAuth } from '../interfaces/interface';
 
 
@@ -13,24 +13,40 @@ export class FirebaseService {
   nodoName:string = "";
   firebaseURL:string;
  
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient:HttpClient, private angularFireDatabase:AngularFireDatabase) { }
 
   setNodeName(node:string){
-   this.firebaseURL ="https://angular-crud-firebase-d60e1.firebaseio.com/"+node+".json";
+   this.firebaseURL ="https://angular-crud-firebase-d60e1.firebaseio.com/"+node;
   }
 
 
   postNewUser(user:UserAuth){
-    this.setNodeName("users");
+     const itemRef = this.angularFireDatabase.object('users/'+user.uid);
+     return itemRef.set(user);
+  }
+
+  putUser(user:UserAuth, key:string){
+    this.setNodeName("users/"+key+".json");
     let body = JSON.stringify( user );
     let headers = new HttpHeaders({
       'Content-Type':'application/json'
     });
-     //.ref.childByAutoId().setValue(user.uid)
-    return this.httpClient.post( this.firebaseURL, body, {headers});
-    }
+    return this.httpClient.put( this.firebaseURL, body, {headers});
+  }
 
-    
+  getUser(key:string){
+    this.setNodeName("users/"+key+".json");
+    return this.httpClient.get(this.firebaseURL);
+  }
 
-  
+  getUsers(){
+    this.setNodeName("users.json");
+    return this.httpClient.get(this.firebaseURL);
+  }
+
+  deleteUser(key:string){
+    this.setNodeName("users/"+key+".json");
+    return this.httpClient.delete(this.firebaseURL);
+  }
+
 }

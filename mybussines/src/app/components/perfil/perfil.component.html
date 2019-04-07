@@ -1,3 +1,49 @@
-<p>
-  perfil works!
-</p>
+<div class="container mt-5">
+    <div class="d-flex justify-content-center h-100">
+        <div class="image_outer_container">
+            <div class="green_icon"></div>
+            <div class="image_inner_container">
+                <img src="{{user.photoURL}}">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container text-center">
+    <div class="d-flex justify-content-center h-100">
+        <div class="image_outer_container">
+            <h4 class="media-heading"><strong>{{user.displayName}}</strong> </h4>
+            <h5>
+                <p class="text-primary">{{user.uid}}</p>
+            </h5>
+            <p><small>{{user.email}}</small></p>
+            <p>{{user.rol}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5 mb-5">
+    <div class="card-columns">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title card-header text-center text-primary">Suscrito <i class="fa fa-exchange"></i></h5>
+                <p class="card-text">This is another card with title and supporting text below. This card has some additional content to make it slightly taller overall.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title card-header text-center text-primary">Reseñas <i class="fa fa-bullhorn"></i></h5>
+                <p class="card-text">This is another card with title and supporting text below. This card has some additional content to make it slightly taller overall.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title card-header text-center text-primary">Valoraciones <i class="fa fa-diamond"></i></h5>
+                <p class="card-text">This is another card with title and supporting text below. This card has some additional content to make it slightly taller overall.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+        </div>
+    </div>
+</div>

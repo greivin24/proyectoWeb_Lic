@@ -57,6 +57,7 @@ public list_centros:any = [{
  "horarios":"Lunes a Domingo de	8:00–16:00",
  "valoraciones":"4",
  "seguidores":"335",
+ "historia":"Se ubica en el primer puesto del ranking. Tiene el mayor número de establecimientos de bajo presupuesto (146) y el precio promedio por noche de alojamiento es de 26 dólares ($ 468). Este destino presenta una infinidad de opciones, tanto de día como de noche. Actualmente, el Gobierno ofrece distintos tours para recorrer la ciudad y sus barrios más representativos: Palermo, Puerto Madero, La Boca, San Telmo y Recoleta. La mayoría de estas excursiones son gratuitas y se pueden realizar en los puntos turísticos. Un dato a tener en cuenta: hace unos meses, Buenos Aires fue elegida como “Ciudad del Año” por la Pacific Area Travel Writers Association (Patwa).",
  "video":"https://www.youtube.com/watch?v=CY_lqgVh_68",
   "descripcion": "El acceso es público, por lo que se sugiere principalmente para días entre semana y algunos sábados. Se cuenta con un rancho para grupos pequeños y un salón de eventos para grupos de 40 participantes en adelante. Entrada general ¢1500 y parqueo ¢1000. La soda abre fines de semana, feriados y vacaciones. El bar abre de jueves a lunes con horario ampliado (ingreso de menores solo con acompañante)"
   
@@ -70,6 +71,7 @@ public list_centros:any = [{
  "horarios":"Lunes a Domingo de	9:00–21:00",
  "valoraciones":"3",
  "seguidores":"520",
+ "historia":"Cuenta con 43 hospedajes a bajo costo y el presupuesto promedio por noche es de 38 dólares ($ 774). La ciudad se caracteriza por sus vinos y su gastronomía, por lo que los tours a bodegas son uno de los paseos más aclamados por turistas nacionales e internacionales. Además, se puede disfrutar de diversos espacios verdes para respirar el aire puro de la Cordillera. Independencia, San Martín, Chile y España son algunas de sus plazas más representativas, mientras que entre los parques se destacan O'Higgings y Central.",
  "video":"https://www.youtube.com/watch?v=yvdl_aSa5Yo",
   "descripcion": "El complejo Turistico la Laguna es un balneario de vertientes naturales de agua, con hermosas cascadas y paisajes, donde grupos familiares y amigos pueden disfrutar de un ambiente natural que ofrece los servicios de bar, restaurante, canchas deportivas de futbol, boly, juegos de obstaculos, musica y mas. Asi como tambien pueden nadar junto a los peces y hermosas cascadas que cuenta la laguna.Las instalaciones de la LAGUNA ofrece varios paquetes todo incluido para grupos de integracion familiar, agasajos para empresas, instituciones educativa para escuelas, colegios, universidades entre otros… En el area de restaurante ofrecemos variedad de platos tipicos de la zona a base de asados a leña asi como tambien una esquisita tilapia frita, maito y variedad de picaditas a precios comodos."
   
@@ -84,6 +86,7 @@ public list_centros:any = [{
  "horarios":"Lunes a Viernes de	10:00–22:00",
  "valoraciones":"5",
  "seguidores":"767",
+ "historia":"Es uno de los destinos más visitados de Argentina. Cuenta con diversos circuitos para realizar y es ideal para quienes aman los deportes. Se encuentra en el segundo lugar del ranking,con un precio promedio por noche de 49 dólares ($ 882) y 47 alojamientos a bajo costo. Algunos imperdibles de este lugar son: el Parque Nacional Nahuel Huapi, la visita a la Isla Victoria y el Bosque de Arrayanes, el recorrido Circuito Chico, el Centro Cívico, el Camino de los 7 lagos y el cerro Catedral. Un evento importante en la ciudad es Bariloche a la Carta, que ofrecerá en octubre un circuito gastronómico por más de 80 restaurantes. Chocolates y cervezas son productos obligados para degustar.",
  "video":"https://www.youtube.com/watch?v=u5SLOus_u98",
   "descripcion": "Este lugar se caracteriza por sus zonas verdes  distribuidas en 11 hectáreas que se recorren en 2 km de senderos,. Tiene además un jardín japonés que ha sido el preferido de muchos. Las orquídeas son una de las principales atracciones de las cuales tiene más de 1200 especies, así  como colecciones de palmas, helechos, bromelias y heliconias y otras variedades.  Es una de las instituciones botánicas más activas e importantes del Neotrópico."
   

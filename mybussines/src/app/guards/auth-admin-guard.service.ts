@@ -16,7 +16,7 @@ export class AuthAdminGuardService implements CanActivate {
   user:UserAuth;
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     this.user = this.dataStorageService.getObjectValue("online")
-    if (this.user.rol == "Admin") {
+    if (this.user.rol == "Administrador" || this.user.rol == "Editor") {
         return true;
     }
     console.log("bloqueado por el guard Admin");

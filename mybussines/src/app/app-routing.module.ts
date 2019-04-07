@@ -29,8 +29,12 @@ const routes: Routes = [
         { path: 'centros-turisticos', component: CentrosTuristicosComponent },
         { path: 'centro-turistico/:id', component: CentroTuristicoComponent },
 
-        { path: 'dashboard', component: DashboardComponent, canActivate: [AuthAdminGuardService], children: [
-          { path: 'perfil', component:  PerfilComponent}, 
+        // duda aqui
+         { path: 'perfil/:id', component:  PerfilComponent, canActivate: [AuthAdminGuardService],}, 
+        // { path: 'dashboard', component: DashboardComponent, canActivate: [AuthAdminGuardService]}
+
+        { path: 'dashboard', component: DashboardComponent,  children: [
+          { path: 'perfil/:id', component:  PerfilComponent}, 
         ]}
   ]},
   { path: '**',redirectTo: "home/noticias"}

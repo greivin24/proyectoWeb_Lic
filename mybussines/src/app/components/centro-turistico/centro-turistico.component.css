@@ -4,7 +4,7 @@
 }
 
 .descripcionFondo {
-    background-color: rgba(135, 145, 145, 0.13);
+    background-color: rgba(172, 194, 194, 0.068);
 }
 
 body {
@@ -263,4 +263,11 @@ textarea {
 .comentarioFondo {
     background-color: rgba(155, 203, 226, 0.089);
     color: rgba(61, 60, 60, 0.829);
+}
+
+.parallax {
+    /* The image used */
+    background-image: url("https://lipoesculturaweb.com/wp-content/uploads/2013/01/LIPOESCULTURA-FONDO-MORADO-DEGRADADO1.png");
+    width: 100%;
+    height: auto;
 }
