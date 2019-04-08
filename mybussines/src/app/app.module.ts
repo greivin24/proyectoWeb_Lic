@@ -36,6 +36,7 @@ import { DataStorageService } from './localstorage/data-storage.service';
 //Auth Guard
 import { AuthGuard } from './guards/auth-guard.service';
 import { AuthAdminGuardService } from './guards/auth-admin-guard.service';
+import { AuthPerfilGuardService } from './guards/auth-perfil-guard.service';
 
 
 // Firebase
@@ -81,7 +82,8 @@ import { DataService } from './services/data/data.service';
     DataStorageService,
     DataService, 
     AuthGuard, 
-    AuthAdminGuardService
+    AuthAdminGuardService, 
+    AuthPerfilGuardService
   ],
   bootstrap: [AppComponent]
 })

@@ -27,7 +27,7 @@ public list_noticia:any = [{
    
  }, {
    "id":2,
-  "nombre": "playas de Costa Rica se ubican entre las 50 mejores de la región",
+  "nombre": "Playas de Costa Rica se ubican entre las 50 mejores de la región",
   "imagen": "noticia3.jpg",
   "ruta": "noticia3",
   "sub":"LAS LISTAS MÁS EXTENSAS DE LAS MEJORES PLAYAS DE AMÉRICA CENTRAL Y EL CARIBE",
@@ -105,6 +105,21 @@ constructor() { }
 
   public getNoticia = (idx:string) => this.list_noticia[idx];
  
+  public searchNoticia = (term: string) => {
+    if (!term) {
+      this.showedList = [];
+    } else { 
+      term=term.toLowerCase();
+      this.showedList = [];
+      this.list_noticia.forEach(  (item) => { 
+        if (item.nombre.toLowerCase().includes(term) || item.sub.toLowerCase().includes(term)) {
+          this.showedList.push(item);
+        }
+      });
+      return this.showedList;
+    }
+
+  }
 
 //----------------------------------------------------------- FUNCIONES Centros
   public getCentrosList = () => this.list_centros;

@@ -14,8 +14,11 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 
+// Guards
 import { AuthGuard } from './guards/auth-guard.service';
 import { AuthAdminGuardService } from './guards/auth-admin-guard.service';
+import { AuthPerfilGuardService } from './guards/auth-perfil-guard.service';
+
 
 const routes: Routes = [
   { path: 'landing-page', component: LandingPageComponent},
@@ -30,12 +33,12 @@ const routes: Routes = [
         { path: 'centro-turistico/:id', component: CentroTuristicoComponent },
 
         // duda aqui
-         { path: 'perfil/:id', component:  PerfilComponent, canActivate: [AuthAdminGuardService],}, 
-        // { path: 'dashboard', component: DashboardComponent, canActivate: [AuthAdminGuardService]}
+           { path: 'perfil/:id', component:  PerfilComponent}, 
+           { path: 'dashboard/:id', component: DashboardComponent, canActivate: [AuthAdminGuardService]}
 
-        { path: 'dashboard', component: DashboardComponent,  children: [
-          { path: 'perfil/:id', component:  PerfilComponent}, 
-        ]}
+        // { path: 'dashboard', component: DashboardComponent,canActivate: [AuthAdminGuardService],  children: [
+        //   { path: 'perfil/:id', component:  PerfilComponent, canActivate: [AuthPerfilGuardService]} 
+        // ]}
   ]},
   { path: '**',redirectTo: "home/noticias"}
 ];

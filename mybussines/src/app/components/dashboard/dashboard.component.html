@@ -1,3 +1,73 @@
-<p>
-  dashboard works!
-</p>
+<div *ngIf="userAdmin" class="container-fluid">
+    <div class="row d-flex d-md-block flex-nowrap wrapper">
+        <div class="col-md-3 float-left col-1 pl-0 pr-0 collapse width " id="sidebar">
+            <div class=" list-group border-0 card text-center text-md-left">
+
+                <a (click)="btnMostrar('noticias')" class="hand list-group-item collapsed" data-parent="#sidebar"><i class="fa fa-newspaper-o"></i> <span class="d-none d-md-inline">Noticias</span></a>
+                <a (click)="btnMostrar('asignar')" class="hand list-group-item collapsed" data-parent="#sidebar"><i class="fa fa-wrench"></i> <span class="d-none d-md-inline">Asiganación Sitios</span></a>
+
+            </div>
+        </div>
+        <main class="col-md-10 col px-5 pl-md-2 pt-2 main mx-auto">
+            <div class="row">
+                <a href="#" data-target="#sidebar" data-toggle="collapse" aria-expanded="false"><i class="fa fa-navicon fa-2x py-2 p-1"> Menu</i></a>
+            </div>
+            <hr>
+
+            <div *ngIf="mostarNoticia" class="row mt-3 mb-2">
+
+                <div class="container">
+                    <div class="row mb-3">
+                        <div class="col-11">
+                            <input type="text" class="form-control" placeholder="Buscar Noticia" (keyup)="btnSearchNoticia(keyword.value)" #keyword>
+                        </div>
+                        <div class="col-1">
+                            <button title="Nueva Noticia" class="btn btn-success"><i class="fa fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-columns">
+                    <div class="card" *ngFor="let item of listNoticias; let i = index;">
+                        <div class="card-body">
+                            <h5 class="card-title card-header text-center">{{item.nombre}} <i class="fa fa-newspaper-o"></i></h5>
+                            <div class="mt-2">
+                                <div class="row center align-self-center" style="cursor: pointer;">
+                                    <button class="btn btn-outline-warning btn-block">Editar<i class="fa fa-edit"></i></button>
+                                    <button class="btn btn-outline-danger btn-block">Eliminar<i class="fa fa-trash"></i></button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div *ngIf="!mostarNoticia" class="row">
+                <h1>asignar</h1>
+            </div>
+
+        </main>
+    </div>
+</div>
+
+<div *ngIf="!userAdmin" class="container-fluid">
+    <div class="row d-flex d-md-block flex-nowrap wrapper">
+        <div class="col-md-3 float-left col-1 pl-0 pr-0 collapse width " id="sidebar">
+            <div class=" list-group border-0 card text-center text-md-left">
+
+                <a class="hand list-group-item collapsed" data-parent="#sidebar"><i class="fa fa-newspaper-o"></i> <span class="d-none d-md-inline">Noticias</span></a>
+                <a class="hand list-group-item collapsed" data-parent="#sidebar"><i class="fa fa-wrench"></i> <span class="d-none d-md-inline">Asiganación Sitios</span></a>
+
+            </div>
+        </div>
+        <main class="col-md-9 col px-5 pl-md-2 pt-2 main mx-auto">
+            <div class="row">
+                <a href="#" data-target="#sidebar" data-toggle="collapse" aria-expanded="false"><i class="fa fa-navicon fa-2x py-2 p-1"> Menu Editor</i></a>
+            </div>
+            <hr>
+
+
+        </main>
+    </div>
+</div>
