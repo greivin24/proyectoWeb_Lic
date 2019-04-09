@@ -20,3 +20,13 @@ export class Comment{
   comentario:string;
   imagen:string;
 }
+
+export class Noticia{
+  id:number;
+  nombre: string;
+  imagen: string;
+  ruta: string; 
+  sub: string;
+  fecha: string;
+  descripcion: string;
+}

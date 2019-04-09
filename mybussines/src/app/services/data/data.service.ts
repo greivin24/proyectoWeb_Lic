@@ -104,6 +104,16 @@ constructor() { }
   public getNoticiasList = ()  =>  this.list_noticia;
 
   public getNoticia = (idx:string) => this.list_noticia[idx];
+
+  public getNoticiaID(key:number){
+    let returList= {};
+    this.list_noticia.forEach(  (item) => { 
+      if (item.id == key) {
+        returList = item;
+      }
+    });
+    return returList;
+  }
  
   public searchNoticia = (term: string) => {
     if (!term) {
@@ -126,6 +136,19 @@ constructor() { }
 
   public getCentro = (idx:string) => this.list_centros[idx];
 
+  public getCentroID(key:number){
+    console.log(this.list_centros);
+    console.log("key idc: "+key);
+    let returList= {};
+    this.list_centros.forEach(  (item) => { 
+      if (item.id == key) {
+        returList = item;
+      }
+    });
+    console.log(returList);
+    return returList;
+  }
+  
   public searchCentro = (term: string) => {
     if (!term) {
       this.showedList = [];

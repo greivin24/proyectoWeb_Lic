@@ -45,6 +45,7 @@ import { FirebaseModule } from './extra-module/firebase.module';
 
 //DataService Local
 import { DataService } from './services/data/data.service';
+import { KeysPipe } from './pipes/keys.pipe';
 
 
 @NgModule({
@@ -63,6 +64,7 @@ import { DataService } from './services/data/data.service';
     DashboardComponent,
     LandingPageComponent,
     PerfilComponent,
+    KeysPipe,
     
   ],
   imports: [

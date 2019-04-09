@@ -19,7 +19,7 @@ export class CentroTuristicoComponent implements OnInit {
   @ViewChild('comment') commentInput: ElementRef;
 
   currentRate = 5;
-  centro:any;
+  centro:any ={};
   youtube_iframe_html: any;
 
   // lista de comentarios y seguidores
@@ -27,14 +27,15 @@ export class CentroTuristicoComponent implements OnInit {
   list_subscribers:Array<any> = [{ }];
 
   user:any;
+  isAnonimo:boolean = false;
+
   constructor(private activatedRouter: ActivatedRoute, private dataService:DataService, config:NgbRatingConfig, private embedVideo:EmbedVideoService, private dataStorageService:DataStorageService) { 
     config.max = 5;
     config.readonly = true;
 
     this.activatedRouter.params.subscribe( params =>{
       this.user = this.dataStorageService.getObjectValue("online");
-      this.centro = this.dataService.getCentro(params['id']);
-      console.log(this.centro);
+      this.centro = this.dataService.getCentroID(params['id']);
       this.youtube_iframe_html = this.embedVideo.embed(this.centro.video, {
         query: { portrait: 0, color: '333' },
         attr: { width: 350, height: 250 }
@@ -48,6 +49,9 @@ export class CentroTuristicoComponent implements OnInit {
 
     //Cargar los suscriptores 
     this.btnLoadSubscribers();
+
+    //Revisa el rol del usuario
+    this.btnGetRol(this.user);
   }
 
   ngOnDestroy() {
@@ -99,6 +103,11 @@ export class CentroTuristicoComponent implements OnInit {
       this.btnLoadSubscribers();
     }
     
+  }
+
+  btnGetRol(user){
+    if(user.rol == "Anonimo")
+      this.isAnonimo = true;
   }
 
 }

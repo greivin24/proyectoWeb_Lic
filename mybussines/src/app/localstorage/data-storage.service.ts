@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
+import { DataService } from '../services/data/data.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataStorageService {
 
-  constructor() { }
+  constructor( private dataService:DataService ) { }
 
   setObjectValue= (key:string, objectValue:any)=>{
     if (window.localStorage) {
@@ -36,31 +38,19 @@ export class DataStorageService {
   }
 
   getCentrosSuscritos(key:string){
-    let list1:any[]=[];let list2:any[]=[];let list3:any[]=[];
+    let list:any[]=[];
+    let listCentros:any={};
     let returnList:any[]=[];
 
-    list1 = this.getObjectValue("Centro Turístico Guachipelín_Subscribers");
-    list2 = this.getObjectValue("Centro Turístico La Libia_Subscribers");
-    list3 = this.getObjectValue("Complejo Turistico la Laguna_Subscribers");
-
-    if(list1 != null)
-    for (const iterator of list1) {
-      if(key == iterator.uid)
-        returnList.push("Centro Turístico Guachipelín");
+    listCentros = this.dataService.list_centros;
+    for (const i of listCentros) {
+      list = this.getObjectValue(i.nombre+"_Subscribers");
+      if(list != null)
+      for (const iterator of list) {
+        if(key == iterator.uid)
+          returnList.push(i.nombre);
+      }
     }
-
-    if(list2 != null)
-    for (const iterator of list2) {
-      if(key == iterator.uid)
-        returnList.push("Centro Turístico La Libia");
-    }
-
-    if(list3 != null)
-    for (const iterator of list3) {
-      if(key == iterator.uid)
-        returnList.push("Complejo Turistico la Laguna");
-    }
-
     //console.log(returnList);
     return returnList;
 

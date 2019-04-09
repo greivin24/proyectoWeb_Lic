@@ -45,13 +45,21 @@ export class LoginComponent implements OnInit {
   btnLogin(val:NgForm){
       this.authService.loginEmailPass(val.value.email.trim(), val.value.pass.trim());
       this.authService.user$.subscribe((result:any)=>{
+
         if(result !=null){
-          this.dataStorageService.setObjectValue("online", result);
-          // this.firebaseService.postNewUser(result).subscribe((result:any)=>{
-          //   console.log(result.name);
-          // });
-          console.log(result);
-          this.router.navigate(['/home/noticias']);
+          this.firebaseService.getUser(result.uid).subscribe(res=>{
+            if(res == null){
+              result.displayName = result.email.split("@")[0];
+              result.photoURL = "https://colegio.santamariadelmar.org/imagenes/128x128/female_male_users.png";
+              result.rol = "Basico";
+              this.firebaseService.postNewUser(result);
+              this.dataStorageService.setObjectValue("online", result);
+            }else{
+              this.dataStorageService.setObjectValue("online", res);
+            }
+             this.router.navigate(['/home/noticias']); 
+          })
+          
         }
       });
   }

@@ -33,7 +33,7 @@ const routes: Routes = [
         { path: 'centro-turistico/:id', component: CentroTuristicoComponent },
 
         // duda aqui
-           { path: 'perfil/:id', component:  PerfilComponent}, 
+           { path: 'perfil/:id', component:  PerfilComponent, canActivate: [AuthPerfilGuardService]}, 
            { path: 'dashboard/:id', component: DashboardComponent, canActivate: [AuthAdminGuardService]}
 
         // { path: 'dashboard', component: DashboardComponent,canActivate: [AuthAdminGuardService],  children: [

@@ -1,4 +1,4 @@
-<div *ngIf="userAdmin" class="container-fluid">
+<div *ngIf="userAdmin" class="container-fluid animated fadeIn">
     <div class="row d-flex d-md-block flex-nowrap wrapper">
         <div class="col-md-3 float-left col-1 pl-0 pr-0 collapse width " id="sidebar">
             <div class=" list-group border-0 card text-center text-md-left">
@@ -14,60 +14,289 @@
             </div>
             <hr>
 
-            <div *ngIf="mostarNoticia" class="row mt-3 mb-2">
+            <div *ngIf="mostarNoticia" class="row mt-3 mb-2 animated fadeIn">
 
                 <div class="container">
-                    <div class="row mb-3">
-                        <div class="col-11">
-                            <input type="text" class="form-control" placeholder="Buscar Noticia" (keyup)="btnSearchNoticia(keyword.value)" #keyword>
-                        </div>
-                        <div class="col-1">
-                            <button title="Nueva Noticia" class="btn btn-success"><i class="fa fa-plus"></i></button>
-                        </div>
+                    <div class="row mb-4 mt-2">
+                        <input type="text" class="form-control" placeholder="Buscar Noticia" (keyup)="btnSearchNoticia(keywordN.value)" #keywordN>
                     </div>
                 </div>
-                <div class="card-columns">
-                    <div class="card" *ngFor="let item of listNoticias; let i = index;">
-                        <div class="card-body">
-                            <h5 class="card-title card-header text-center">{{item.nombre}} <i class="fa fa-newspaper-o"></i></h5>
-                            <div class="mt-2">
-                                <div class="row center align-self-center" style="cursor: pointer;">
-                                    <button class="btn btn-outline-warning btn-block">Editar<i class="fa fa-edit"></i></button>
-                                    <button class="btn btn-outline-danger btn-block">Eliminar<i class="fa fa-trash"></i></button>
-                                </div>
+                <div class="row">
+                    <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+                        <div class="card-columns">
+                            <div class="card" *ngFor="let item of listNoticias; let i = index;">
+                                <div class="card-body">
+                                    <h5 class="card-title card-header text-center">{{item.nombre}} <i class="fa fa-newspaper-o"></i></h5>
+                                    <div class="mt-2">
+                                        <div class="row center align-self-center" style="cursor: pointer;">
+                                            <button class="btn btn-outline-warning btn-block">Editar<i class="fa fa-edit"></i></button>
+                                            <button (click)="btnEliminarNoticia(i)" class="btn btn-outline-danger btn-block">Eliminar<i class="fa fa-trash"></i></button>
+                                        </div>
 
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                        <div class="form-sec">
+                            <div class="center">
+                                <h4 class="text-success text-center">Crear Nueva Noticia <i class="fa fa-newspaper-o"></i></h4>
+                            </div>
+
+                            <form #formaNewNoticia="ngForm">
+                                <div class="form-group">
+                                    <label>Titulo</label>
+                                    <input type="text" class="form-control" id="titulo" name="titulo" ngModel required #titulo="ngModel" placeholder="Titulo de la noticia">
+                                </div>
+                                <div class="form-group">
+                                    <label>Subtitulo</label>
+                                    <input type="text" class="form-control" id="sub" name="sub" ngModel required #sub="ngModel" placeholder="Subtitulo de la noticia">
+                                </div>
+                                <div class="form-group">
+                                    <label>Fecha de Noticia</label>
+                                    <input type="date" class="form-control" id="fecha" name="fecha" ngModel required #fecha="ngModel">
+                                </div>
+                                <div class="form-group">
+                                    <label>Descripción</label>
+                                    <textarea rows="3" class="form-control" id="desc" name="desc" ngModel required #desc="ngModel" placeholder="Descripción de la noticia"></textarea>
+                                </div>
+                                <div class="form-group center">
+
+                                    <div class="row">
+                                        <div class="col-2 align-self-center">
+                                            <input style="display: none;" type="file" (change)="onFileUpload($event)" ngModel required #selectFile #file="ngModel" id="file" name="file">
+                                            <button class="btn btn-info" title="Subir imagen" style="cursor: pointer; border: none;" (click)="selectFile.click()"><i class="text-white fa fa-upload fa-2x"></i> </button>
+                                        </div>
+                                        <div class="ml-2 col-9">
+                                            <div class="image-preview">
+                                                <img *ngIf="verImagen" class="img-fluid" [src]="imagePreview">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+
+                                    </div>
+
+
+
+                                </div>
+
+                                <button [disabled]="!formaNewNoticia.valid" (click)="btnCrearNoticia(formaNewNoticia)" class="btn btn-outline-success btn-block">Crear Noticia</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
+
 
             </div>
 
-            <div *ngIf="!mostarNoticia" class="row">
-                <h1>asignar</h1>
+            <div *ngIf="!mostarNoticia" class="row animated fadeIn">
+                <div class="container">
+                    <div class="row mb-4 mt-2">
+                        <input type="text" class="form-control" placeholder="Buscar Centro Turistico" (keyup)="btnSearchCentro(keywordC.value)" #keywordC>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+                        <div class="card-columns">
+                            <div class="card" *ngFor="let item of listCentros; let i = index;">
+                                <div class="card-body">
+                                    <h5 class="card-title card-header text-center">{{item.nombre}} <i class="fa fa-image"></i></h5>
+                                    <img src="../../../assets/centros/{{item.ruta}}/1.jpg" class="card-img-top" alt="..." height="200px">
+                                    <div class="mt-2">
+                                        <div class="row center align-self-center" style="cursor: pointer;">
+                                            <button (click)="btnEliminarCentro(i)" class="btn btn-outline-danger btn-block">Eliminar<i class="fa fa-trash"></i></button>
+                                            <button class="btn btn-outline-primary btn-block" (click)="btnAsignarCentro(i)" data-toggle="modal" data-target="#asignarModal">Asignar Centro Turistico<i class="fa fa-street-view"></i></button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                        <div class="form-sec">
+                            <div class="center">
+                                <h4 class="text-success text-center">Crear Nuevo Centro Turistico <i class="fa fa-image"></i></h4>
+                            </div>
+
+                            <form #formaNewCentro="ngForm">
+                                <div class="form-group">
+                                    <label>Nombre</label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" ngModel required #nombre="ngModel" placeholder="Nombre del Centro">
+                                </div>
+                                <div class="form-group">
+                                    <label>Dirección</label>
+                                    <input type="text" class="form-control" id="direccion" name="direccion" ngModel required #direccion="ngModel" placeholder="Dirección del Centro">
+                                </div>
+                                <div class="form-group">
+                                    <label>Horarios</label>
+                                    <input type="text" class="form-control" id="horarios" name="horarios" ngModel required #horarios="ngModel">
+                                </div>
+                                <div class="form-group">
+                                    <label>Telefono</label>
+                                    <input type="number" min="1" maxlength="8" class="form-control" id="telefono" name="telefono" ngModel required #telefono="ngModel">
+                                </div>
+                                <div class="form-group">
+                                    <label>Link de youtube</label>
+                                    <input type="text" class="form-control" id="video" name="video" ngModel required #video="ngModel">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Descripción</label>
+                                    <textarea rows="3" class="form-control" id="descripcion" name="descripcion" ngModel required #descripcion="ngModel" placeholder="Descripción del Centro"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Historia</label>
+                                    <textarea rows="3" class="form-control" id="historia" name="historia" ngModel required #historia="ngModel" placeholder="Historia del Centro"></textarea>
+                                </div>
+
+
+
+                                <div class="form-group center">
+
+                                    <div class="row">
+                                        <div class="col-2 align-self-center">
+                                            <input style="display: none;" type="file" (change)="onFileUpload($event)" ngModel required #selectFile #file="ngModel" id="file" name="file">
+                                            <button class="btn btn-info" title="Subir imagen" style="cursor: pointer; border: none;" (click)="selectFile.click()"><i class="text-white fa fa-upload fa-2x"></i> </button>
+                                        </div>
+                                        <div class="ml-2 col-9">
+                                            <div class="image-preview">
+                                                <img *ngIf="verImagen" class="img-fluid" [src]="imagePreview">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+
+                                    </div>
+                                </div>
+
+                                <button [disabled]="!formaNewCentro.valid" (click)="btnCrearCentro(formaNewCentro)" class="btn btn-outline-success btn-block">Crear Centro</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </main>
     </div>
 </div>
 
-<div *ngIf="!userAdmin" class="container-fluid">
-    <div class="row d-flex d-md-block flex-nowrap wrapper">
-        <div class="col-md-3 float-left col-1 pl-0 pr-0 collapse width " id="sidebar">
-            <div class=" list-group border-0 card text-center text-md-left">
 
-                <a class="hand list-group-item collapsed" data-parent="#sidebar"><i class="fa fa-newspaper-o"></i> <span class="d-none d-md-inline">Noticias</span></a>
-                <a class="hand list-group-item collapsed" data-parent="#sidebar"><i class="fa fa-wrench"></i> <span class="d-none d-md-inline">Asiganación Sitios</span></a>
+
+<!-- PANEL DE CONTROL DE UN EDITOR -->
+<div *ngIf="!userAdmin" class="container-fluid animated fadeIn">
+    <div class="row d-flex d-md-block flex-nowrap wrapper">
+        <main class="col-md-9 col px-5 pl-md-2 pt-2 main mx-auto">
+            <div class="row">
+                <h2 class="text-primary mt-3 mb-2"> Panel de Control Editor</h2>
+            </div>
+            <hr>
+            <div class="container">
+                <div class="row mb-4 mt-2">
+                    <input type="text" class="form-control" placeholder="Buscar Centro Turistico" (keyup)="btnSearchMyCentro(keywordCM.value)" #keywordCM>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+                    <div class="card-columns">
+                        <div class="card" *ngFor="let item of listMyCentros; let i = index;">
+                            <div class="card-body">
+                                <h5 class="card-title card-header text-center">{{item.nombre}} <i class="fa fa-image"></i></h5>
+                                <img src="../../../assets/centros/{{item.ruta}}/1.jpg" class="card-img-top" alt="..." height="120px">
+                                <div class="mt-2">
+                                    <div class="row center align-self-center" style="cursor: pointer;">
+                                        <button class="btn btn-outline-warning btn-block">Editar<i class="fa fa-edit"></i></button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                    <div class="form-sec">
+                        <div class="center">
+                            <h4 class="text-warning text-center">Editar Centro Turistico <i class="fa fa-image"></i></h4>
+                        </div>
+
+                        <form #formaEditCentro="ngForm">
+                            <div class="form-group">
+                                <label>Nombre</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" ngModel required #nombre="ngModel" placeholder="Nombre del Centro">
+                            </div>
+                            <div class="form-group">
+                                <label>Dirección</label>
+                                <input type="text" class="form-control" id="direccion" name="direccion" ngModel required #direccion="ngModel" placeholder="Dirección del Centro">
+                            </div>
+                            <div class="form-group">
+                                <label>Horarios</label>
+                                <input type="text" class="form-control" id="horarios" name="horarios" ngModel required #horarios="ngModel">
+                            </div>
+                            <div class="form-group">
+                                <label>Telefono</label>
+                                <input type="number" min="1" maxlength="8" class="form-control" id="telefono" name="telefono" ngModel required #telefono="ngModel">
+                            </div>
+                            <div class="form-group">
+                                <label>Link de youtube</label>
+                                <input type="text" class="form-control" id="video" name="video" ngModel required #video="ngModel">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Descripción</label>
+                                <textarea rows="3" class="form-control" id="descripcion" name="descripcion" ngModel required #descripcion="ngModel" placeholder="Descripción del Centro"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Historia</label>
+                                <textarea rows="3" class="form-control" id="historia" name="historia" ngModel required #historia="ngModel" placeholder="Historia del Centro"></textarea>
+                            </div>
+                            <button [disabled]="!formaEditCentro.valid" (click)="btnCrearCentro(formaEditCentro)" class="btn btn-outline-warning btn-block">Editar Centro</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+
+
+
+<!-------------------------- Modal -------------------------->
+
+
+<div class="modal fade" id="asignarModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title " id="exampleModalLabel">Asiganar Centro Turistico</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div *ngFor="let item of listEditors">
+
+                        <div class="row mb-3 border-top border-right" style="background-color: rgba(240, 234, 234, 0.589)">
+                            <div class="col-9">
+                                <div class="mr-2 mt-2 pull-left">
+                                    <img class="rounded-circle" alt="userImg" [src]="item.photoURL" width="60" height="60" />
+                                </div>
+                                <p class="text-primary"><strong>{{item.displayName}}</strong></p>
+                                <small><p>{{item.email}}</p></small>
+                            </div>
+                            <div class="col-3 align-self-end align-self-center">
+                                <button data-dismiss="modal" (click)="btnAsignar(item.uid)" class="btn btn-outline-primary">Asignar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
-        <main class="col-md-9 col px-5 pl-md-2 pt-2 main mx-auto">
-            <div class="row">
-                <a href="#" data-target="#sidebar" data-toggle="collapse" aria-expanded="false"><i class="fa fa-navicon fa-2x py-2 p-1"> Menu Editor</i></a>
-            </div>
-            <hr>
-
-
-        </main>
     </div>
 </div>

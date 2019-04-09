@@ -17,7 +17,7 @@ import { DataStorageService } from '../../localstorage/data-storage.service';
 export class PerfilComponent implements OnInit {
   currentRate = 1;
 
-  user:any;
+  user:any=[];
 
   listCentrosSuscritos:any[]=[];
 
@@ -40,7 +40,7 @@ export class PerfilComponent implements OnInit {
 
   btnLoadCentrosSuscritos(key:string){
     this.listCentrosSuscritos = this.dataStorageService.getCentrosSuscritos(key);
-    console.log(this.listCentrosSuscritos);
+   // console.log(this.listCentrosSuscritos);
   }
 
   btnDeleteSubcribe(index:any){

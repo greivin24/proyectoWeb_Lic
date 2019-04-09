@@ -16,7 +16,7 @@ export class NoticiaComponent implements OnInit {
   constructor(private activatedRouter: ActivatedRoute, private dataService:DataService) { 
 
     this.activatedRouter.params.subscribe( params =>{
-      this.noticia = this.dataService.getNoticia(params['id']);
+      this.noticia = this.dataService.getNoticiaID(params['id']);
       console.log(this.noticia);
     })
 

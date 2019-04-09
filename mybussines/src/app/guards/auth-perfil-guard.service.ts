@@ -16,7 +16,7 @@ export class AuthPerfilGuardService implements CanActivate {
   user:UserAuth;
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     this.user = this.dataStorageService.getObjectValue("online")
-    if (this.user.rol == "Editor") {
+    if (this.user.rol != "Anonimo") {
         return true;
     }
     console.log("bloqueado por el guard Perfil");

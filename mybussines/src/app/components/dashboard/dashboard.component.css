@@ -124,3 +124,21 @@
     -webkit-transition-timing-function: ease-out;
     transition-timing-function: ease-out;
 }
+
+
+/*----------------- FORM------------------*/
+
+.form-sec {
+    width: 100%;
+    background: #ccc;
+    background: #f8f9fa;
+    padding: 15px;
+    box-shadow: 0 0 4px #ccc;
+}
+
+
+/*----------------- INPUT NWE NOTICIA------------------*/
+
+#pic {
+    display: none;
+}
