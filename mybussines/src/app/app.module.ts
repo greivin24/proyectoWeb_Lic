@@ -47,6 +47,8 @@ import { FirebaseModule } from './extra-module/firebase.module';
 import { DataService } from './services/data/data.service';
 import { KeysPipe } from './pipes/keys.pipe';
 
+import { BtnctaContactenosComponent } from './components/btncta-contactenos/btncta-contactenos.component';
+
 
 @NgModule({
   declarations: [
@@ -65,7 +67,7 @@ import { KeysPipe } from './pipes/keys.pipe';
     LandingPageComponent,
     PerfilComponent,
     KeysPipe,
-    
+    BtnctaContactenosComponent
   ],
   imports: [
     BrowserModule,
