@@ -20,6 +20,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 //Servicios
 import { UsuariosService } from './services/usuarios.service';
+import { BtnctaContactenosComponent } from './components/btncta-contactenos/btncta-contactenos.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { UsuariosService } from './services/usuarios.service';
     ServiciosComponent,
     CentrosTuristicosComponent,
     CentroTuristicoComponent,
-    DashboardComponent
+    DashboardComponent,
+    BtnctaContactenosComponent
   ],
   imports: [
     BrowserModule,
