@@ -25,6 +25,15 @@ export class FirebaseService {
      return itemRef.set(user);
   }
 
+  post(val:any, node:string){
+    this.setNodeName(node+".json");
+    let body = JSON.stringify( val );
+    let headers = new HttpHeaders({
+      'Content-Type':'application/json'
+    });
+    return this.httpClient.post(this.firebaseURL, body, {headers})
+  }
+
   putUser(user:UserAuth, key:string){
     this.setNodeName("users/"+key+".json");
     let body = JSON.stringify( user );

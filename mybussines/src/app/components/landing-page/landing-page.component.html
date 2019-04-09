@@ -186,7 +186,7 @@
     <h2>Contactanos</h2>
     <div class="row justify-content-center">
         <div class="col-12">
-            <form action="mail.php" method="post">
+            <form #formContactenos="ngForm">
                 <div class="card border-primary rounded-0">
                     <div class="card-header p-0">
                         <div class="bg-info text-white text-center py-2">
@@ -200,7 +200,7 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text"><i class="fa fa-user text-info"></i></div>
                                 </div>
-                                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre y Apellido" required>
+                                <input type="text" class="form-control" name="nombre" ngModel required #nombre="ngModel" placeholder="Nombre y Apellido">
                             </div>
                         </div>
                         <div class="form-group">
@@ -208,7 +208,7 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text"><i class="fa fa-envelope text-info"></i></div>
                                 </div>
-                                <input type="email" class="form-control" id="nombre" name="email" placeholder="ejemplo@gmail.com" required>
+                                <input type="email" class="form-control" name="email" ngModel required #email="ngModel" placeholder="ejemplo@gmail.com">
                             </div>
                         </div>
 
@@ -217,12 +217,12 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text"><i class="fa fa-comment text-info"></i></div>
                                 </div>
-                                <textarea class="form-control" placeholder="Envianos tu Mensaje" required></textarea>
+                                <textarea class="form-control" name="msj" ngModel required #msj="ngModel" placeholder="Envianos tu Mensaje"></textarea>
                             </div>
                         </div>
 
                         <div class="text-center">
-                            <input type="submit" value="Enviar" class="btn btn-info btn-block rounded-0 py-2">
+                            <button [disabled]="!formContactenos.valid" (click)="btnEnviarMsj(formContactenos)" class="btn btn-info btn-block rounded-0 py-2">Enviar Mensaje</button>
                         </div>
                     </div>
 
