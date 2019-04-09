@@ -1,118 +1,133 @@
-<div class="comp-root">
-    <section class="contactoforum">
-        <div class="row">
-            <div class="col-lg-9">
-                <div class="container sizeSecTopBot">
-                    <div class="row justify-content-center">
-                        <div class="col-12">
-                            <form action="mail.php" method="post">
-                                <div class="card border-primary rounded-0">
-                                    <div class="card-header p-0">
-                                        <div class="bg-info text-white text-center py-2">
-                                            <h3><i class="fa fa-envelope"></i> Contactanos</h3>
-                                        </div>
-                                    </div>
-                                    <div class="card-body p-3">
-                                        <div class="form-group">
-                                            <div class="input-group mb-2">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text"><i class="fa fa-user text-info"></i></div>
-                                                </div>
-                                                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre y Apellido" required>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="input-group mb-2">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text"><i class="fa fa-envelope text-info"></i></div>
-                                                </div>
-                                                <input type="email" class="form-control" id="nombre" name="email" placeholder="ejemplo@gmail.com" required>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="input-group mb-2">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text"><i class="fa fa-comment text-info"></i></div>
-                                                </div>
-                                                <textarea class="form-control msj-input" placeholder="Envianos tu Mensaje" required></textarea>
-                                            </div>
-                                        </div>
-
-                                        <div class="text-center">
-                                            <input type="submit" value="Enviar" class="btn btn-info btn-block rounded-0 py-2">
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </form>
+<div class="container sizeSecTopBot mt-5 animated fadeIn">
+    <h2>Contactanos</h2>
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <form #formContactenos="ngForm">
+                <div class="card border-primary rounded-0">
+                    <div class="card-header p-0">
+                        <div class="bg-info text-white text-center py-2">
+                            <h3><i class="fa fa-envelope"></i> Contactanos</h3>
+                            <p class="m-0">Con gusto te ayudaremos</p>
                         </div>
+                    </div>
+                    <div class="card-body p-3">
+                        <div class="form-group">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fa fa-user text-info"></i></div>
+                                </div>
+                                <input type="text" class="form-control" name="nombre" ngModel required #nombre="ngModel" placeholder="Nombre y Apellido">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fa fa-envelope text-info"></i></div>
+                                </div>
+                                <input type="email" class="form-control" name="email" ngModel required #email="ngModel" placeholder="ejemplo@gmail.com">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fa fa-comment text-info"></i></div>
+                                </div>
+                                <textarea class="form-control" name="msj" ngModel required #msj="ngModel" placeholder="Envianos tu Mensaje"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <button [disabled]="!formContactenos.valid" (click)="btnEnviarMsj(formContactenos)" class="btn btn-info btn-block rounded-0 py-2">Enviar Mensaje</button>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="container second-portion">
+            <div class="row">
+                <div class="hvr-buzz-out col-xs-12 col-sm-6 col-lg-4">
+                    <div class="box">
+                        <div class="icon">
+                            <div class="image "><i class="fa fa-envelope" aria-hidden="true"></i></div>
+                            <div class="info">
+                                <h3 class="title mt-2">MAIL & WEBSITE</h3>
+                                <p>
+                                    <i class="fa fa-envelope" aria-hidden="true"></i> &nbsp gondhiyahardik6610@gmail.com
+                                    <br>
+                                    <br>
+                                    <i class="fa fa-globe" aria-hidden="true"></i> &nbsp www.hardikgondhiya.com
+                                </p>
+
+                            </div>
+                        </div>
+                        <div class="space"></div>
+                    </div>
+                </div>
+
+                <div class="hvr-buzz-out col-xs-12 col-sm-6 col-lg-4">
+                    <div class="box">
+                        <div class="icon">
+                            <div class="image "><i class="fa fa-mobile" aria-hidden="true"></i></div>
+                            <div class="info">
+                                <h3 class="title mt-2">CONTACTOS</h3>
+                                <p>
+                                    <i class="fa fa-mobile" aria-hidden="true"></i> &nbsp (+91)-9624XXXXX
+                                    <br>
+                                    <br>
+                                    <i class="fa fa-mobile" aria-hidden="true"></i> &nbsp (+91)-756706XXXX
+                                </p>
+                            </div>
+                        </div>
+                        <div class="space"></div>
+                    </div>
+                </div>
+
+                <div class="hvr-buzz-out col-xs-12 col-sm-6 col-lg-4">
+                    <div class="box">
+                        <div class="icon">
+                            <div class="image "><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+                            <div class="info">
+                                <h3 class="title mt-2">DIRCCIÓN</h3>
+                                <p>
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp 15/3 Junction Plot "Shree Krishna Krupa", Rajkot - 360001.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="space"></div>
                     </div>
                 </div>
             </div>
-
-            <div class="col-lg-3">
-                <div class="row justify-content-center">
-                    <div class="container second-portion">
-
-                        <div class="box">
-                            <div class="icon">
-                                <div class="image "><i class="fa fa-mobile" aria-hidden="true"></i></div>
-                                <div class="info">
-                                    <h3 class="title mt-2">CONTACTOS</h3>
-                                    <p>
-                                        <i class="fa fa-mobile" aria-hidden="true"></i> (+91)-9624XXXXX
-                                        <br>
-                                        <br>
-                                        <i class="fa fa-mobile" aria-hidden="true"></i> (+91)-756706XXXX
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="space"></div>
-                        </div>
-
-                        <div class="box">
-                            <div class="icon">
-                                <div class="image "><i class="fa fa-map-marker" aria-hidden="true"></i></div>
-                                <div class="info">
-                                    <h3 class="title mt-2">DIRCCIÓN</h3>
-                                    <p>
-                                        <i class="fa fa-map-marker" aria-hidden="true"></i> 15/3 Junction Plot "Shree Krishna Krupa", Rajkot - 360001.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="space"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
+    </div>
 
-    </section>
-
-    <section class="social">
-        <div class="container text-center">
-            <header>
-                <h2 class="social-tittle">Social Media</h2>
-            </header>
-            <div class="row d-flex align-items-center text-center center justify-content-center">
-                <div class="item col-lg-2 col-md-4 col-6">
-                    <a href="#"><img src="../../../assets/img/iconmonstr-facebook-3-72.png" alt="..." class="img-fluid"></a>
-                </div>
-                <div class="item col-lg-2 col-md-4 col-6">
-                    <a href="#"><img src="../../../assets/img/iconmonstr-google-plus-1-72.png" alt="..." class="img-fluid"></a>
-                </div>
-                <div class="item col-lg-2 col-md-4 col-6">
-                    <a href="#"><img src="../../../assets/img/iconmonstr-instagram-1-72.png" alt="..." class="img-fluid"></a>
-                </div>
-                <div class="item col-lg-2 col-md-4 col-6">
-                    <a href="#"><img src="../../../assets/img/iconmonstr-linkedin-3-72.png" alt="..." class="img-fluid"></a>
-                </div>
-                <div class="item col-lg-2 col-md-4 col-6">
-                    <a href="#"><img src="../../../assets/img/iconmonstr-twitter-3-72.png" alt="..." class="img-fluid"></a>
-                </div>
-            </div>
-        </div>
-    </section>
 </div>
+
+<section class="social">
+    <div class="container text-center">
+        <header>
+            <h2 class="social-tittle">Social Media</h2>
+        </header>
+        <div class="row d-flex align-items-center text-center center justify-content-center">
+            <div class="item col-lg-2 col-md-4 col-6">
+                <a href="#"><img src="../../../assets/img/iconmonstr-facebook-3-72.png" alt="..." class="img-fluid"></a>
+            </div>
+            <div class="item col-lg-2 col-md-4 col-6">
+                <a href="#"><img src="../../../assets/img/iconmonstr-google-plus-1-72.png" alt="..." class="img-fluid"></a>
+            </div>
+            <div class="item col-lg-2 col-md-4 col-6">
+                <a href="#"><img src="../../../assets/img/iconmonstr-instagram-1-72.png" alt="..." class="img-fluid"></a>
+            </div>
+            <div class="item col-lg-2 col-md-4 col-6">
+                <a href="#"><img src="../../../assets/img/iconmonstr-linkedin-3-72.png" alt="..." class="img-fluid"></a>
+            </div>
+            <div class="item col-lg-2 col-md-4 col-6">
+                <a href="#"><img src="../../../assets/img/iconmonstr-twitter-3-72.png" alt="..." class="img-fluid"></a>
+            </div>
+        </div>
+    </div>
+</section>
