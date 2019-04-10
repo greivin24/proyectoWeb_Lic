@@ -106,6 +106,7 @@ constructor() { }
   public getNoticia = (idx:string) => this.list_noticia[idx];
 
   public getNoticiaID(key:number){
+
     let returList= {};
     this.list_noticia.forEach(  (item) => { 
       if (item.id == key) {

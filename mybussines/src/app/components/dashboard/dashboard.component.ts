@@ -192,7 +192,7 @@ export class DashboardComponent implements OnInit {
     if(listExC == null){
       this.dataStorageService.setObjectValue("CentrosXEditor", data);
     }else{
-      listExC.push(data);
+      listExC.push(data[0]);
       this.dataStorageService.setObjectValue("CentrosXEditor", listExC);
     }
     
@@ -204,13 +204,19 @@ export class DashboardComponent implements OnInit {
   btnCargarMyCentros(){
     this.listMyCentros = [];
     let list = this.dataStorageService.getObjectValue("CentrosXEditor");
+    console.log(list);
           if(list != null){
-            for (const i of list) {
+            list.forEach(  (i) => { 
+              console.log("user: "+this.user.uid+" centroID:"+i.uid);
               if(i.uid == this.user.uid){
                 this.listMyCentros.push(this.dataService.getCentroID(i.centroid));
               }
-                
-            }
+            });
+            // for (const i of list) {
+
+            // }
+            console.log(this.listMyCentros);
+           //console.log(this.dataService.getCentroID(2))
           }
   }
 
