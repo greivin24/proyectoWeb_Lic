@@ -75,7 +75,7 @@
 .thumb-img {
     border-radius: 2px;
     overflow: hidden;
-    width: 100%;
+    max-width: 300px;
 }
 
 .gal-detail h4 {
@@ -95,7 +95,7 @@
 }
 
 .feature-description {
-    margin-top: 100px;
+    /* margin-top: 50px; */
     background: rgba(0, 0, 0, 0.096);
 }
 
@@ -265,7 +265,7 @@
     padding: 150px 0;
     display: block;
     box-sizing: border-box;
-    margin-top: 75px;
+    margin-top: 40px;
 }
 
 .partner-tittle {
@@ -290,4 +290,99 @@ section.partners .item {
 
 .centered-contend {
     padding-top: 70px;
+}
+
+
+/* ------------------------------ FEATURE BOX CSS (HISTORY SECTION) */
+
+.feature-box-icon {
+    color: #fff;
+    padding: 15px;
+    background: #323232;
+    font-size: 50px;
+    border-radius: 90px;
+    border: 10px solid #323232;
+}
+
+.feature-box {
+    text-align: center;
+    padding: 20px;
+    transition: .5s;
+    border: 1px solid #e8e8e8;
+}
+
+.feature-box:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.feature-box h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 25px 0 15px;
+}
+
+
+/*------------------------------GALLERY CSS*/
+
+
+/* ===========
+       Gallery
+     =============*/
+
+.portfolioFilter a {
+    -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    -webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    -webkit-transition: all 0.3s ease-out;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    color: #333333;
+    padding: 5px 10px;
+    display: inline-block;
+    transition: all 0.3s ease-out;
+}
+
+.portfolioFilter a:hover {
+    background-color: #228bdf;
+    color: #ffffff;
+}
+
+.portfolioFilter a.current {
+    background-color: #228bdf;
+    color: #ffffff;
+}
+
+.thumb {
+    background-color: #ffffff;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    width: 100%;
+}
+
+.thumb-img {
+    border-radius: 2px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.gal-detail h4 {
+    margin: 16px auto 10px auto;
+    width: 80%;
+    white-space: nowrap;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.gal-detail .ga-border {
+    height: 3px;
+    width: 40px;
+    background-color: #228bdf;
+    margin: 10px auto;
 }
