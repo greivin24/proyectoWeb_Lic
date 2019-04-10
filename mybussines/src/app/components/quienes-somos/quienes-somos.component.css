@@ -265,7 +265,7 @@
     padding: 150px 0;
     display: block;
     box-sizing: border-box;
-    margin-top: 75px;
+    margin-top: 40px;
 }
 
 .partner-tittle {
@@ -290,4 +290,33 @@ section.partners .item {
 
 .centered-contend {
     padding-top: 70px;
+}
+
+
+/* ------------------------------ FEATURE BOX CSS (HISTORY SECTION) */
+
+.icon {
+    color: #fff;
+    padding: 15px;
+    background: #323232;
+    font-size: 50px;
+    border-radius: 90px;
+    border: 10px solid #323232;
+}
+
+.feature-box {
+    text-align: center;
+    padding: 20px;
+    transition: .5s;
+    border: 1px solid #e8e8e8;
+}
+
+.feature-box:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.feature-box h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 25px 0 15px;
 }
