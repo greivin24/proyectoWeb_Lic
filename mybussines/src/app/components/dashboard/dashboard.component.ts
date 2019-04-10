@@ -31,6 +31,8 @@ export class DashboardComponent implements OnInit {
 
   //Nueva noticia
   data= new Noticia;
+  isNuevaNoticia:boolean=true;
+  noticiaEdit:any={};
 
   // Asignar centro a usuario
   idCentro:any;
@@ -38,6 +40,8 @@ export class DashboardComponent implements OnInit {
 
   //Mis Centros
   listMyCentros:any[]=[];
+  centroEditID:string;
+  centroEdit:any = {};
 
   constructor(private activatedRouter: ActivatedRoute, private dataService:DataService, private firebaseService:FirebaseService, private dataStorageService:DataStorageService, private httpClientModule:HttpClientModule) {
     this.activatedRouter.params.subscribe( params =>{
@@ -47,6 +51,7 @@ export class DashboardComponent implements OnInit {
         if(this.user.rol =="Administrador"){
           this.userAdmin = true;
           this.listNoticias = this.dataService.getNoticiasList();
+          console.log(this.listNoticias);
           this.listCentros = this.dataService.getCentrosList();
           this.firebaseService.getUsers().subscribe(result =>{
               
@@ -58,21 +63,7 @@ export class DashboardComponent implements OnInit {
           })
         }else
           this.userAdmin = false;
-          let list = this.dataStorageService.getObjectValue("CentrosXEditor");
-          console.log(list);
-
-          if(list != null){
-            console.log("diferente de null");
-            for (const i of list) {
-              console.log("comparacion: "+i.uid+" = "+this.user.uid);
-              if(i.uid == this.user.uid){
-                console.log(this.dataService.getCentroID(i.centroid));
-                this.listMyCentros.push(this.dataService.getCentroID(i.centroid));
-              }
-                
-            }
-          }
-          console.log(this.listMyCentros);
+          this.btnCargarMyCentros();
       })
     })
    }
@@ -121,11 +112,40 @@ export class DashboardComponent implements OnInit {
       "descripcion": val.value.desc
     };
 
-    console.log(data);
+    //console.log(data);
     this.listNoticias.push(data);
-    console.log(this.listNoticias);
+    //console.log(this.listNoticias);
     val.resetForm();
   }
+
+  btnSeleccionEditNoticia(key){
+    this.noticiaEdit = {};
+    this.noticiaEdit = this.dataService.getNoticiaID(key);
+    console.log(this.noticiaEdit);
+    this.isNuevaNoticia = false;
+  }
+
+  btnSeleccionNuevaNoticia(){
+    this.isNuevaNoticia = true;
+  }
+
+   btnEditarNoticia(val:NgForm){
+    let data:any ={
+      "id":this.noticiaEdit.id,
+     "nombre": val.value.titulo,
+     "imagen": this.noticiaEdit.imagen,
+     "ruta": this.noticiaEdit.ruta,
+     "sub":val.value.sub,
+     "fecha":this.noticiaEdit.fecha,
+      "descripcion": val.value.desc
+    };
+    this.listNoticias.splice(this.noticiaEdit.id, 1);
+    val.reset();
+    this.noticiaEdit = {};
+    this.listNoticias.push(data);
+    
+  }
+
 
   btnEliminarNoticia(index){
     this.listNoticias.splice(index, 1);
@@ -155,7 +175,7 @@ export class DashboardComponent implements OnInit {
     };
 
     this.listCentros.push(data);
-    console.log(this.listCentros);
+    //console.log(this.listCentros);
     val.resetForm();
   }
 
@@ -181,8 +201,47 @@ export class DashboardComponent implements OnInit {
 
   //--------------EDITOR-------------------------------//
 
-  btnSearchMyCentro(val:NgForm){
-    
+  btnCargarMyCentros(){
+    this.listMyCentros = [];
+    let list = this.dataStorageService.getObjectValue("CentrosXEditor");
+          if(list != null){
+            for (const i of list) {
+              if(i.uid == this.user.uid){
+                this.listMyCentros.push(this.dataService.getCentroID(i.centroid));
+              }
+                
+            }
+          }
   }
+
+  btnSeleccionarCentro(key){
+    this.centroEditID = key;
+    this.centroEdit = {};
+    this.centroEdit = this.dataService.getCentroID(key);
+  }
+
+  btnEditarCentro(val:NgForm){
+    let data:any ={
+      "id":this.centroEdit.id,
+      "nombre": val.value.nombre,
+      "imagen":this.centroEdit.imagen,
+      "direccion":val.value.direccion,
+      "ruta": this.centroEdit.ruta,
+      "telefono":val.value.telefono,
+      "horarios":val.value.horarios,
+      "valoraciones":this.centroEdit.valoraciones,
+      "seguidores":this.centroEdit.seguidores,
+      "historia":val.value.historia,
+      "video":val.value.video,
+       "descripcion":val.value.descripcion
+    };
+
+    this.dataService.list_centros.splice(this.centroEdit.id, 1);
+    this.dataService.list_centros.push(data);
+    val.reset();
+    this.centroEdit = {};
+    this.btnCargarMyCentros();
+  }
+
 
 }

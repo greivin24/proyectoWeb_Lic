@@ -36,6 +36,7 @@ export class CentroTuristicoComponent implements OnInit {
     this.activatedRouter.params.subscribe( params =>{
       this.user = this.dataStorageService.getObjectValue("online");
       this.centro = this.dataService.getCentroID(params['id']);
+      console.log(this.centro);
       this.youtube_iframe_html = this.embedVideo.embed(this.centro.video, {
         query: { portrait: 0, color: '333' },
         attr: { width: 350, height: 250 }

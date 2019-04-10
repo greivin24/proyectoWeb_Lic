@@ -137,15 +137,12 @@ constructor() { }
   public getCentro = (idx:string) => this.list_centros[idx];
 
   public getCentroID(key:number){
-    console.log(this.list_centros);
-    console.log("key idc: "+key);
     let returList= {};
     this.list_centros.forEach(  (item) => { 
       if (item.id == key) {
         returList = item;
       }
     });
-    console.log(returList);
     return returList;
   }
   

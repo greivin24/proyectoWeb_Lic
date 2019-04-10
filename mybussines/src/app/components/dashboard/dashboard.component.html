@@ -29,7 +29,7 @@
                                     <h5 class="card-title card-header text-center">{{item.nombre}} <i class="fa fa-newspaper-o"></i></h5>
                                     <div class="mt-2">
                                         <div class="row center align-self-center" style="cursor: pointer;">
-                                            <button class="btn btn-outline-warning btn-block">Editar<i class="fa fa-edit"></i></button>
+                                            <button (click)="btnSeleccionEditNoticia(item.id)" class="btn btn-outline-warning btn-block">Editar<i class="fa fa-edit"></i></button>
                                             <button (click)="btnEliminarNoticia(i)" class="btn btn-outline-danger btn-block">Eliminar<i class="fa fa-trash"></i></button>
                                         </div>
 
@@ -38,7 +38,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+
+                    <!-- CREAR NUEVA NOTICIA -->
+                    <div *ngIf="isNuevaNoticia" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 animated fadeIn">
                         <div class="form-sec">
                             <div class="center">
                                 <h4 class="text-success text-center">Crear Nueva Noticia <i class="fa fa-newspaper-o"></i></h4>
@@ -87,6 +89,42 @@
                             </form>
                         </div>
                     </div>
+
+                    <!-- EDITAR  NOTICIA -->
+                    <div *ngIf="!isNuevaNoticia" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 animated fadeIn">
+                        <div class="form-sec">
+                            <div class="center">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <button (click)="btnSeleccionNuevaNoticia()" class="btn btn-success"><i class="fa fa-plus"></i></button>
+                                    </div>
+                                    <div class="col-10">
+                                        <h4 class="text-success text-center">Editar Noticia <i class="fa fa-newspaper-o"></i></h4>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <form class="mt-2" #formaEditNoticia="ngForm">
+                                <div class="form-group">
+                                    <label>Titulo</label>
+                                    <input type="text" class="form-control" id="titulo" name="titulo" [ngModel]="noticiaEdit.nombre" required #titulo="ngModel" placeholder="Titulo de la noticia">
+                                </div>
+                                <div class="form-group">
+                                    <label>Subtitulo</label>
+                                    <input type="text" class="form-control" id="sub" name="sub" [ngModel]="noticiaEdit.sub" required #sub="ngModel" placeholder="Subtitulo de la noticia">
+                                </div>
+                                <div class="form-group">
+                                    <label>Descripción</label>
+                                    <textarea rows="3" class="form-control" id="desc" name="desc" [ngModel]="noticiaEdit.descripcion" required #desc="ngModel" placeholder="Descripción de la noticia"></textarea>
+                                </div>
+
+                                <button [disabled]="!formaEditNoticia.valid" (click)="btnEditarNoticia(formaEditNoticia)" class="btn btn-outline-success btn-block">Actualizar Noticia</button>
+                            </form>
+                        </div>
+                    </div>
+
+
                 </div>
 
 
@@ -116,6 +154,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                         <div class="form-sec">
                             <div class="center">
@@ -187,6 +226,12 @@
 
 
 
+
+
+
+
+
+
 <!-- PANEL DE CONTROL DE UN EDITOR -->
 <div *ngIf="!userAdmin" class="container-fluid animated fadeIn">
     <div class="row d-flex d-md-block flex-nowrap wrapper">
@@ -195,11 +240,6 @@
                 <h2 class="text-primary mt-3 mb-2"> Panel de Control Editor</h2>
             </div>
             <hr>
-            <div class="container">
-                <div class="row mb-4 mt-2">
-                    <input type="text" class="form-control" placeholder="Buscar Centro Turistico" (keyup)="btnSearchMyCentro(keywordCM.value)" #keywordCM>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
                     <div class="card-columns">
@@ -209,7 +249,7 @@
                                 <img src="../../../assets/centros/{{item.ruta}}/1.jpg" class="card-img-top" alt="..." height="120px">
                                 <div class="mt-2">
                                     <div class="row center align-self-center" style="cursor: pointer;">
-                                        <button class="btn btn-outline-warning btn-block">Editar<i class="fa fa-edit"></i></button>
+                                        <button (click)="btnSeleccionarCentro(item.id)" class="btn btn-outline-warning btn-block">Editar<i class="fa fa-edit"></i></button>
                                     </div>
 
                                 </div>
@@ -226,34 +266,34 @@
                         <form #formaEditCentro="ngForm">
                             <div class="form-group">
                                 <label>Nombre</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre" ngModel required #nombre="ngModel" placeholder="Nombre del Centro">
+                                <input type="text" class="form-control" id="nombre" name="nombre" [ngModel]="centroEdit.nombre" ngModel required #nombre="ngModel" placeholder="Nombre del Centro">
                             </div>
                             <div class="form-group">
                                 <label>Dirección</label>
-                                <input type="text" class="form-control" id="direccion" name="direccion" ngModel required #direccion="ngModel" placeholder="Dirección del Centro">
+                                <input type="text" class="form-control" id="direccion" name="direccion" [ngModel]="centroEdit.direccion" ngModel required #direccion="ngModel" placeholder="Dirección del Centro">
                             </div>
                             <div class="form-group">
                                 <label>Horarios</label>
-                                <input type="text" class="form-control" id="horarios" name="horarios" ngModel required #horarios="ngModel">
+                                <input type="text" class="form-control" id="horarios" name="horarios" [ngModel]="centroEdit.horarios" ngModel required #horarios="ngModel">
                             </div>
                             <div class="form-group">
                                 <label>Telefono</label>
-                                <input type="number" min="1" maxlength="8" class="form-control" id="telefono" name="telefono" ngModel required #telefono="ngModel">
+                                <input type="text" maxlength="10" class="form-control" id="telefono" [ngModel]="centroEdit.telefono" name="telefono" ngModel required #telefono="ngModel">
                             </div>
                             <div class="form-group">
                                 <label>Link de youtube</label>
-                                <input type="text" class="form-control" id="video" name="video" ngModel required #video="ngModel">
+                                <input type="text" class="form-control" id="video" name="video" [ngModel]="centroEdit.video" ngModel required #video="ngModel">
                             </div>
 
                             <div class="form-group">
                                 <label>Descripción</label>
-                                <textarea rows="3" class="form-control" id="descripcion" name="descripcion" ngModel required #descripcion="ngModel" placeholder="Descripción del Centro"></textarea>
+                                <textarea rows="3" class="form-control" id="descripcion" name="descripcion" [ngModel]="centroEdit.descripcion" ngModel required #descripcion="ngModel" placeholder="Descripción del Centro"></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Historia</label>
-                                <textarea rows="3" class="form-control" id="historia" name="historia" ngModel required #historia="ngModel" placeholder="Historia del Centro"></textarea>
+                                <textarea rows="3" class="form-control" id="historia" name="historia" [ngModel]="centroEdit.historia" ngModel required #historia="ngModel" placeholder="Historia del Centro"></textarea>
                             </div>
-                            <button [disabled]="!formaEditCentro.valid" (click)="btnCrearCentro(formaEditCentro)" class="btn btn-outline-warning btn-block">Editar Centro</button>
+                            <button [disabled]="!formaEditCentro.valid" (click)="btnEditarCentro(formaEditCentro)" class="btn btn-outline-warning btn-block">Editar Centro</button>
                         </form>
                     </div>
                 </div>
