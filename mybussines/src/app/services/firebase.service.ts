@@ -16,7 +16,7 @@ export class FirebaseService {
   constructor(private httpClient:HttpClient, private angularFireDatabase:AngularFireDatabase) { }
 
   setNodeName(node:string){
-   this.firebaseURL ="https://angular-crud-firebase-d60e1.firebaseio.com/"+node;
+   this.firebaseURL ="https://angular-crud-firebase-d60e1.firebaseio.com/"+node; //imgNoticias.json
   }
 
 
@@ -31,7 +31,17 @@ export class FirebaseService {
     let headers = new HttpHeaders({
       'Content-Type':'application/json'
     });
+    
     return this.httpClient.post(this.firebaseURL, body, {headers})
+  }
+
+  put(val:any, node:string,  key:string){
+    this.setNodeName(""+node+"/"+key+".json");
+    let body = JSON.stringify( val );
+    let headers = new HttpHeaders({
+      'Content-Type':'application/json'
+    });
+    return this.httpClient.put( this.firebaseURL, body, {headers});
   }
 
   putUser(user:UserAuth, key:string){

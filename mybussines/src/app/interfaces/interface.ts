@@ -21,12 +21,18 @@ export class Comment{
   imagen:string;
 }
 
+
 export class Noticia{
   id:number;
   nombre: string;
-  imagen: string;
-  ruta: string; 
   sub: string;
   fecha: string;
   descripcion: string;
+
+  constructor (pNombre, pSub, pFecha, pDesc){
+    this.nombre = pNombre;
+    this.sub = pSub;
+    this.fecha = pFecha;
+    this.descripcion = pDesc;
+  }
 }

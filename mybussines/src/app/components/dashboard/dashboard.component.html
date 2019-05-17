@@ -65,7 +65,7 @@
                                 </div>
                                 <div class="form-group center">
 
-                                    <div class="row">
+                                    <!-- <div class="row">
                                         <div class="col-2 align-self-center">
                                             <input style="display: none;" type="file" (change)="onFileUpload($event)" ngModel required #selectFile #file="ngModel" id="file" name="file">
                                             <button class="btn btn-info" title="Subir imagen" style="cursor: pointer; border: none;" (click)="selectFile.click()"><i class="text-white fa fa-upload fa-2x"></i> </button>
@@ -75,9 +75,50 @@
                                                 <img *ngIf="verImagen" class="img-fluid" [src]="imagePreview">
                                             </div>
                                         </div>
+                                    </div> -->
+
+                                    <hr><br>
+                                    <!-- CARGA DE IMAGEN CON DROP -->
+                                    <div class="row">
+                                        <div *ngIf="filesUp.length == 4">
+                                            <button class="btn btn-danger" (click)="clerFiles()">Limpiar</button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div *ngIf="filesUp.length != 4" class="col-4">
+                                            <div appNgDropFiles [filesUp]="filesUp" (isHover)="isHover=$event" [ngClass]="{'file-over': isHover}" class="well drop-zone">
+                                                <!-- <img src="../../../assets/img/drop-images.png" alt="drop-zone-img"> -->
+                                                <i class="fa fa-upload fa-2x"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <button class="btn btn-primary" (click)="uploadImag()" [disabled]="filesUp.length === 0">Cargar</button>
+                                        </div>
                                     </div>
 
                                     <div class="row">
+                                        <div class="col-12">
+                                            <table>
+                                                <thead class="thead=dark">
+                                                    <tr>
+                                                        <th>Nombre</th>
+                                                        <th>Tamaño</th>
+                                                        <th>Progreso</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let item of filesUp">
+                                                        <th>{{item.nombreArchivo}}</th>
+                                                        <th>{{item.archivo.size / 1024 / 1024 | number: '.2-2'}} MB</th>
+                                                        <th>
+                                                            <div class="progress">
+                                                                <div class="progress-bar" role="progressbar" [ngStyle]="{'width': item.progreso + '%'}"></div>
+                                                            </div>
+                                                        </th>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
 
                                     </div>
 

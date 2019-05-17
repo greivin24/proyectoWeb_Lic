@@ -23,12 +23,16 @@ export class ContactenosComponent implements OnInit {
       "nombre": val.value.nombre,
       "email": val.value.email,
       "mensaje": val.value.msj,
+      "id":""
     }
-    this.firebaseService.post(data, "casillero").subscribe (result =>{
-      console.log(result);
-      alertify.alert("Mensaje recibido exitosamente, pronto estaremos en contacto.");
-      val.reset();
-    })
+    // this.firebaseService.post(data, "casillero").subscribe (result =>{
+    //    data.id = result.name;
+    //    this.firebaseService.put(data, "casillero", result.name).subscribe(res=>{ 
+    //      console.log(res);
+    //    })
+    //   alertify.alert("Mensaje recibido exitosamente, pronto estaremos en contacto.");
+    //   val.reset();
+    // })
   }
 
 }

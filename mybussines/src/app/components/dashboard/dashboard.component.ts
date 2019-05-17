@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core'; 
 
 import { ActivatedRoute } from '@angular/router';
+
 import { DataService } from '../../services/data/data.service';
 import { FirebaseService } from '../../services/firebase.service';
+import { ImagenesService } from '../../services/imagenes.service';
 import { DataStorageService } from '../../localstorage/data-storage.service';
 
 import { Noticia } from '../../interfaces/interface';
@@ -10,6 +12,7 @@ import { Noticia } from '../../interfaces/interface';
 
 import { NgForm } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { FileItem } from 'src/app/models/file-item';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,8 +32,12 @@ export class DashboardComponent implements OnInit {
   verImagen:boolean= false;
   imagePreview: any;
 
+  //file upload firebase
+   filesUp: FileItem[] = [];
+   isHover: boolean = false;
+
   //Nueva noticia
-  data= new Noticia;
+  //data= new Noticia;
   isNuevaNoticia:boolean=true;
   noticiaEdit:any={};
 
@@ -43,7 +50,7 @@ export class DashboardComponent implements OnInit {
   centroEditID:string;
   centroEdit:any = {};
 
-  constructor(private activatedRouter: ActivatedRoute, private dataService:DataService, private firebaseService:FirebaseService, private dataStorageService:DataStorageService, private httpClientModule:HttpClientModule) {
+  constructor(private activatedRouter: ActivatedRoute, private dataService:DataService, private firebaseService:FirebaseService, private dataStorageService:DataStorageService, private httpClientModule:HttpClientModule, private imagenesService: ImagenesService) {
     this.activatedRouter.params.subscribe( params =>{
       this.firebaseService.getUser(params['id']).subscribe(result=>{
         this.user = result;
@@ -101,21 +108,30 @@ export class DashboardComponent implements OnInit {
   } 
 
   btnCrearNoticia(val:NgForm){
-    let data:any ={
-      "id":this.listNoticias.length,
-     "nombre": val.value.titulo,
-     //"imagen": val.value.file,
-     "imagen": "noticia5.jpg",
-     "ruta": "noticia5",
-     "sub":val.value.sub,
-     "fecha":val.value.fecha,
-      "descripcion": val.value.desc
-    };
+    // let data:any ={
+    //   "id":this.listNoticias.length,
+    //  "nombre": val.value.titulo,
+    //  "sub":val.value.sub,
+    //  "fecha":val.value.fecha,
+    //   "descripcion": val.value.desc
+    // };
+    
+
+    let newNoticia = new Noticia( val.value.titulo, val.value.sub ,val.value.fecha, val.value.desc );
+    this.firebaseService.post(newNoticia, "noticias").subscribe (result =>{
+      newNoticia.id = result[0]; 
+      debugger
+      console.log(newNoticia.id);
+      // this.firebaseService.put(newNoticia, "noticias", newNoticia.id.toString()).subscribe (result =>{
+      //   this.imagenesService.loadImgToFirebase(this.filesUp, "Noticias", newNoticia.id.toString());
+      // });
+      //val.reset();
+    });
 
     //console.log(data);
-    this.listNoticias.push(data);
+    //this.listNoticias.push(data);
     //console.log(this.listNoticias);
-    val.resetForm();
+    //val.resetForm();
   }
 
   btnSeleccionEditNoticia(key){
@@ -247,6 +263,19 @@ export class DashboardComponent implements OnInit {
     val.reset();
     this.centroEdit = {};
     this.btnCargarMyCentros();
+  }
+
+
+
+  // ---------------------------------------------------------------CARGAR IMAGENES 
+
+  uploadImag(){
+    console.log(this.filesUp);
+    //this.imagenesService.loadImgToFirebase(this.filesUp, "Noticias");
+  }
+
+  clerFiles(){
+    this.filesUp = [];
   }
 
 

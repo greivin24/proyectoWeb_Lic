@@ -29,6 +29,8 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 
 //Servicios
 import { FirebaseService } from './services/firebase.service';
+import { ImagenesService } from './services/imagenes.service';
+
 
 //Local Storage
 import { DataStorageService } from './localstorage/data-storage.service';
@@ -48,6 +50,7 @@ import { DataService } from './services/data/data.service';
 import { KeysPipe } from './pipes/keys.pipe';
 
 import { BtnctaContactenosComponent } from './components/btncta-contactenos/btncta-contactenos.component';
+import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
 
 
 @NgModule({
@@ -67,7 +70,8 @@ import { BtnctaContactenosComponent } from './components/btncta-contactenos/btnc
     LandingPageComponent,
     PerfilComponent,
     KeysPipe,
-    BtnctaContactenosComponent
+    BtnctaContactenosComponent,
+    NgDropFilesDirective
   ],
   imports: [
     BrowserModule,
@@ -82,7 +86,8 @@ import { BtnctaContactenosComponent } from './components/btncta-contactenos/btnc
      
   ],
   providers: [
-    FirebaseService, 
+    FirebaseService,
+    ImagenesService, 
     DataStorageService,
     DataService, 
     AuthGuard, 
