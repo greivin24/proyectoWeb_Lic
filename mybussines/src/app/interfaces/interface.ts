@@ -23,7 +23,7 @@ export class Comment{
 
 
 export class Noticia{
-  id:number;
+  id:string;
   nombre: string;
   sub: string;
   fecha: string;

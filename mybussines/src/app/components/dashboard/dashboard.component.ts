@@ -13,6 +13,7 @@ import { Noticia } from '../../interfaces/interface';
 import { NgForm } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FileItem } from 'src/app/models/file-item';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,6 +27,15 @@ export class DashboardComponent implements OnInit {
   mostarNoticia:boolean=true;
   listNoticias:any[]=[];
   listCentros:any[]=[];
+
+
+  //-----
+
+
+
+
+
+  //-----
 
   //file preview
   selecetdFile : File;
@@ -108,30 +118,18 @@ export class DashboardComponent implements OnInit {
   } 
 
   btnCrearNoticia(val:NgForm){
-    // let data:any ={
-    //   "id":this.listNoticias.length,
-    //  "nombre": val.value.titulo,
-    //  "sub":val.value.sub,
-    //  "fecha":val.value.fecha,
-    //   "descripcion": val.value.desc
-    // };
-    
-
     let newNoticia = new Noticia( val.value.titulo, val.value.sub ,val.value.fecha, val.value.desc );
     this.firebaseService.post(newNoticia, "noticias").subscribe (result =>{
-      newNoticia.id = result[0]; 
-      debugger
-      console.log(newNoticia.id);
-      // this.firebaseService.put(newNoticia, "noticias", newNoticia.id.toString()).subscribe (result =>{
-      //   this.imagenesService.loadImgToFirebase(this.filesUp, "Noticias", newNoticia.id.toString());
-      // });
-      //val.reset();
+        newNoticia.id = result.name;
+        this.firebaseService.put(newNoticia, "noticias", result.name).subscribe(res=>{
+          let list:FileItem[]=[];
+          //this.imagenesService.loadImgToFirebase(this.filesUp, "Noticias", newNoticia.id);
+          list = this.imagenesService.prueba2(this.filesUp, "Noticias", newNoticia.id);
+          console.log(list);
+      })
+         
     });
-
-    //console.log(data);
-    //this.listNoticias.push(data);
-    //console.log(this.listNoticias);
-    //val.resetForm();
+      //val.reset();
   }
 
   btnSeleccionEditNoticia(key){
@@ -270,8 +268,10 @@ export class DashboardComponent implements OnInit {
   // ---------------------------------------------------------------CARGAR IMAGENES 
 
   uploadImag(){
-    console.log(this.filesUp);
-    //this.imagenesService.loadImgToFirebase(this.filesUp, "Noticias");
+    let list:FileItem[]=[];
+
+    // list = this.imagenesService.prueba2(this.filesUp);
+    // console.log(list);
   }
 
   clerFiles(){

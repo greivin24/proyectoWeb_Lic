@@ -25,25 +25,6 @@ export class FirebaseService {
      return itemRef.set(user);
   }
 
-  post(val:any, node:string){
-    this.setNodeName(node+".json");
-    let body = JSON.stringify( val );
-    let headers = new HttpHeaders({
-      'Content-Type':'application/json'
-    });
-    
-    return this.httpClient.post(this.firebaseURL, body, {headers})
-  }
-
-  put(val:any, node:string,  key:string){
-    this.setNodeName(""+node+"/"+key+".json");
-    let body = JSON.stringify( val );
-    let headers = new HttpHeaders({
-      'Content-Type':'application/json'
-    });
-    return this.httpClient.put( this.firebaseURL, body, {headers});
-  }
-
   putUser(user:UserAuth, key:string){
     this.setNodeName("users/"+key+".json");
     let body = JSON.stringify( user );
@@ -66,6 +47,35 @@ export class FirebaseService {
   deleteUser(key:string){
     this.setNodeName("users/"+key+".json");
     return this.httpClient.delete(this.firebaseURL);
+  }
+
+
+
+
+  //---------------------------------NEW FUNCIONS
+
+  gets(node:string){
+    this.setNodeName(node+".json");
+    return this.httpClient.get(this.firebaseURL);
+  }
+
+  post(val:any, node:string){
+    this.setNodeName(node+".json");
+    let body = JSON.stringify( val );
+    let headers = new HttpHeaders({
+      'Content-Type':'application/json'
+    });
+    
+    return this.httpClient.post(this.firebaseURL, body, {headers})
+  }
+
+  put(val:any, node:string,  key:string){
+    this.setNodeName(node+"/"+key+".json");
+    let body = JSON.stringify( val );
+    let headers = new HttpHeaders({
+      'Content-Type':'application/json'
+    });
+    return this.httpClient.put( this.firebaseURL, body, {headers});
   }
 
 }

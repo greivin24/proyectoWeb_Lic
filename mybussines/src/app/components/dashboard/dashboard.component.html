@@ -92,7 +92,7 @@
                                             </div>
                                         </div>
                                         <div class="col-8">
-                                            <button class="btn btn-primary" (click)="uploadImag()" [disabled]="filesUp.length === 0">Cargar</button>
+                                            <button class="btn btn-primary" (click)=" uploadImag()" [disabled]="filesUp.length === 0">Cargar</button>
                                         </div>
                                     </div>
 
@@ -127,6 +127,7 @@
                                 </div>
 
                                 <button [disabled]="!formaNewNoticia.valid" (click)="btnCrearNoticia(formaNewNoticia)" class="btn btn-outline-success btn-block">Crear Noticia</button>
+
                             </form>
                         </div>
                     </div>
