@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data/data.service';
 import { FirebaseService } from '../../services/firebase.service';
+import { ImagenesService } from '../../services/imagenes.service';
 
 
 
@@ -12,8 +13,8 @@ import { FirebaseService } from '../../services/firebase.service';
 export class NoticiasComponent implements OnInit {
 
   noticias_list:any[] = [];
-  noticias_listFire:any;
-  constructor(private dataService:DataService, private firebaseService:FirebaseService) { }
+  noticias_listFire:any[]=[];
+  constructor(private dataService:DataService, private firebaseService:FirebaseService, private imagenesService:ImagenesService) { }
 
   ngOnInit() {
     this.noticias_list = this.dataService.getNoticiasList();
@@ -22,10 +23,17 @@ export class NoticiasComponent implements OnInit {
 
   getsNoticias(){
     this.firebaseService.gets("noticias").subscribe(ret=>{
-       this.noticias_listFire = ret;
+       this.noticias_listFire = this.firebaseService.fromObjetcToArray(ret);
        console.log(this.noticias_listFire);
+
+       console.log(this.noticias_listFire[0].id);
+       this.getURLImg(this.noticias_listFire[0].id );
     })
    
+  }
+
+  getURLImg(id:string){
+    this.imagenesService.getsImgFromNode("Noticias", this.noticias_listFire[0].id )
   }
 
 }

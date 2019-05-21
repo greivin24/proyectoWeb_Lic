@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
 import { FirebaseService } from './firebase.service';
 
@@ -132,6 +132,15 @@ prueba(imgs: FileItem[]){
 
   private saveImage(data: {nombre:string, url:string}){
     this.angularFirestore.collection(`/${this.CARPETA}` ).add( data );
+  }
+
+  public getsImgFromNode(carpeta:string, node:string){
+    let storeRef = firebase.storage();
+    let path = storeRef.ref(`${carpeta} / ${node} / cropped-logo.png`);
+    console.log(path.getDownloadURL());
+  // const storeRef = this.angularFirestore.collection(`${carpeta} / ${node}`);
+    
+   
   }
 
 

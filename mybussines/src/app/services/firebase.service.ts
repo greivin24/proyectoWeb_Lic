@@ -78,4 +78,13 @@ export class FirebaseService {
     return this.httpClient.put( this.firebaseURL, body, {headers});
   }
 
+
+  fromObjetcToArray(items:any){
+    let list:any[]=[];
+    for (const key in items) {
+      list.push(items[key]);
+    }
+    return list;
+  }
+
 }
