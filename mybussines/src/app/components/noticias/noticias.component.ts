@@ -18,7 +18,7 @@ export class NoticiasComponent implements OnInit {
 
   ngOnInit() {
     this.noticias_list = this.dataService.getNoticiasList();
-    this.getsNoticias();
+    //this.getsNoticias();
   }
 
   getsNoticias(){

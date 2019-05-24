@@ -1,3 +1,5 @@
+import { FileItem } from '../models/file-item';
+
 export interface NavbarOpc{
     nombre:string,
     router_link:string
@@ -21,6 +23,11 @@ export class Comment{
   imagen:string;
 }
 
+export interface imgURL{
+  name:string;
+  url:string;
+}
+
 
 export class Noticia{
   id:string;
@@ -28,11 +35,27 @@ export class Noticia{
   sub: string;
   fecha: string;
   descripcion: string;
+  listImg: FileItem[];
+  imgs:any;
 
   constructor (pNombre, pSub, pFecha, pDesc){
     this.nombre = pNombre;
     this.sub = pSub;
     this.fecha = pFecha;
     this.descripcion = pDesc;
+  }
+}
+
+export class Upload {
+
+  $key: string;
+  file:File;
+  name:string;
+  url:string;
+  progress:number; 
+  createdAt: Date = new Date();
+
+  constructor(file:File) {
+    this.file = file;
   }
 }

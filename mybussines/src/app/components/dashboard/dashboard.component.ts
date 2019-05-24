@@ -119,13 +119,26 @@ export class DashboardComponent implements OnInit {
 
   btnCrearNoticia(val:NgForm){
     let newNoticia = new Noticia( val.value.titulo, val.value.sub ,val.value.fecha, val.value.desc );
-    this.firebaseService.post(newNoticia, "noticias").subscribe (result =>{
+    this.firebaseService.post(newNoticia, "noticias").subscribe ((result:any) =>{
+      console.log(result);
         newNoticia.id = result.name;
         this.firebaseService.put(newNoticia, "noticias", result.name).subscribe(res=>{
-          let list:FileItem[]=[];
           //this.imagenesService.loadImgToFirebase(this.filesUp, "Noticias", newNoticia.id);
-          list = this.imagenesService.prueba2(this.filesUp, "Noticias", newNoticia.id);
-          console.log(list);
+           this.imagenesService.prueba2(this.filesUp, "noticias", newNoticia.id).then((rest)=>{
+              console.log(rest);
+           })
+
+          //  setTimeout(()=>{
+          //     newNoticia.imgs = this.imagenesService.getListaImagenes();
+          //     this.firebaseService.put(newNoticia, "noticias", result.name);
+          //     console.log("Actualizacion");
+          //  }, 5000);
+           
+          // this.firebaseService.put(newNoticia, "noticias", result.name).subscribe(res=>{
+          //   console.log(res);
+          // })
+          
+          
       })
          
     });
@@ -268,10 +281,7 @@ export class DashboardComponent implements OnInit {
   // ---------------------------------------------------------------CARGAR IMAGENES 
 
   uploadImag(){
-    let list:FileItem[]=[];
-
-    // list = this.imagenesService.prueba2(this.filesUp);
-    // console.log(list);
+    this.imagenesService.prueba(this.filesUp);
   }
 
   clerFiles(){
