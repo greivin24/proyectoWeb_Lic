@@ -3,10 +3,13 @@ import { CommonModule } from '@angular/common';
 
 
 // Firebase
-import { AngularFireModule } from "@angular/fire";
-import { AngularFireAuthModule } from "@angular/fire/auth";
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireModule} from "@angular/fire";
+import { AngularFireAuthModule} from "@angular/fire/auth";
+import { AngularFirestoreModule  } from '@angular/fire/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+
+
 
 
 // Initialize Firebase
@@ -27,6 +30,7 @@ var config = {
     AngularFireModule.initializeApp(config),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFireStorageModule,
     AngularFireDatabaseModule
   ], 
   exports:[

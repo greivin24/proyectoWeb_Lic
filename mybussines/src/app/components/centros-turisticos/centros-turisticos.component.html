@@ -7,11 +7,11 @@
 
     <div class="card-columns mt-3">
         <div class="card text-center " *ngFor="let item of centros_list">
-            <img src="../../../assets/centros/{{item.ruta}}/1.jpg" class="card-img-top" alt="...">
+            <img [src]="item.imgs[0].url_s" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title ">{{item.nombre}}</h5>
-                <p>Rank <small title="Valoración: {{item.valoraciones}}" style="color: rgba(142, 150, 33, 0.904)"><ngb-rating [(rate)]="item.valoraciones"></ngb-rating></small></p>
-                <p class="card-text">Dirección: <small>{{item.direccion}}</small></p>
+                <p>Rank <small title="Valoración: {{item.valoracion}}" style="color: rgba(142, 150, 33, 0.904)"><ngb-rating [(rate)]="item.valoraciones"></ngb-rating></small></p>
+                <p class="card-text">Dirección: <small>{{item.dirreccion}}</small></p>
                 <button [routerLink]="[ '/home/centro-turistico/', item.id ]" class="btn btn-outline-primary btn-block">Visitar </button>
             </div>
         </div>

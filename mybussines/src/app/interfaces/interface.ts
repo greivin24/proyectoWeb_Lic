@@ -1,4 +1,5 @@
 import { FileItem } from '../models/file-item';
+import { Observable } from 'rxjs';
 
 export interface NavbarOpc{
     nombre:string,
@@ -35,8 +36,8 @@ export class Noticia{
   sub: string;
   fecha: string;
   descripcion: string;
-  listImg: FileItem[];
   imgs:any;
+  
 
   constructor (pNombre, pSub, pFecha, pDesc){
     this.nombre = pNombre;
@@ -45,6 +46,64 @@ export class Noticia{
     this.descripcion = pDesc;
   }
 }
+
+export class CentroTuristico{
+  id:string;
+  nombre: string;
+  dirreccion: string;
+  telefono: string;
+  horarios: string;
+  valoracion: string;
+  seguidores: string;
+  historia: string;
+  video: string;
+  descripcion: string;
+  imgs:any;
+  subcriptores:any;
+  comentarios:any;
+
+  constructor (pnombre:string, pdirreccion:string, ptelefono:string, phorarios:string, phistoria:string, pvideo:string, pdescripcion:string){
+    
+    this.nombre = pnombre;
+    this.dirreccion = pdirreccion;
+    this.telefono = ptelefono;
+    this.horarios = phorarios;
+    this.valoracion = "0";
+    this.seguidores = "0";
+    this.historia = phistoria;
+    this.video = pvideo;
+    this.descripcion = pdescripcion;
+    this.subcriptores = [];
+    this.comentarios = [];
+  }
+}
+
+export class Subcriptor{
+  id:string;
+  uid:string;
+  url:string;
+  cid:string;
+  constructor(puid:string, purl:string, pcid:string) {
+    this.uid = puid;
+    this.url = purl;
+    this.cid = pcid;
+  }
+}
+
+export class Comments{
+  id:string;
+  uid:string;
+  url:string;
+  cid:string;
+  comment:string;
+  constructor(puid:string, purl:string, pcid:string, pcoment:string) {
+    this.uid = puid;
+    this.url = purl;
+    this.cid = pcid;
+    this.comment = pcoment;
+  }
+}
+
 
 export class Upload {
 

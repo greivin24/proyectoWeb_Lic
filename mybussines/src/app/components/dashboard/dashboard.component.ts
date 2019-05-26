@@ -7,13 +7,12 @@ import { FirebaseService } from '../../services/firebase.service';
 import { ImagenesService } from '../../services/imagenes.service';
 import { DataStorageService } from '../../localstorage/data-storage.service';
 
-import { Noticia } from '../../interfaces/interface';
+import { Noticia, CentroTuristico } from '../../interfaces/interface';
 
 
 import { NgForm } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FileItem } from 'src/app/models/file-item';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,20 +21,16 @@ import { Observable } from 'rxjs';
 })
 export class DashboardComponent implements OnInit {
 
+  
+  //-----
   user:any;
   userAdmin:boolean = true;
   mostarNoticia:boolean=true;
-  listNoticias:any[]=[];
-  listCentros:any[]=[];
 
-
-  //-----
-
-
-
-
-
-  //-----
+  listNoticias:any={};
+  listNoticiastFullLoad:boolean=false;
+  listCentros:any={};
+  listCentrosFullLoad:boolean= false;  //-----
 
   //file preview
   selecetdFile : File;
@@ -60,24 +55,14 @@ export class DashboardComponent implements OnInit {
   centroEditID:string;
   centroEdit:any = {};
 
-  constructor(private activatedRouter: ActivatedRoute, private dataService:DataService, private firebaseService:FirebaseService, private dataStorageService:DataStorageService, private httpClientModule:HttpClientModule, private imagenesService: ImagenesService) {
+  constructor(private activatedRouter: ActivatedRoute, private firebaseService:FirebaseService, private dataStorageService:DataStorageService, private httpClientModule:HttpClientModule, private imagenesService: ImagenesService) {
     this.activatedRouter.params.subscribe( params =>{
       this.firebaseService.getUser(params['id']).subscribe(result=>{
         this.user = result;
 
         if(this.user.rol =="Administrador"){
           this.userAdmin = true;
-          this.listNoticias = this.dataService.getNoticiasList();
-          console.log(this.listNoticias);
-          this.listCentros = this.dataService.getCentrosList();
-          this.firebaseService.getUsers().subscribe(result =>{
-              
-            for (const key in result) {
-              if(result[key].rol == "Editor")
-                this.listEditors.push(result[key])
-            }
-
-          })
+          this.cargarTodo();
         }else
           this.userAdmin = false;
           this.btnCargarMyCentros();
@@ -87,6 +72,40 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {}
 
+  cargarTodo(){
+    this.cargarNoticas();
+    this.cargarCentros();
+    this.cargarEditores();
+  }
+
+  cargarNoticas(){
+    //Carga de la lista de noticias
+    this.firebaseService.gets("noticias").subscribe(res=>{
+      this.listNoticias = {};
+      this.listNoticias = this.firebaseService.fromObjetcToArray(res);
+      this.listNoticiastFullLoad = true;
+    });  
+  }
+
+  cargarCentros(){
+  //Carga de la lista de centros
+    this.firebaseService.gets("centros").subscribe(res=>{
+      this.listCentros = {};
+      this.listCentros = this.firebaseService.fromObjetcToArray(res);
+      this.listCentrosFullLoad = true;
+    });
+  }
+
+  cargarEditores(){
+    //Carga de la lista de editores
+    this.firebaseService.getUsers().subscribe(result =>{
+      this.listEditors = [];
+      for (const key in result) {
+        if(result[key].rol == "Editor")
+          this.listEditors.push(result[key])
+      }
+    });
+  }
 
   btnMostrar(val:string){
     if(val != "noticias")
@@ -101,127 +120,93 @@ export class DashboardComponent implements OnInit {
   //--------------Noticias
 
   btnSearchNoticia(val:string){
-    if(val != "")
-      this.listNoticias = this.dataService.searchNoticia(val);
-    else
-      this.listNoticias = this.dataService.getNoticiasList();
+    // if(val != "")
+    //   this.listNoticias = this.dataService.searchNoticia(val);
+    // else
+    //   this.listNoticias = this.dataService.getNoticiasList();
   }
 
-  onFileUpload(event){
-    this.selecetdFile = event.target.files[0];
-    const Imgreader = new FileReader();
-    Imgreader.onload = () => {
-      this.imagePreview = Imgreader.result;
-    };
-    this.verImagen = true;
-    Imgreader.readAsDataURL(this.selecetdFile);
-  } 
 
   btnCrearNoticia(val:NgForm){
     let newNoticia = new Noticia( val.value.titulo, val.value.sub ,val.value.fecha, val.value.desc );
     this.firebaseService.post(newNoticia, "noticias").subscribe ((result:any) =>{
-      console.log(result);
         newNoticia.id = result.name;
         this.firebaseService.put(newNoticia, "noticias", result.name).subscribe(res=>{
-          //this.imagenesService.loadImgToFirebase(this.filesUp, "Noticias", newNoticia.id);
-           this.imagenesService.prueba2(this.filesUp, "noticias", newNoticia.id).then((rest)=>{
-              console.log(rest);
-           })
-
-          //  setTimeout(()=>{
-          //     newNoticia.imgs = this.imagenesService.getListaImagenes();
-          //     this.firebaseService.put(newNoticia, "noticias", result.name);
-          //     console.log("Actualizacion");
-          //  }, 5000);
-           
-          // this.firebaseService.put(newNoticia, "noticias", result.name).subscribe(res=>{
-          //   console.log(res);
-          // })
-          
-          
-      })
-         
+          this.imagenesService.loadImgToFirebase(this.filesUp, "noticias", newNoticia);
+          this.clerFiles();      
+      })    
     });
-      //val.reset();
+      val.reset();
   }
 
-  btnSeleccionEditNoticia(key){
+  btnSeleccionEditNoticia(key:any){
     this.noticiaEdit = {};
-    this.noticiaEdit = this.dataService.getNoticiaID(key);
-    console.log(this.noticiaEdit);
-    this.isNuevaNoticia = false;
+    this.firebaseService.get("noticias/"+key).subscribe(res=>{
+      this.noticiaEdit = res;
+      this.isNuevaNoticia = false;
+    })
+    
+  }
+  
+  btnEliminarNoticia(key){
+    this.firebaseService.delete("noticias/"+key).subscribe(res=>{
+      this.cargarNoticas();
+    });
   }
 
   btnSeleccionNuevaNoticia(){
     this.isNuevaNoticia = true;
+    this.noticiaEdit = {};
   }
 
    btnEditarNoticia(val:NgForm){
-    let data:any ={
-      "id":this.noticiaEdit.id,
-     "nombre": val.value.titulo,
-     "imagen": this.noticiaEdit.imagen,
-     "ruta": this.noticiaEdit.ruta,
-     "sub":val.value.sub,
-     "fecha":this.noticiaEdit.fecha,
-      "descripcion": val.value.desc
-    };
-    this.listNoticias.splice(this.noticiaEdit.id, 1);
-    val.reset();
-    this.noticiaEdit = {};
-    this.listNoticias.push(data);
+    this.noticiaEdit.nombre = val.value.titulo;
+    this.noticiaEdit.sub = val.value.sub;
+    this.noticiaEdit.descripcion = val.value.desc;
+
+    this.firebaseService.put(this.noticiaEdit, "noticias", this.noticiaEdit.id).subscribe(res=>{
+      this.cargarNoticas();
+    })
     
   }
 
 
-  btnEliminarNoticia(index){
-    this.listNoticias.splice(index, 1);
-  }
+  
 
 //--------------Centros
 
-  btnEliminarCentro(index){
-    this.listCentros.splice(index, 1);
+  btnEliminarCentro(key){
+    this.firebaseService.delete("centros/"+key).subscribe(res=>{
+      this.cargarCentros();
+    });
   }
-
-  btnCrearCentro(val:NgForm){
-    let data:any ={
-      "id":this.listCentros.length,
-      "nombre": val.value.nombre,
-      // imagen": val.value.fileC,
-      "imagen":"1.jpg",
-      "direccion":val.value.direccion,
-      "ruta": "c4",
-      "telefono":val.value.telefono,
-      "horarios":val.value.horarios,
-      "valoraciones":"1",
-      "seguidores":"0",
-      "historia":val.value.historia,
-      "video":val.value.video,
-       "descripcion":val.value.descripcion
-    };
-
-    this.listCentros.push(data);
-    //console.log(this.listCentros);
-    val.resetForm();
-  }
-
+  
   btnAsignarCentro(key){
     this.idCentro = key;
   }
+
+  btnCrearCentro(val:NgForm){
+   
+    let newCentro = new CentroTuristico(val.value.nombre, val.value.direccion, val.value.telefono, val.value.horarios, val.value.historia, val.value.video, val.value.descripcion);
+    this.firebaseService.post(newCentro, "centros").subscribe ((result:any) =>{
+      console.log(result);
+      newCentro.id = result.name;
+        this.firebaseService.put(newCentro, "centros", result.name).subscribe(res=>{
+          this.imagenesService.loadImgToFirebase(this.filesUp, "centros", newCentro);
+          //this.clerFiles();      
+      })    
+    });
+     // val.reset();
+  }
+
+  
 
   btnAsignar(userKey){
     let data = [{
       "uid":userKey,
       "centroid":this.idCentro
     }];
-    let listExC = this.dataStorageService.getObjectValue("CentrosXEditor");
-    if(listExC == null){
-      this.dataStorageService.setObjectValue("CentrosXEditor", data);
-    }else{
-      listExC.push(data[0]);
-      this.dataStorageService.setObjectValue("CentrosXEditor", listExC);
-    }
+
     
   }
 
@@ -229,51 +214,51 @@ export class DashboardComponent implements OnInit {
   //--------------EDITOR-------------------------------//
 
   btnCargarMyCentros(){
-    this.listMyCentros = [];
-    let list = this.dataStorageService.getObjectValue("CentrosXEditor");
-    console.log(list);
-          if(list != null){
-            list.forEach(  (i) => { 
-              console.log("user: "+this.user.uid+" centroID:"+i.uid);
-              if(i.uid == this.user.uid){
-                this.listMyCentros.push(this.dataService.getCentroID(i.centroid));
-              }
-            });
-            // for (const i of list) {
+    // this.listMyCentros = [];
+    // let list = this.dataStorageService.getObjectValue("CentrosXEditor");
+    // console.log(list);
+    //       if(list != null){
+    //         list.forEach(  (i) => { 
+    //           console.log("user: "+this.user.uid+" centroID:"+i.uid);
+    //           if(i.uid == this.user.uid){
+    //             this.listMyCentros.push(this.dataService.getCentroID(i.centroid));
+    //           }
+    //         });
+    //         // for (const i of list) {
 
-            // }
-            console.log(this.listMyCentros);
-           //console.log(this.dataService.getCentroID(2))
-          }
+    //         // }
+    //         console.log(this.listMyCentros);
+    //        //console.log(this.dataService.getCentroID(2))
+    //       }
   }
 
   btnSeleccionarCentro(key){
-    this.centroEditID = key;
-    this.centroEdit = {};
-    this.centroEdit = this.dataService.getCentroID(key);
+    // this.centroEditID = key;
+    // this.centroEdit = {};
+    // this.centroEdit = this.dataService.getCentroID(key);
   }
 
   btnEditarCentro(val:NgForm){
-    let data:any ={
-      "id":this.centroEdit.id,
-      "nombre": val.value.nombre,
-      "imagen":this.centroEdit.imagen,
-      "direccion":val.value.direccion,
-      "ruta": this.centroEdit.ruta,
-      "telefono":val.value.telefono,
-      "horarios":val.value.horarios,
-      "valoraciones":this.centroEdit.valoraciones,
-      "seguidores":this.centroEdit.seguidores,
-      "historia":val.value.historia,
-      "video":val.value.video,
-       "descripcion":val.value.descripcion
-    };
+    // let data:any ={
+    //   "id":this.centroEdit.id,
+    //   "nombre": val.value.nombre,
+    //   "imagen":this.centroEdit.imagen,
+    //   "direccion":val.value.direccion,
+    //   "ruta": this.centroEdit.ruta,
+    //   "telefono":val.value.telefono,
+    //   "horarios":val.value.horarios,
+    //   "valoraciones":this.centroEdit.valoraciones,
+    //   "seguidores":this.centroEdit.seguidores,
+    //   "historia":val.value.historia,
+    //   "video":val.value.video,
+    //    "descripcion":val.value.descripcion
+    // };
 
-    this.dataService.list_centros.splice(this.centroEdit.id, 1);
-    this.dataService.list_centros.push(data);
-    val.reset();
-    this.centroEdit = {};
-    this.btnCargarMyCentros();
+    // this.dataService.list_centros.splice(this.centroEdit.id, 1);
+    // this.dataService.list_centros.push(data);
+    // val.reset();
+    // this.centroEdit = {};
+    // this.btnCargarMyCentros();
   }
 
 
@@ -281,7 +266,7 @@ export class DashboardComponent implements OnInit {
   // ---------------------------------------------------------------CARGAR IMAGENES 
 
   uploadImag(){
-    this.imagenesService.prueba(this.filesUp);
+   // console.log(this.imagenesService.loadIMG(this.filesUp, "noticias", "0001g"));
   }
 
   clerFiles(){

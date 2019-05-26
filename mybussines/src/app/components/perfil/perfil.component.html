@@ -28,13 +28,13 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title card-header text-center text-primary">Suscrito <i class="fa fa-exchange"></i></h5>
-                    <div *ngFor="let item of listCentrosSuscritos; let i = index;" class="mt-2 border-right border-top" style="border-style: outset;">
+                    <div *ngFor="let item of listMySubscribers; let i = index;" class="mt-2 border-right border-top" style="border-style: outset;">
                         <div class="row">
                             <div class="col-10 text-center align-self-center">
-                                <p><strong>{{item}}</strong> </p>
+                                <p><strong>{{item.nombre}}</strong> </p>
                             </div>
                             <div class="col-2 text-danger">
-                                <i (click)="btnDeleteSubcribe(i)" title="Eliminar suscripción" class="fa fa-trash fa-2x" style="cursor: pointer;"></i>
+                                <i (click)="btnDeleteSubcribe(item.id)" title="Eliminar suscripción" class="fa fa-trash fa-2x" style="cursor: pointer;"></i>
                             </div>
                         </div>
 
@@ -51,12 +51,12 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title card-header text-center text-primary">Valoraciones <i class="fa fa-diamond"></i></h5>
-                    <div *ngFor="let item of listCentrosSuscritos;" class="mt-2 border-right border-top" style="border-style: outset;">
+                    <div *ngFor="let item of listMySubscribers;" class="mt-2 border-right border-top" style="border-style: outset;">
                         <div class="text-center">
-                            <p><strong>{{item}}</strong></p>
+                            <p><strong>{{item.valoracion}}</strong></p>
                         </div>
                         <div class="offset-2">
-                            <p>Rank <small style="color: rgba(142, 150, 33, 0.904)"><ngb-rating [(rate)]="currentRate"></ngb-rating></small><small class="text-muted">{{currentRate}}</small></p>
+                            <p>Rank <small style="color: rgba(142, 150, 33, 0.904)"><ngb-rating (click)="setRank()" [(rate)]="currentRate"></ngb-rating></small><small class="text-muted">{{currentRate}}</small></p>
                         </div>
                     </div>
 

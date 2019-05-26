@@ -20,6 +20,7 @@ export class PerfilComponent implements OnInit {
   user:any=[];
 
   listCentrosSuscritos:any[]=[];
+  listMySubscribers:any[]=[];
 
   constructor(private activatedRouter: ActivatedRoute, private dataService:DataService, private firebaseService:FirebaseService, config:NgbRatingConfig, private dataStorageService:DataStorageService) { 
     config.max = 5;
@@ -28,7 +29,7 @@ export class PerfilComponent implements OnInit {
     this.activatedRouter.params.subscribe( params =>{
       this.firebaseService.getUser(params['id']).subscribe(result=>{
         this.user = result;
-        this.btnLoadCentrosSuscritos(this.user.uid);
+        this.btnLoadSubscribers();
       })
     })
 
@@ -38,13 +39,46 @@ export class PerfilComponent implements OnInit {
     
   }
 
-  btnLoadCentrosSuscritos(key:string){
-    this.listCentrosSuscritos = this.dataStorageService.getCentrosSuscritos(key);
-   // console.log(this.listCentrosSuscritos);
-  }
 
   btnDeleteSubcribe(index:any){
-    this.listCentrosSuscritos.splice(index, 1);
+    this.firebaseService.gets("subcriptores").subscribe(res=>{
+      this.processDesSubscriber(this.firebaseService.fromObjetcToArray(res), index);
+    })
+  }
+
+  processDesSubscriber(list:any, pcentroId:string){
+    list.forEach(element => {
+      if(this.user.uid == element.uid  &&  pcentroId == element.cid){
+        this.firebaseService.delete("subcriptores/"+element.id).subscribe(res=>{
+          this.btnLoadSubscribers();
+        });
+      }
+    });
+  }
+
+  btnLoadSubscribers(){
+    this.firebaseService.gets("subcriptores").subscribe(res=>{
+      this.processSubscribers(this.firebaseService.fromObjetcToArray(res));
+    })
+  }
+
+  processSubscribers(list:any){
+    this.listMySubscribers = [];
+    console.log(list);
+    list.forEach(element => {
+      if(this.user.uid == element.uid){
+        this.firebaseService.get("centros/"+element.cid).subscribe(res=>{
+          this.listMySubscribers.push(res);
+          console.log(this.listMySubscribers);
+        })
+        
+      }
+    });
+
+  }
+
+  setRank(){
+    console.log(this.currentRate);
   }
 
 }

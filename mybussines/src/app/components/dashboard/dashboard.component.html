@@ -1,3 +1,4 @@
+<!-- PANEL DE CONTROL DE UN ADMINISTRADOR-->
 <div *ngIf="userAdmin" class="container-fluid animated fadeIn">
     <div class="row d-flex d-md-block flex-nowrap wrapper">
         <div class="col-md-3 float-left col-1 pl-0 pr-0 collapse width " id="sidebar">
@@ -23,14 +24,14 @@
                 </div>
                 <div class="row">
                     <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
-                        <div class="card-columns">
-                            <div class="card" *ngFor="let item of listNoticias; let i = index;">
+                        <div class="card-columns" *ngIf="listNoticiastFullLoad">
+                            <div class="card" *ngFor="let item of listNoticias">
                                 <div class="card-body">
                                     <h5 class="card-title card-header text-center">{{item.nombre}} <i class="fa fa-newspaper-o"></i></h5>
                                     <div class="mt-2">
                                         <div class="row center align-self-center" style="cursor: pointer;">
                                             <button (click)="btnSeleccionEditNoticia(item.id)" class="btn btn-outline-warning btn-block">Editar<i class="fa fa-edit"></i></button>
-                                            <button (click)="btnEliminarNoticia(i)" class="btn btn-outline-danger btn-block">Eliminar<i class="fa fa-trash"></i></button>
+                                            <button (click)="btnEliminarNoticia(item.id)" class="btn btn-outline-danger btn-block">Eliminar<i class="fa fa-trash"></i></button>
                                         </div>
 
                                     </div>
@@ -65,39 +66,20 @@
                                 </div>
                                 <div class="form-group center">
 
-                                    <!-- <div class="row">
-                                        <div class="col-2 align-self-center">
-                                            <input style="display: none;" type="file" (change)="onFileUpload($event)" ngModel required #selectFile #file="ngModel" id="file" name="file">
-                                            <button class="btn btn-info" title="Subir imagen" style="cursor: pointer; border: none;" (click)="selectFile.click()"><i class="text-white fa fa-upload fa-2x"></i> </button>
-                                        </div>
-                                        <div class="ml-2 col-9">
-                                            <div class="image-preview">
-                                                <img *ngIf="verImagen" class="img-fluid" [src]="imagePreview">
-                                            </div>
-                                        </div>
-                                    </div> -->
 
                                     <hr><br>
                                     <!-- CARGA DE IMAGEN CON DROP -->
-                                    <div class="row">
-                                        <div *ngIf="filesUp.length == 4">
-                                            <button class="btn btn-danger" (click)="clerFiles()">Limpiar</button>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div *ngIf="filesUp.length != 4" class="col-4">
-                                            <div appNgDropFiles [filesUp]="filesUp" (isHover)="isHover=$event" [ngClass]="{'file-over': isHover}" class="well drop-zone">
-                                                <!-- <img src="../../../assets/img/drop-images.png" alt="drop-zone-img"> -->
-                                                <i class="fa fa-upload fa-2x"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-8">
-                                            <button class="btn btn-primary" (click)=" uploadImag()" [disabled]="filesUp.length === 0">Cargar</button>
-                                        </div>
+                                    <div>
+                                        <button class="btn btn-danger btn-block" (click)="clerFiles()">Limpiar Imagenes</button>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col-12">
+                                    <div class="row mt-2">
+                                        <div *ngIf="filesUp.length != 4" class="col-3">
+                                            <div appNgDropFiles [filesUp]="filesUp" (isHover)="isHover=$event" [ngClass]="{'file-over': isHover}" class="well drop-zone">
+                                                <i class="fa fa-upload fa-3x"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-9">
                                             <table>
                                                 <thead class="thead=dark">
                                                     <tr>
@@ -106,7 +88,7 @@
                                                         <th>Progreso</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody class="" style="font-size: 10px;">
                                                     <tr *ngFor="let item of filesUp">
                                                         <th>{{item.nombreArchivo}}</th>
                                                         <th>{{item.archivo.size / 1024 / 1024 | number: '.2-2'}} MB</th>
@@ -119,10 +101,7 @@
                                                 </tbody>
                                             </table>
                                         </div>
-
                                     </div>
-
-
 
                                 </div>
 
@@ -160,6 +139,16 @@
                                     <label>Descripción</label>
                                     <textarea rows="3" class="form-control" id="desc" name="desc" [ngModel]="noticiaEdit.descripcion" required #desc="ngModel" placeholder="Descripción de la noticia"></textarea>
                                 </div>
+                                <div class="form-group d-none d-sm-block">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-6 col-md-3 image-grid-item" *ngFor="let item of noticiaEdit.imgs; let i = index">
+                                            <div class="image-grid-cover">
+                                                <img [src]="noticiaEdit.imgs[i].url_s" alt="..." class="img-thumbnail">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
 
                                 <button [disabled]="!formaEditNoticia.valid" (click)="btnEditarNoticia(formaEditNoticia)" class="btn btn-outline-success btn-block">Actualizar Noticia</button>
                             </form>
@@ -180,15 +169,15 @@
                 </div>
                 <div class="row">
                     <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
-                        <div class="card-columns">
-                            <div class="card" *ngFor="let item of listCentros; let i = index;">
+                        <div class="card-columns" *ngIf="listCentrosFullLoad">
+                            <div class="card" *ngFor="let item of listCentros">
                                 <div class="card-body">
                                     <h5 class="card-title card-header text-center">{{item.nombre}} <i class="fa fa-image"></i></h5>
-                                    <img src="../../../assets/centros/{{item.ruta}}/1.jpg" class="card-img-top" alt="..." height="200px">
+                                    <img [src]="item.imgs[0].url_s" class="card-img-top" alt="..." height="200px">
                                     <div class="mt-2">
                                         <div class="row center align-self-center" style="cursor: pointer;">
-                                            <button (click)="btnEliminarCentro(i)" class="btn btn-outline-danger btn-block">Eliminar<i class="fa fa-trash"></i></button>
-                                            <button class="btn btn-outline-primary btn-block" (click)="btnAsignarCentro(i)" data-toggle="modal" data-target="#asignarModal">Asignar Centro Turistico<i class="fa fa-street-view"></i></button>
+                                            <button (click)="btnEliminarCentro(item.id)" class="btn btn-outline-danger btn-block">Eliminar<i class="fa fa-trash"></i></button>
+                                            <button (click)="btnAsignarCentro(item.id)" class="btn btn-outline-primary btn-block" data-toggle="modal" data-target="#asignarModal">Asignar Centro Turistico<i class="fa fa-street-view"></i></button>
                                         </div>
 
                                     </div>
@@ -238,20 +227,40 @@
 
                                 <div class="form-group center">
 
-                                    <div class="row">
-                                        <div class="col-2 align-self-center">
-                                            <input style="display: none;" type="file" (change)="onFileUpload($event)" ngModel required #selectFile #file="ngModel" id="file" name="file">
-                                            <button class="btn btn-info" title="Subir imagen" style="cursor: pointer; border: none;" (click)="selectFile.click()"><i class="text-white fa fa-upload fa-2x"></i> </button>
-                                        </div>
-                                        <div class="ml-2 col-9">
-                                            <div class="image-preview">
-                                                <img *ngIf="verImagen" class="img-fluid" [src]="imagePreview">
-                                            </div>
-                                        </div>
+                                    <hr><br>
+                                    <!-- CARGA DE IMAGEN CON DROP -->
+                                    <div>
+                                        <button class="btn btn-danger btn-block" (click)="clerFiles()">Limpiar Imagenes</button>
                                     </div>
 
-                                    <div class="row">
-
+                                    <div class="row mt-2">
+                                        <div *ngIf="filesUp.length != 4" class="col-3">
+                                            <div appNgDropFiles [filesUp]="filesUp" (isHover)="isHover=$event" [ngClass]="{'file-over': isHover}" class="well drop-zone">
+                                                <i class="fa fa-upload fa-3x"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-9">
+                                            <table>
+                                                <thead class="thead=dark">
+                                                    <tr>
+                                                        <th>Nombre</th>
+                                                        <th>Tamaño</th>
+                                                        <th>Progreso</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="" style="font-size: 10px;">
+                                                    <tr *ngFor="let item of filesUp">
+                                                        <th>{{item.nombreArchivo}}</th>
+                                                        <th>{{item.archivo.size / 1024 / 1024 | number: '.2-2'}} MB</th>
+                                                        <th>
+                                                            <div class="progress">
+                                                                <div class="progress-bar" role="progressbar" [ngStyle]="{'width': item.progreso + '%'}"></div>
+                                                            </div>
+                                                        </th>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -265,11 +274,6 @@
         </main>
     </div>
 </div>
-
-
-
-
-
 
 
 

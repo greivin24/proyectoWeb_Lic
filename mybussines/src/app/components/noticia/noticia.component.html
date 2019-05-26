@@ -3,21 +3,13 @@
         <h1>{{noticia.nombre}}</h1>
     </div>
     <div data-aos="fade-up" data-aos-duration="5000" class="row">
-        <div class="col-12 col-sm-6 col-md-4 image-grid-item">
+
+        <div class="col-12 col-sm-6 col-md-4 image-grid-item" *ngFor="let item of noticia.imgs; let i = index">
             <div class="image-grid-cover">
-                <img src="../../../assets/noticias/{{noticia.ruta}}/1.jpg" alt="..." class="img-thumbnail">
+                <img [src]="noticia.imgs[i].url_s" alt="..." class="img-thumbnail">
             </div>
         </div>
-        <div class="col-12 col-sm-6 col-md-4 image-grid-item">
-            <div class="image-grid-cover">
-                <img src="../../../assets/noticias/{{noticia.ruta}}/2.jpg" alt="..." class="img-thumbnail">
-            </div>
-        </div>
-        <div class="col-12 col-sm-6 col-md-4 image-grid-item">
-            <div class="image-grid-cover">
-                <img src="../../../assets/noticias/{{noticia.ruta}}/3.jpg" alt="..." class="img-thumbnail">
-            </div>
-        </div>
+
     </div>
     <div class="container">
         <div class="row mt-3 mb-3">

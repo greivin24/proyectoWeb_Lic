@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { DataService } from '../../services/data/data.service';
-
 import * as AOS from 'aos';
+import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
   selector: 'app-noticia',
@@ -12,12 +11,13 @@ import * as AOS from 'aos';
 })
 export class NoticiaComponent implements OnInit {
 
-  noticia:any ={};
-  constructor(private activatedRouter: ActivatedRoute, private dataService:DataService) { 
+  noticia:any = {};
+  constructor(private activatedRouter: ActivatedRoute, private firebaseService:FirebaseService) { 
 
     this.activatedRouter.params.subscribe( params =>{
-      this.noticia = this.dataService.getNoticiaID(params['id']);
-      console.log(this.noticia);
+      this.firebaseService.get("noticias/"+params['id']).subscribe(ret=>{
+        this.noticia = ret;
+      })
     })
 
   }
