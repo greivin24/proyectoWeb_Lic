@@ -54,6 +54,9 @@ export class CentroTuristicoComponent implements OnInit {
   getCentro(){
 
     this.user = this.dataStorageService.getObjectValue("online");
+    if(this.user.rol == "Anonimo")
+      this.isAnonimo = true;
+
     this.activatedRouter.params.subscribe( params =>{
       this.firebaseService.get("centros/"+params['id']).subscribe(ret=>{
         this.centro = ret;
@@ -96,11 +99,6 @@ export class CentroTuristicoComponent implements OnInit {
     })
   }
 
-
-  btnGetRol(user){
-    if(user.rol == "Anonimo")
-      this.isAnonimo = true;
-  }
   
   
   btnloadComments(){

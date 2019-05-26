@@ -90,6 +90,21 @@ export class Subcriptor{
   }
 }
 
+
+export class Propietario{
+  id:string;
+  uid:string;
+  displayName: string;
+  url:string;
+  cid:string;
+  constructor(puid:string, purl:string, pnombre:string,  pcid:string) {
+    this.uid = puid;
+    this.url = purl;
+    this.displayName = pnombre;
+    this.cid = pcid;
+  }
+}
+
 export class Comments{
   id:string;
   uid:string;
@@ -117,4 +132,18 @@ export class Upload {
   constructor(file:File) {
     this.file = file;
   }
+}
+
+export class Mensaje{
+  nombre:string;
+  email:string;
+  id:string;
+  msj:string;
+
+  constructor( pnombre:string, pemail:string, pmsj:string,) {
+    this.nombre = pnombre;
+    this.email = pemail;
+    this.msj = pmsj;
+  }
+
 }

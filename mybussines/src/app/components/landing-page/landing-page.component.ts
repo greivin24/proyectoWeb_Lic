@@ -4,6 +4,7 @@ import { FirebaseService } from '../../services/firebase.service';
 
 import * as AOS from 'aos';
 import * as alertify from 'alertifyjs';
+import { Mensaje } from 'src/app/interfaces/interface';
 
 
 @Component({
@@ -20,16 +21,17 @@ export class LandingPageComponent implements OnInit {
   }
 
   btnEnviarMsj(val:NgForm){
-    const data ={
-      "nombre": val.value.nombre,
-      "email": val.value.email,
-      "mensaje": val.value.msj,
-    }
-    this.firebaseService.post(data, "casillero").subscribe (result =>{
-      console.log(result);
-      alertify.alert("Mensaje recibido exitosamente, pronto estaremos en contacto.");
-      val.reset();
+
+    let data = new Mensaje(val.value.nombre, val.value.email, val.value.msj);
+    this.firebaseService.post(data, "casillero").subscribe ((res:any) =>{
+      data.id = res.name;
+      this.firebaseService.put(data, "casillero", data.id).subscribe(res=>{
+        alertify.success("Mensaje recibido exitosamente, pronto estaremos en contacto.");
+        val.reset();
+      })
+      
     })
+    
   }
 
 }

@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { DataService } from '../../services/data/data.service';
 import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
@@ -13,7 +11,7 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 export class CentrosTuristicosComponent implements OnInit {
 
   public centros_list:any[] = [];
-  constructor(private firebaseService:FirebaseService, private dataService:DataService, config:NgbRatingConfig ) { 
+  constructor(private firebaseService:FirebaseService, config:NgbRatingConfig ) { 
     config.max = 5;
     config.readonly = true;
   }
@@ -29,10 +27,7 @@ export class CentrosTuristicosComponent implements OnInit {
   }
 
   btnSearch(val:string){
-    if(val != ""){
-      this.centros_list = this.dataService.searchCentro(val);
-    }else
-      this.centros_list = this.dataService.getCentrosList();
+    
   }
 
 }

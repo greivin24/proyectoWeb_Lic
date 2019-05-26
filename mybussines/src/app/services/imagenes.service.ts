@@ -37,13 +37,10 @@ export class ImagenesService {
         task.snapshotChanges().pipe(finalize(()=>{ 
           staregeRef.getDownloadURL().subscribe(rest=>{
             item.estadoSubiendo = false;
-            console.log(rest);
             item.url_s = rest;
             listImg.push(item);
-              fullData.imgs = listImg;
-              this.firebaseService.put(fullData, nodo, fullData.id).subscribe(res=>{
-                console.log(res);
-            });  
+            fullData.imgs = listImg;
+            this.firebaseService.put(fullData, nodo, fullData.id).subscribe(res=>{});  
           })})).subscribe();
        
 

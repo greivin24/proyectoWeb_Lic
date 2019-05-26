@@ -51,6 +51,8 @@ import { KeysPipe } from './pipes/keys.pipe';
 
 import { BtnctaContactenosComponent } from './components/btncta-contactenos/btncta-contactenos.component';
 import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -82,7 +84,8 @@ import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
     FormsModule, 
     CarouselModule,
     FirebaseModule,
-    EmbedVideo
+    EmbedVideo,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
      
   ],
   providers: [

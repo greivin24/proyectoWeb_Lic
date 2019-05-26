@@ -1,13 +1,3 @@
-<!-- <form (ngSubmit)="guardarUser()" #forma="ngForm">
-    <div class="form-group">
-        <label for=""></label>
-        <input type="text" name="nombre" [(ngModel)]="usuario.nombre" required class="form-control" placeholder="">
-        <small id="helpId" class="text-muted">Nombre</small>
-        <input type="text" name="apellido" [(ngModel)]="usuario.apellido" required class="form-control" placeholder="">
-        <small id="helpId" class="text-muted">Apellido</small><br>
-        <button class="btn btn-outline-primary" [disabled]="!forma.valid">Agregar a FireBase</button>
-    </div>
-</form> -->
 <section class="headerTop pt-5 pb-5 mt-0 align-items-center">
     <div class="container-fluid">
         <div data-aos="flip-right" class="animated fadeIn col-sm-10 offset-sm-2 col-md-6 offset-md-3 col-lg-5 offset-lg-3 col-xl-4 offset-xl-4">
@@ -29,54 +19,38 @@
                         <button [disabled]="!forma.valid" (click)="btnLogin(forma)" class="btn  btn-danger col">Ingresar</button>
                     </div>
 
-                    <div class="text-center mt-2">
-                        <a><img (click)="btnLoginGoogle()" src="../../../assets/img/002-google-plus.png" alt="img_google"></a>
+                    <div class="mt-3">
+                        <h5 class="text-primary">Registrarse</h5>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="mt-2">
+                                <button class="btn btn-sm btn-outline-secondary btn-sm" (click)="btnLoginAnonimo()"><i class="fa fa-user-secret"></i> Anonimo</button>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="text-center mt-2">
+                                <button class="btn btn-outline-danger btn-sm" img (click)="btnLoginGoogle()"><i class="fa fa-google-plus-circle"></i> Google</button>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="text-center mt-2">
+                                <button class="btn btn-outline-info btn-sm" img (click)="btnLoginFacebook()"><i class="fa fa-facebook-square"></i> Facebook</button>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class=" mt-2">
-                        <button class="btn btn-sm btn-outline-secondary" (click)="btnLoginAnonimo()"><i class="fa fa-user-secret"></i> Ingresar Anonimo</button>
-                    </div>
-
-                    <div class="mt-5">
-                        <p class="text-center">
-                            Don't have an account?
-                            <a href="#">Click here to register</a>
-                        </p>
+                    <div class="mt-3">
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <div class="copyright">
+                                    <p>© <span>2018</span> <a [routerLink]="[ 'landing-page' ]" class="transition">MyBussines</a> All rights reserved.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </section>
-
-<!-- <div *ngIf="authService.user$ | async as user">
-    <h2>Hola {{ user.displayName }}</h2>
-    <img [src]="user.photoURL" alt="">
-    <p>UID: {{ user.uid }}</p>
-    <p>something: {{user.something}}</p>
-    <button class="btn btn-primary" (click)="btnLogout()">logout</button>
-</div> -->
-
-
-<!-- <div *ngIf="authService.user$ | async; then authenticated else guest">
-
-    </div>
-
-    <ng-template #guess>
-        <div class="text-center mt-2">
-            <a><img (click)="btnLoginGoogle()" src="../../../assets/img/002-google-plus.png" alt="img_google"></a>
-        </div>
-    </ng-template>
-
-    <ng-template #authenticated>
-        <div *ngIf="authService.user$ | async as user">
-            <h2>Hola {{ user.displayName }}</h2>
-            <img [src]="user.photoURL" alt="">
-            <p>UID: {{ user.uid }}</p>
-            <p>something: {{user.something}}</p>
-        </div>
-    </ng-template> -->
-
-
-<!-- <button class="btn btn-outline-primary" (click)="btnLoginAnonimo()">Anonimo</button>
-<button class="btn btn-outline-primary" (click)="btnLogin()">Administrador</button> -->

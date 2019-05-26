@@ -16,10 +16,12 @@ import { UserAuth } from '../../interfaces/interface';
 export class NavbarComponent implements OnInit {
 
   activeUser:UserAuth;
+  userRol:string;
   constructor(private dataStorageService:DataStorageService, private router:Router, private authService:AuthService) { }
 
   ngOnInit() {
     this.activeUser = this.dataStorageService.getObjectValue("online");
+    this.userRol = this.activeUser.rol;
   }
 
   btnSalir(){

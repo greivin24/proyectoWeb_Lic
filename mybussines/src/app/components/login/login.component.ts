@@ -11,7 +11,7 @@ import { NgForm } from '@angular/forms';
 
 
 import * as AOS from 'aos';
-
+import * as alertify from 'alertifyjs';
 
 @Component({
   selector: 'app-login',
@@ -60,12 +60,32 @@ export class LoginComponent implements OnInit {
              this.router.navigate(['/home/noticias']); 
           })
           
+        }else{
+          alertify.message('Credenciales incorrectos.');  
         }
       });
   }
 
   btnLoginGoogle(){
     this.authService.googleSingIn();
+    this.authService.user$.subscribe((result:any)=>{
+      if(result !=null){
+        this.firebaseService.getUser(result.uid).subscribe(res=>{
+          if(res == null){
+            this.firebaseService.postNewUser(result);
+            this.dataStorageService.setObjectValue("online", result);
+          }else{
+            this.dataStorageService.setObjectValue("online", res);
+          }
+           this.router.navigate(['/home/noticias']); 
+        })
+        
+      }
+    });
+  }
+
+  btnLoginFacebook(){
+    this.authService.facebookSingIn();
     this.authService.user$.subscribe((result:any)=>{
       if(result !=null){
         this.firebaseService.getUser(result.uid).subscribe(res=>{

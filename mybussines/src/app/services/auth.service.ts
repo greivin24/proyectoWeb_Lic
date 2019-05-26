@@ -37,6 +37,12 @@ export class AuthService {
     return this.updateUserData(credencial.user);
   }
 
+  async facebookSingIn(){
+    const provider = new auth.FacebookAuthProvider();
+    const credencial = await this.angularFireAuth.auth.signInWithPopup(provider);
+    return this.updateUserData(credencial.user); 
+  }
+
   async loginEmailPass(email: string, password: string) {
     const credencial = await this.angularFireAuth.auth.signInWithEmailAndPassword(email, password);
     return this.updateUserData(credencial.user);
