@@ -263,16 +263,21 @@ export class DashboardComponent implements OnInit {
 
   btnEditarCentro(val:NgForm){
 
-    this.centroEdit.nombre = val.value.nombre;
-    this.centroEdit.dirreccion = val.value.dirreccion;
-    this.centroEdit.telefono = val.value.telefono;
-    this.centroEdit.horarios = val.value.horarios;
-    this.centroEdit.historia = val.value.historia;
-    this.centroEdit.video = val.value.video;
-    this.centroEdit.descripcion = val.value.descripcion;
-    this.firebaseService.put(this.centroEdit, "centros", this.centroEdit.id).subscribe(res=>{
-      alertify.success('Se Edito el Centro correctamente.');
-    })
+    if(this.centroEditID != null){
+      this.centroEdit.nombre = val.value.nombre;
+      this.centroEdit.dirreccion = val.value.dirreccion;
+      this.centroEdit.telefono = val.value.telefono;
+      this.centroEdit.horarios = val.value.horarios;
+      this.centroEdit.historia = val.value.historia;
+      this.centroEdit.video = val.value.video;
+      this.centroEdit.descripcion = val.value.descripcion;
+      this.firebaseService.put(this.centroEdit, "centros", this.centroEdit.id).subscribe(res=>{
+        alertify.success('Se Edito el Centro correctamente.');
+      })
+    }else{
+      alertify.message('No se puede modificar, ya que no se ha seleccionado el Centro.');
+    }
+    
 
   }
 
