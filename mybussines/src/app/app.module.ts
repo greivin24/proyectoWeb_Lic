@@ -53,6 +53,7 @@ import { BtnctaContactenosComponent } from './components/btncta-contactenos/btnc
 import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { RatingCustomComponent } from './components/rating-custom/rating-custom.component';
 
 
 @NgModule({
@@ -73,7 +74,8 @@ import { environment } from '../environments/environment';
     PerfilComponent,
     KeysPipe,
     BtnctaContactenosComponent,
-    NgDropFilesDirective
+    NgDropFilesDirective,
+    RatingCustomComponent
   ],
   imports: [
     BrowserModule,

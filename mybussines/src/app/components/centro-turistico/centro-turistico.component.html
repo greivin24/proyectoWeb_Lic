@@ -46,7 +46,9 @@
                     <div class="caption">
                         <span class="tag">Valoraciones</span>
                         <small><h1 class="title">Seguidores: {{centro.seguidores}}</h1> <i class="fa fa-thumbs-o-up"></i></small>
-                        <span class="author"><p>Rank <small title="Valoración: {{centro.valoracion}}" style="color: rgba(142, 150, 33, 0.904)"><ngb-rating [(rate)]="centro.valoraciones"></ngb-rating></small></p></span>
+                        <app-rating-custom [currating]="centro.valoracion" (ratingClick)="btnratingsystem($event)">
+
+                        </app-rating-custom>
                     </div>
                 </div>
             </div>

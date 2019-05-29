@@ -8,7 +8,8 @@ import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 
 import { UserAuth, Subcriptor , Comments } from '../../interfaces/interface';
 import { FirebaseService } from 'src/app/services/firebase.service';
-
+import { analyzeAndValidateNgModules } from '@angular/compiler';
+import * as alertify from 'alertifyjs';
 
 @Component({
   selector: 'app-centro-turistico',
@@ -139,6 +140,18 @@ export class CentroTuristicoComponent implements OnInit {
 
   }
 
+
+btnratingsystem ($event)
+{
+  if($event.rating != this.centro.valoracion){
+    let toputcentro = this.centro;
+    console.log("valoracion " +$event.rating);
+    toputcentro.valoracion=$event.rating;
+    this.firebaseService.put(toputcentro, "centros", toputcentro.id).subscribe(res=>{
+      alertify.success('Gracias por su valoracion');
+    })
+  }
+}
 
 
 }
