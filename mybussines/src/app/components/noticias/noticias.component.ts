@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../services/data/data.service';
 import { FirebaseService } from '../../services/firebase.service';
 import { ImagenesService } from '../../services/imagenes.service';
 
@@ -13,7 +12,7 @@ import { ImagenesService } from '../../services/imagenes.service';
 export class NoticiasComponent implements OnInit {
 
   noticias_listFire:any[]=[];
-  constructor(private dataService:DataService, private firebaseService:FirebaseService, private imagenesService:ImagenesService) { }
+  constructor( private firebaseService:FirebaseService, private imagenesService:ImagenesService) { }
 
   ngOnInit() {
     this.getsNoticias();

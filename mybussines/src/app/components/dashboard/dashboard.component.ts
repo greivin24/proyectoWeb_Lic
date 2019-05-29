@@ -11,7 +11,6 @@ import { Noticia, CentroTuristico, Propietario, UserAuth } from '../../interface
 import { NgForm } from '@angular/forms';
 import { FileItem } from 'src/app/models/file-item';
 import * as alertify from 'alertifyjs';
-import { DataService } from 'src/app/services/data/data.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -54,7 +53,7 @@ export class DashboardComponent implements OnInit {
   centroEditID:string;
   centroEdit:any = {};
 
-  constructor(private activatedRouter: ActivatedRoute, private firebaseService:FirebaseService, private imagenesService: ImagenesService, private dataService:DataService) {
+  constructor(private activatedRouter: ActivatedRoute, private firebaseService:FirebaseService, private imagenesService: ImagenesService) {
     this.activatedRouter.params.subscribe( params =>{
       this.firebaseService.getUser(params['id']).subscribe(result=>{
         this.user = result;
@@ -123,7 +122,7 @@ export class DashboardComponent implements OnInit {
     if(val == '')
       this.cargarNoticas();
     else
-      this.listNoticias = this.dataService.searchNoticia(val, this.listNoticias); 
+      this.listNoticias = this.searchNoticia(val, this.listNoticias); 
   }
 
 
@@ -181,7 +180,7 @@ export class DashboardComponent implements OnInit {
     if(val == '')
       this.cargarCentros();
     else
-      this.listCentros = this.dataService.searchCentro(val, this.listCentros);
+      this.listCentros = this.searchCentro(val, this.listCentros);
     
       
   }
@@ -296,5 +295,26 @@ export class DashboardComponent implements OnInit {
     this.filesUp = [];
   }
 
+  public searchCentro = (term: string, plist:any) => {
+    term=term.toLowerCase();
+    let showedList = [];
+    plist.forEach(  (item) => {
+      if (item.nombre.toLowerCase().includes(term) || item.dirreccion.toLowerCase().includes(term)) {
+        showedList.push(item);
+      }
+    });
+    return showedList;
+}
+
+public searchNoticia = (term: string, plist:any) => {
+  term=term.toLowerCase();
+  let showedList = [];
+  plist.forEach(  (item) => { 
+    if (item.nombre.toLowerCase().includes(term) || item.sub.toLowerCase().includes(term)) {
+      showedList.push(item);
+    }
+  });
+  return showedList;
+}
 
 }

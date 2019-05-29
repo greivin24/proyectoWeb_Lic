@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 import { FirebaseService } from 'src/app/services/firebase.service';
-import { DataService } from 'src/app/services/data/data.service';
 
 @Component({
   selector: 'app-centros-turisticos',
@@ -12,7 +11,7 @@ import { DataService } from 'src/app/services/data/data.service';
 export class CentrosTuristicosComponent implements OnInit {
 
   public centros_list:any[] = [];
-  constructor(private firebaseService:FirebaseService, config:NgbRatingConfig, private dataService:DataService ) { 
+  constructor(private firebaseService:FirebaseService, config:NgbRatingConfig ) { 
     config.max = 5;
     config.readonly = true;
   }
@@ -32,7 +31,30 @@ export class CentrosTuristicosComponent implements OnInit {
     if(val == '')
       this.getCentros();
     else
-      this.centros_list = this.dataService.searchCentro(val, this.centros_list); 
+      this.centros_list = this.searchCentro(val, this.centros_list); 
   }
+
+
+  public searchCentro = (term: string, plist:any) => {
+    term=term.toLowerCase();
+    let showedList = [];
+    plist.forEach(  (item) => {
+      if (item.nombre.toLowerCase().includes(term) || item.dirreccion.toLowerCase().includes(term)) {
+        showedList.push(item);
+      }
+    });
+    return showedList;
+}
+
+public searchNoticia = (term: string, plist:any) => {
+  term=term.toLowerCase();
+  let showedList = [];
+  plist.forEach(  (item) => { 
+    if (item.nombre.toLowerCase().includes(term) || item.sub.toLowerCase().includes(term)) {
+      showedList.push(item);
+    }
+  });
+  return showedList;
+}
 
 }

@@ -46,7 +46,6 @@ import { FirebaseModule } from './extra-module/firebase.module';
 
 
 //DataService Local
-import { DataService } from './services/data/data.service';
 import { KeysPipe } from './pipes/keys.pipe';
 
 import { BtnctaContactenosComponent } from './components/btncta-contactenos/btncta-contactenos.component';
@@ -92,7 +91,6 @@ import { environment } from '../environments/environment';
     FirebaseService,
     ImagenesService, 
     DataStorageService,
-    DataService, 
     AuthGuard, 
     AuthAdminGuardService, 
     AuthPerfilGuardService

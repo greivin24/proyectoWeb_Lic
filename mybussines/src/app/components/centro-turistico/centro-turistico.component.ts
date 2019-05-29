@@ -1,6 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DataService } from '../../services/data/data.service';
 import { DataStorageService } from '../../localstorage/data-storage.service';
 
 import { EmbedVideoService } from 'ngx-embed-video';
@@ -32,11 +31,12 @@ export class CentroTuristicoComponent implements OnInit {
 
   user:UserAuth;
   isAnonimo:boolean = false;
+  
   haveSubcripbers:boolean= false;
   inputComment:string;
 
 
-  constructor(private activatedRouter: ActivatedRoute, private dataService:DataService, config:NgbRatingConfig, private embedVideo:EmbedVideoService, private dataStorageService:DataStorageService, private firebaseService:FirebaseService) { 
+  constructor(private activatedRouter: ActivatedRoute, config:NgbRatingConfig, private embedVideo:EmbedVideoService, private dataStorageService:DataStorageService, private firebaseService:FirebaseService) { 
     config.max = 5;
     config.readonly = true;
    }

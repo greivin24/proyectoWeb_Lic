@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { DataService } from '../services/data/data.service';
 
 
 @Injectable({
@@ -7,7 +6,7 @@ import { DataService } from '../services/data/data.service';
 })
 export class DataStorageService {
 
-  constructor( private dataService:DataService ) { }
+  constructor( ) { }
 
   setObjectValue= (key:string, objectValue:any)=>{
     if (window.localStorage) {
@@ -36,26 +35,5 @@ export class DataStorageService {
   deleteObjectValue(key:string){
     localStorage.removeItem(key);
   }
-
-  getCentrosSuscritos(key:string){
-    let list:any[]=[];
-    let listCentros:any={};
-    let returnList:any[]=[];
-
-    listCentros = this.dataService.list_centros;
-    for (const i of listCentros) {
-      list = this.getObjectValue(i.nombre+"_Subscribers");
-      if(list != null)
-      for (const iterator of list) {
-        if(key == iterator.uid)
-          returnList.push(i.nombre);
-      }
-    }
-    //console.log(returnList);
-    return returnList;
-
-  }
-  
-
 
 }

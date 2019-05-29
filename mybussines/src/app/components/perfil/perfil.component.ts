@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { DataService } from '../../services/data/data.service';
 import { FirebaseService } from '../../services/firebase.service';
 import { UserAuth } from '../../interfaces/interface';
 
@@ -22,7 +21,7 @@ export class PerfilComponent implements OnInit {
   listCentrosSuscritos:any[]=[];
   listMySubscribers:any[]=[];
 
-  constructor(private activatedRouter: ActivatedRoute, private dataService:DataService, private firebaseService:FirebaseService, config:NgbRatingConfig, private dataStorageService:DataStorageService) { 
+  constructor(private activatedRouter: ActivatedRoute, private firebaseService:FirebaseService, config:NgbRatingConfig, private dataStorageService:DataStorageService) { 
     config.max = 5;
     config.readonly = false;
 
