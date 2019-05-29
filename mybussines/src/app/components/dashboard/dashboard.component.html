@@ -41,7 +41,7 @@
                     </div>
 
                     <!-- CREAR NUEVA NOTICIA -->
-                    <div *ngIf="isNuevaNoticia" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 animated fadeIn">
+                    <div *ngIf="isNuevaNoticia" class="col-12 animated fadeIn">
                         <div class="form-sec">
                             <div class="center">
                                 <h4 class="text-success text-center">Crear Nueva Noticia <i class="fa fa-newspaper-o"></i></h4>
@@ -88,7 +88,7 @@
                                                         <th>Progreso</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody class="" style="font-size: 10px;">
+                                                <tbody>
                                                     <tr *ngFor="let item of filesUp">
                                                         <th>{{item.nombreArchivo}}</th>
                                                         <th>{{item.archivo.size / 1024 / 1024 | number: '.2-2'}} MB</th>

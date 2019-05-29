@@ -11,6 +11,7 @@ import { Noticia, CentroTuristico, Propietario, UserAuth } from '../../interface
 import { NgForm } from '@angular/forms';
 import { FileItem } from 'src/app/models/file-item';
 import * as alertify from 'alertifyjs';
+import { DataService } from 'src/app/services/data/data.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -53,7 +54,7 @@ export class DashboardComponent implements OnInit {
   centroEditID:string;
   centroEdit:any = {};
 
-  constructor(private activatedRouter: ActivatedRoute, private firebaseService:FirebaseService, private imagenesService: ImagenesService) {
+  constructor(private activatedRouter: ActivatedRoute, private firebaseService:FirebaseService, private imagenesService: ImagenesService, private dataService:DataService) {
     this.activatedRouter.params.subscribe( params =>{
       this.firebaseService.getUser(params['id']).subscribe(result=>{
         this.user = result;
@@ -119,7 +120,10 @@ export class DashboardComponent implements OnInit {
   //--------------Noticias
 
   btnSearchNoticia(val:string){
-    
+    if(val == '')
+      this.cargarNoticas();
+    else
+      this.listNoticias = this.dataService.searchNoticia(val, this.listNoticias); 
   }
 
 
@@ -131,6 +135,7 @@ export class DashboardComponent implements OnInit {
             this.firebaseService.put(newNoticia, "noticias", result.name).subscribe(res=>{
               this.imagenesService.loadImgToFirebase(this.filesUp, "noticias", newNoticia);
               val.reset();
+              this.cargarNoticas();
               alertify.success('Noticia registrada correctamente.');    
           })    
         });
@@ -173,7 +178,12 @@ export class DashboardComponent implements OnInit {
 
 //--------------Centros
   btnSearchCentro(val:string){
+    if(val == '')
+      this.cargarCentros();
+    else
+      this.listCentros = this.dataService.searchCentro(val, this.listCentros);
     
+      
   }
 
   btnEliminarCentro(key){
@@ -195,7 +205,8 @@ export class DashboardComponent implements OnInit {
           this.firebaseService.put(newCentro, "centros", result.name).subscribe(res=>{
             this.imagenesService.loadImgToFirebase(this.filesUp, "centros", newCentro);
             this.cargarCentros(); 
-            val.reset();   
+            val.reset(); 
+            this.cargarCentros();  
             alertify.success('Se Registro el Centro correctamente.');  
           })    
       });

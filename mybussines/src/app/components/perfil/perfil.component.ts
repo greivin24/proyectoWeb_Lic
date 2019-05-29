@@ -64,14 +64,12 @@ export class PerfilComponent implements OnInit {
 
   processSubscribers(list:any){
     this.listMySubscribers = [];
-    console.log(list);
     list.forEach(element => {
       if(this.user.uid == element.uid){
         this.firebaseService.get("centros/"+element.cid).subscribe(res=>{
           this.listMySubscribers.push(res);
           console.log(this.listMySubscribers);
-        })
-        
+        })  
       }
     });
 

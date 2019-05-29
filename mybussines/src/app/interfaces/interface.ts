@@ -83,10 +83,12 @@ export class Subcriptor{
   uid:string;
   url:string;
   cid:string;
+  urank:string;
   constructor(puid:string, purl:string, pcid:string) {
     this.uid = puid;
     this.url = purl;
     this.cid = pcid;
+    this.urank = "0";
   }
 }
 

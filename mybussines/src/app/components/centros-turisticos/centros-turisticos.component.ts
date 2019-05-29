@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { DataService } from 'src/app/services/data/data.service';
 
 @Component({
   selector: 'app-centros-turisticos',
@@ -11,7 +12,7 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 export class CentrosTuristicosComponent implements OnInit {
 
   public centros_list:any[] = [];
-  constructor(private firebaseService:FirebaseService, config:NgbRatingConfig ) { 
+  constructor(private firebaseService:FirebaseService, config:NgbRatingConfig, private dataService:DataService ) { 
     config.max = 5;
     config.readonly = true;
   }
@@ -23,11 +24,15 @@ export class CentrosTuristicosComponent implements OnInit {
   getCentros(){
       this.firebaseService.gets("centros").subscribe(ret=>{
          this.centros_list = this.firebaseService.fromObjetcToArray(ret);
+         console.log(this.centros_list);
       }) 
   }
 
   btnSearch(val:string){
-    
+    if(val == '')
+      this.getCentros();
+    else
+      this.centros_list = this.dataService.searchCentro(val, this.centros_list); 
   }
 
 }

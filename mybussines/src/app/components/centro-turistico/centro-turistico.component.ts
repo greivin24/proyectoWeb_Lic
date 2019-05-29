@@ -8,6 +8,7 @@ import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 
 import { UserAuth, Subcriptor , Comments } from '../../interfaces/interface';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 
 
 @Component({
@@ -87,19 +88,24 @@ export class CentroTuristicoComponent implements OnInit {
     
   }
 
-
+  
   btnSubscribers(){
     let sub = new Subcriptor(this.user.uid, this.user.photoURL, this.centro.id);
     this.firebaseService.post(sub, "subcriptores").subscribe((ret:any)=>{
       sub.id = ret.name;
       this.isAnonimo = true;
-      this.firebaseService.put(sub, "subcriptores", sub.id).subscribe(ret=>{})
+      this.firebaseService.put(sub, "subcriptores", sub.id).subscribe(ret=>{
+        this.firebaseService.get("centros/"+this.centro.id).subscribe((res:any)=>{
+          let temCentro = res;
+          temCentro.seguidores = (Number(temCentro.seguidores) + 1).toString();
+          this.firebaseService.put(temCentro, "centros", temCentro.id).subscribe(res=>{});
+        })
+      })
       this.list_subscribers.push(sub);
       this.btnLoadSubscribers();
     })
   }
 
-  
   
   btnloadComments(){
     this.firebaseService.gets("comentarios").subscribe(res=>{
