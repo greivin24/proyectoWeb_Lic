@@ -8,6 +8,7 @@ import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 
 import { UserAuth, Subcriptor , Comments } from '../../interfaces/interface';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import {CommentNode} from '../comment-tree/comment-tree.component';
 
 
 @Component({
@@ -19,6 +20,8 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 export class CentroTuristicoComponent implements OnInit {
   @ViewChild('comment') commentInput: ElementRef;
 
+
+  comments:Array<CommentNode> = [];
   currentRate = 5;
   centro:any ={};
   centroFullLoad:boolean=false;
@@ -38,6 +41,7 @@ export class CentroTuristicoComponent implements OnInit {
   constructor(private activatedRouter: ActivatedRoute, private dataService:DataService, config:NgbRatingConfig, private embedVideo:EmbedVideoService, private dataStorageService:DataStorageService, private firebaseService:FirebaseService) { 
     config.max = 5;
     config.readonly = true;
+    this.comments =  [new CommentNode(" ")]
    }
 
   ngOnInit() { 

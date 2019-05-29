@@ -1,0 +1,13 @@
+<div id="mainDiv" *ngFor="let comment of comments.reverse()">
+    <img class="rounded-circle" alt="" width="50px" height="50px">
+    <label class="commentbox">{{comment.text}}</label>
+    <br>
+    <button class="btn btn-primary" (click)="openCommentText(comment)">Reply</button>
+    <div *ngIf="comment.isOpen">
+        <textarea [(ngModel)]="text" cols="80" rows="7"></textarea>
+        <br>
+        <button class="btn btn-success" (click)="addComment(comment)">Publicar <i class="fa fa-angle-double-right"></i></button>
+    </div>
+    <app-comment-tree [comments]="comment.anwsers">
+    </app-comment-tree>
+</div>
