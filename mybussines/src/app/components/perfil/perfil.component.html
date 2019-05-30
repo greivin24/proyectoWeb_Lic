@@ -53,7 +53,7 @@
                     <h5 class="card-title card-header text-center text-primary">Valoraciones <i class="fa fa-diamond"></i></h5>
                     <div *ngFor="let item of listMySubscribers;" class="mt-2 border-right border-top" style="border-style: outset;">
                         <div class="text-center">
-                            <p><strong>{{item.valoracion}}</strong></p>
+                            <p><strong>Seguidores: {{item.valoracion}}</strong></p>
                         </div>
                         <div class="offset-2">
                             <p>Rank <small style="color: rgba(142, 150, 33, 0.904)"><ngb-rating (click)="setRank()" [(rate)]="currentRate"></ngb-rating></small><small class="text-muted">{{currentRate}}</small></p>
