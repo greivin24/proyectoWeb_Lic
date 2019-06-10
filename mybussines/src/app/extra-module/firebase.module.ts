@@ -8,30 +8,20 @@ import { AngularFireAuthModule} from "@angular/fire/auth";
 import { AngularFirestoreModule  } from '@angular/fire/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { environment } from 'src/environments/environment';
 
-
-
-
-// Initialize Firebase
-var config = {
-  apiKey: "AIzaSyALBVTT556hh7Jg1sCdA6eOE4G4zNyBxeA",
-  authDomain: "angular-crud-firebase-d60e1.firebaseapp.com",
-  databaseURL: "https://angular-crud-firebase-d60e1.firebaseio.com",
-  projectId: "angular-crud-firebase-d60e1",
-  storageBucket: "angular-crud-firebase-d60e1.appspot.com",
-  messagingSenderId: "151666909009"
-};
 
 @NgModule({
   declarations: [
   ],
   imports: [
     CommonModule,
-    AngularFireModule.initializeApp(config),
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+   
   ], 
   exports:[
     AngularFireAuthModule,

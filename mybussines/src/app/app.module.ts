@@ -37,7 +37,6 @@ import { DataStorageService } from './localstorage/data-storage.service';
 
 //Auth Guard
 import { AuthGuard } from './guards/auth-guard.service';
-import { AuthAdminGuardService } from './guards/auth-admin-guard.service';
 import { AuthPerfilGuardService } from './guards/auth-perfil-guard.service';
 
 
@@ -48,10 +47,13 @@ import { FirebaseModule } from './extra-module/firebase.module';
 //DataService Local
 import { KeysPipe } from './pipes/keys.pipe';
 
+
 import { BtnctaContactenosComponent } from './components/btncta-contactenos/btncta-contactenos.component';
 import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+
+import { AgmCoreModule } from '@agm/core';
 
 
 @NgModule({
@@ -84,15 +86,15 @@ import { environment } from '../environments/environment';
     CarouselModule,
     FirebaseModule,
     EmbedVideo,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    AgmCoreModule.forRoot({apiKey: 'AIzaSyD7JGOhxsKqYzwzky98otpe3Pgxa1uDPbw'})
      
   ],
   providers: [
     FirebaseService,
     ImagenesService, 
     DataStorageService,
-    AuthGuard, 
-    AuthAdminGuardService, 
+    AuthGuard,
     AuthPerfilGuardService
   ],
   bootstrap: [AppComponent]

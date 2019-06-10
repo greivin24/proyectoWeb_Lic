@@ -264,15 +264,23 @@
                                     </div>
                                 </div>
 
-                                <button [disabled]="!formaNewCentro.valid" (click)="btnCrearCentro(formaNewCentro)" class="btn btn-outline-success btn-block">Crear Centro</button>
+                                <agm-map [latitude]="lat" (mapClick)="agregarMarcador( $event )" [longitude]="lng" style="height: 300px;">
+                                    <agm-marker *ngFor="let item of marcadores" [latitude]="item.lat" [longitude]="item.lng"></agm-marker>
+                                </agm-map>
+
+                                <button [disabled]="!formaNewCentro.valid" (click)="btnCrearCentro(formaNewCentro)" class="btn btn-outline-success btn-block mt-3">Crear Centro</button>
                             </form>
                         </div>
+
+
+
                     </div>
                 </div>
             </div>
 
         </main>
     </div>
+
 </div>
 
 

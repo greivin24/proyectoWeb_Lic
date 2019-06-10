@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
   btnLoginAnonimo(){
     this.user.rol = "Anonimo";
     this.dataStorageService.setObjectValue("online", this.user);
-    this.router.navigate(['/home/noticias']);
+    this.router.navigate(['/inicio/noticias']);
   }
 
   btnLogin(val:NgForm){
@@ -57,11 +57,9 @@ export class LoginComponent implements OnInit {
             }else{
               this.dataStorageService.setObjectValue("online", res);
             }
-             this.router.navigate(['/home/noticias']); 
+             this.router.navigate(['/inicio/noticias']); 
           })
           
-        }else{
-          alertify.message('Credenciales incorrectos.');  
         }
       });
   }
@@ -77,7 +75,7 @@ export class LoginComponent implements OnInit {
           }else{
             this.dataStorageService.setObjectValue("online", res);
           }
-           this.router.navigate(['/home/noticias']); 
+           this.router.navigate(['/inicio/noticias']); 
         })
         
       }
@@ -95,7 +93,7 @@ export class LoginComponent implements OnInit {
           }else{
             this.dataStorageService.setObjectValue("online", res);
           }
-           this.router.navigate(['/home/noticias']); 
+           this.router.navigate(['/inicio/noticias']); 
         })
         
       }

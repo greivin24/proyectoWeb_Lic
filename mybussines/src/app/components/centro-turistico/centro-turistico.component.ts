@@ -5,9 +5,8 @@ import { DataStorageService } from '../../localstorage/data-storage.service';
 import { EmbedVideoService } from 'ngx-embed-video';
 import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 
-import { UserAuth, Subcriptor , Comments } from '../../interfaces/interface';
+import { UserAuth, Subcriptor , Comments, CentroTuristico } from '../../interfaces/interface';
 import { FirebaseService } from 'src/app/services/firebase.service';
-import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 
 
 @Component({
@@ -20,7 +19,7 @@ export class CentroTuristicoComponent implements OnInit {
   @ViewChild('comment') commentInput: ElementRef;
 
   currentRate = 5;
-  centro:any ={};
+  centro:CentroTuristico;
   centroFullLoad:boolean=false;
   youtube_iframe_html: any;
 
@@ -28,12 +27,22 @@ export class CentroTuristicoComponent implements OnInit {
   list_commets:any[]=[];
   list_subscribers:any[]=[];
 
-
   user:UserAuth;
   isAnonimo:boolean = false;
+  isOwner:boolean = false;
   
   haveSubcripbers:boolean= false;
   inputComment:string;
+  inputCommentRespons:string;
+
+  lat:number;
+  lng:number;
+
+  ownerCentro:any={
+    "name":"",
+    "img":"",
+    "id":""
+  } ;
 
 
   constructor(private activatedRouter: ActivatedRoute, config:NgbRatingConfig, private embedVideo:EmbedVideoService, private dataStorageService:DataStorageService, private firebaseService:FirebaseService) { 
@@ -45,11 +54,29 @@ export class CentroTuristicoComponent implements OnInit {
     this.getCentro();
     this.btnloadComments();
     this.btnLoadSubscribers();
+    this.getsAsignaciones();
   }
 
    ngOnDestroy() {
 
    }
+
+   getsAsignaciones(){
+    this.firebaseService.gets("asignaciones").subscribe(result =>{
+      for (const key in result) {
+        if(result[key].cid == this.centro.id){
+          this.ownerCentro.name = result[key].displayName;
+          this.ownerCentro.img = result[key].url;
+          this.ownerCentro.id = result[key].uid;
+        }
+        if(result[key].uid == this.user.uid && result[key].cid == this.centro.id){
+          this.isOwner = true;
+          break;
+        } 
+      }
+    });
+
+  }
 
 
   getCentro(){
@@ -59,8 +86,10 @@ export class CentroTuristicoComponent implements OnInit {
       this.isAnonimo = true;
 
     this.activatedRouter.params.subscribe( params =>{
-      this.firebaseService.get("centros/"+params['id']).subscribe(ret=>{
+      this.firebaseService.get("centros/"+params['id']).subscribe((ret:any)=>{
         this.centro = ret;
+        this.lat = this.centro.latMap;
+        this.lng = this.centro.lngMap;
         this.centroFullLoad = true;
         this.youtube_iframe_html = this.embedVideo.embed(this.centro.video, {
           query: { portrait: 0, color: '333' },
@@ -109,7 +138,8 @@ export class CentroTuristicoComponent implements OnInit {
   
   btnloadComments(){
     this.firebaseService.gets("comentarios").subscribe(res=>{
-      this.processComments(this.firebaseService.fromObjetcToArray(res));
+      if(res != null || res != '')
+        this.processComments(this.firebaseService.fromObjetcToArray(res));
     })
   }
 
@@ -143,6 +173,28 @@ export class CentroTuristicoComponent implements OnInit {
       }
     });
 
+  }
+
+
+  btnResponderComentario(idComent:string){
+    
+    this.firebaseService.get("comentarios/"+idComent).subscribe((res:any)=>{
+      let comment:Comments = res;
+      comment.respons = this.inputCommentRespons;
+      comment.idRespons = this.user.uid;
+      comment.imgRespons = this.user.photoURL;
+      this.firebaseService.put(comment, "comentarios", idComent).subscribe(res=>{
+        
+        this.inputCommentRespons = "";
+      });
+    })
+
+  }
+
+  btnCensurar(key:string){
+    this.firebaseService.delete("comentarios/"+key).subscribe(res=>{
+      this.btnloadComments();
+    })
   }
 
 

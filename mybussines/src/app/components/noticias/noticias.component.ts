@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { ImagenesService } from '../../services/imagenes.service';
 
-
 @Component({
   selector: 'app-noticias',
   templateUrl: './noticias.component.html',
@@ -11,7 +10,7 @@ import { ImagenesService } from '../../services/imagenes.service';
 
 export class NoticiasComponent implements OnInit {
 
-  noticias_listFire:any[]=[];
+  noticias_listFire:any[] = [];
   constructor( private firebaseService:FirebaseService, private imagenesService:ImagenesService) { }
 
   ngOnInit() {

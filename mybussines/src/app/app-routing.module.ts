@@ -16,14 +16,14 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 
 // Guards
 import { AuthGuard } from './guards/auth-guard.service';
-import { AuthAdminGuardService } from './guards/auth-admin-guard.service';
 import { AuthPerfilGuardService } from './guards/auth-perfil-guard.service';
-
 
 const routes: Routes = [
   { path: 'landing-page', component: LandingPageComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
+  { path: 'inicio', component: HomeComponent, canActivate: [AuthGuard], children: [
+
+        { path: '',redirectTo: "noticias", pathMatch: 'full'},
         { path: 'noticias', component: NoticiasComponent },
         { path: 'noticia/:id', component: NoticiaComponent },
         { path: 'quienes-somos', component: QuienesSomosComponent },
@@ -32,19 +32,17 @@ const routes: Routes = [
         { path: 'centros-turisticos', component: CentrosTuristicosComponent },
         { path: 'centro-turistico/:id', component: CentroTuristicoComponent },
 
-        // duda aqui
-           { path: 'perfil/:id', component:  PerfilComponent, canActivate: [AuthPerfilGuardService]}, 
-           { path: 'dashboard/:id', component: DashboardComponent, canActivate: [AuthAdminGuardService]}
-
-        // { path: 'dashboard', component: DashboardComponent,canActivate: [AuthAdminGuardService],  children: [
-        //   { path: 'perfil/:id', component:  PerfilComponent, canActivate: [AuthPerfilGuardService]} 
-        // ]}
+        { path: 'perfil/:id', component:  PerfilComponent, canActivate: [AuthPerfilGuardService], data: {role: 'Anonimo'}  }, 
+        { path: 'panel-control/:id', component: DashboardComponent, canActivate: [AuthPerfilGuardService], data: {role: 'Anonimo'}},
+        { path: '**',redirectTo: "noticias", pathMatch: 'full'},
+        
   ]},
-  { path: '**',redirectTo: "home/noticias"}
+  { path: '**',redirectTo: "inicio/noticias"}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }

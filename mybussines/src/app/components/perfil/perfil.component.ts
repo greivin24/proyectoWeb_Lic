@@ -67,7 +67,6 @@ export class PerfilComponent implements OnInit {
       if(this.user.uid == element.uid){
         this.firebaseService.get("centros/"+element.cid).subscribe(res=>{
           this.listMySubscribers.push(res);
-          console.log(this.listMySubscribers);
         })  
       }
     });
@@ -75,7 +74,7 @@ export class PerfilComponent implements OnInit {
   }
 
   setRank(){
-    console.log(this.currentRate);
+    //this.currentRate;
   }
 
 }

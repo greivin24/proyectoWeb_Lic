@@ -15,14 +15,11 @@ export class AuthPerfilGuardService implements CanActivate {
 
   user:UserAuth;
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    this.user = this.dataStorageService.getObjectValue("online")
-    if (this.user.rol != "Anonimo") {
-        return true;
+    this.user = this.dataStorageService.getObjectValue("online");
+    if (this.user.rol != next.data.role) {
+      return true;
     }
-    console.log("bloqueado por el guard Perfil");
-    // navigate to login page
-    this._router.navigate(['/home/noticias']);
-    // you can save redirect url so after authing we can move them back to the page they requested
+    this._router.navigate(['/inicio/noticias']);
     return false;
 
   }

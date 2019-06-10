@@ -61,8 +61,13 @@ export class CentroTuristico{
   imgs:any;
   subcriptores:any;
   comentarios:any;
+  uidAsignado:string;
 
-  constructor (pnombre:string, pdirreccion:string, ptelefono:string, phorarios:string, phistoria:string, pvideo:string, pdescripcion:string){
+  latMap:number;
+  lngMap:number;
+  
+
+  constructor (pnombre:string, pdirreccion:string, ptelefono:string, phorarios:string, phistoria:string, pvideo:string, pdescripcion:string, plat:number, plng:number){
     
     this.nombre = pnombre;
     this.dirreccion = pdirreccion;
@@ -75,6 +80,10 @@ export class CentroTuristico{
     this.descripcion = pdescripcion;
     this.subcriptores = [];
     this.comentarios = [];
+    this.uidAsignado = "";
+
+    this.latMap = plat;
+    this.lngMap = plng;
   }
 }
 
@@ -113,11 +122,21 @@ export class Comments{
   url:string;
   cid:string;
   comment:string;
+
+  respons:string;
+  imgRespons:string;
+  idRespons:string;
+
   constructor(puid:string, purl:string, pcid:string, pcoment:string) {
     this.uid = puid;
     this.url = purl;
     this.cid = pcid;
     this.comment = pcoment;
+
+    this.respons = "";
+    this.imgRespons = "";
+    this.idRespons = "";
+
   }
 }
 
@@ -142,10 +161,20 @@ export class Mensaje{
   id:string;
   msj:string;
 
-  constructor( pnombre:string, pemail:string, pmsj:string,) {
+  constructor( pnombre:string, pemail:string, pmsj:string) {
     this.nombre = pnombre;
     this.email = pemail;
     this.msj = pmsj;
   }
 
+}
+
+export class Marcador{
+lat:Number;
+lng:number;
+
+  constructor( plat:number, plng:number) {
+    this.lat = plat;
+    this.lng = plng;
+  }
 }

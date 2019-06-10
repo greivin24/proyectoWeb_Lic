@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FirebaseService } from '../../services/firebase.service';
 import { ImagenesService } from '../../services/imagenes.service';
 
-import { Noticia, CentroTuristico, Propietario, UserAuth } from '../../interfaces/interface';
+import { Noticia, CentroTuristico, Propietario, UserAuth, Marcador } from '../../interfaces/interface';
 
 
 import { NgForm } from '@angular/forms';
@@ -19,6 +19,13 @@ import * as alertify from 'alertifyjs';
 })
 export class DashboardComponent implements OnInit {
 
+
+  marcadores:Marcador[]=[];
+  lat: number = 9.360977;
+  lng: number = -83.691863;
+
+  mapLat:number=null;
+  mapLng:number=null;
   
   //-----
   user:any;
@@ -181,8 +188,6 @@ export class DashboardComponent implements OnInit {
       this.cargarCentros();
     else
       this.listCentros = this.searchCentro(val, this.listCentros);
-    
-      
   }
 
   btnEliminarCentro(key){
@@ -198,17 +203,27 @@ export class DashboardComponent implements OnInit {
 
   btnCrearCentro(val:NgForm){
     if(this.filesUp.length > 3){
-      let newCentro = new CentroTuristico(val.value.nombre, val.value.direccion, val.value.telefono, val.value.horarios, val.value.historia, val.value.video, val.value.descripcion);
-      this.firebaseService.post(newCentro, "centros").subscribe ((result:any) =>{
-        newCentro.id = result.name;
-          this.firebaseService.put(newCentro, "centros", result.name).subscribe(res=>{
-            this.imagenesService.loadImgToFirebase(this.filesUp, "centros", newCentro);
-            this.cargarCentros(); 
-            val.reset(); 
-            this.cargarCentros();  
-            alertify.success('Se Registro el Centro correctamente.');  
-          })    
-      });
+      if(this.mapLat != null){
+        let newCentro = new CentroTuristico(val.value.nombre, val.value.direccion, val.value.telefono, val.value.horarios, val.value.historia, val.value.video, val.value.descripcion, this.mapLat, this.mapLng);
+        this.firebaseService.post(newCentro, "centros").subscribe ((result:any) =>{
+          newCentro.id = result.name;
+            this.firebaseService.put(newCentro, "centros", result.name).subscribe(res=>{
+              this.imagenesService.loadImgToFirebase(this.filesUp, "centros", newCentro); 
+              val.reset(); 
+
+              setTimeout(()=>{  
+                this.cargarCentros();
+                this.marcadores = [];
+                alertify.success('Se Registro el Centro correctamente.'); 
+              },5000);
+                
+               
+            })    
+        });
+      }else{
+        alertify.message('Se debe registar una ubicación en el mapa'); 
+      }
+      
     }else
           alertify.message('Se deben subir al menos 4 images a la noticia para Registrarla.');  
   }
@@ -252,7 +267,7 @@ export class DashboardComponent implements OnInit {
     this.firebaseService.get("asignaciones").subscribe(result =>{
       for (const key in result) {
         if(result[key].uid == this.user.uid)
-          temListMyCentros.push(result[key])
+          temListMyCentros.push(result[key]);
       }
 
       for (const key in temListMyCentros) {
@@ -266,6 +281,7 @@ export class DashboardComponent implements OnInit {
 
   btnSeleccionarCentro(key){
     this.centroEdit = {};
+    this.centroEditID = key;
     this.firebaseService.get("centros/"+key).subscribe(res=>{
       this.centroEdit = res;
     })
@@ -315,6 +331,14 @@ public searchNoticia = (term: string, plist:any) => {
     }
   });
   return showedList;
+}
+
+agregarMarcador(evento){
+  this.marcadores = [];
+  const newMarcador = new Marcador(evento.coords.lat,evento.coords.lng);
+  this.marcadores.push(newMarcador);
+  this.mapLat = evento.coords.lat;
+  this.mapLng = evento.coords.lng;
 }
 
 }

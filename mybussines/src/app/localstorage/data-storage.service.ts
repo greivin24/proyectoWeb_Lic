@@ -22,14 +22,15 @@ export class DataStorageService {
         if (DATA) {
           return DATA;
         }else{
-          //console.log('No se encontró el valor ${key} en el localStorage');
           this.setObjectValue(key, null);
           return null;
         }
       }else{
-        console.log('No se puede obtener la información, porque no está habilitado el localStorage');
+        alert('No se puede obtener la información, porque no está habilitado el localStorage');
       }
   }
+
+  
 
   
   deleteObjectValue(key:string){

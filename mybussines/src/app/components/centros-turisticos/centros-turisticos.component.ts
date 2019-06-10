@@ -23,7 +23,6 @@ export class CentrosTuristicosComponent implements OnInit {
   getCentros(){
       this.firebaseService.gets("centros").subscribe(ret=>{
          this.centros_list = this.firebaseService.fromObjetcToArray(ret);
-         console.log(this.centros_list);
       }) 
   }
 

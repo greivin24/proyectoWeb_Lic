@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a [routerLink]="[ '/home/noticias' ]" routerLinkActive="active">Noticias</a>
+    <a [routerLink]="[ '/noticias' ]" routerLinkActive="active">Noticias</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -7,22 +7,25 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" [routerLink]="[ '/home/quienes-somos' ]">Quienes-somos</a>
+                <a class="nav-link" [routerLink]="[ 'quienes-somos' ]">Quienes-somos</a>
             </li>
             <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" [routerLink]="[ '/home/servicios' ]">Servicios</a>
+                <a class="nav-link" [routerLink]="[ 'servicios' ]">Servicios</a>
             </li>
             <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" [routerLink]="[ '/home/contactenos' ]">Contactenos</a>
+                <a class="nav-link" [routerLink]="[ 'contactenos' ]">Contactenos</a>
             </li>
             <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" [routerLink]="[ '/home/centros-turisticos' ]">Centros Turisticos</a>
+                <a class="nav-link" [routerLink]="[ 'centros-turisticos' ]">Centros Turisticos</a>
             </li>
             <li class="nav-item" routerLinkActive="active" *ngIf="userRol != 'Anonimo' && userRol != 'Basico'">
-                <a class="nav-link" [routerLink]="[ '/home/dashboard', activeUser.uid  ]">Panel de Control</a>
+                <a class="nav-link" [routerLink]="[ 'panel-control', activeUser.uid  ]">Panel de Control</a>
             </li>
-            <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" [routerLink]="[ '/home/perfil',activeUser.uid ]"><img class="rounded-circle" src="{{activeUser.photoURL}}" alt="" width="30px" height="30px"> {{activeUser.displayName}}</a>
+            <li class="nav-item" routerLinkActive="active" *ngIf="userRol != 'Anonimo'">
+                <a class="nav-link" [routerLink]="[ 'perfil',activeUser.uid ]"><img class="rounded-circle" src="{{activeUser.photoURL}}" alt="" width="30px" height="30px"> {{activeUser.displayName}}</a>
+            </li>
+            <li class="nav-item" *ngIf="userRol == 'Anonimo'">
+                <button class="btn btn-info" [routerLink]="[ '/login' ]">Crear Cuenta</button>
             </li>
         </ul>
         <span class="navbar-text">

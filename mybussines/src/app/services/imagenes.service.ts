@@ -39,7 +39,9 @@ export class ImagenesService {
             item.url_s = rest;
             listImg.push(item);
             fullData.imgs = listImg;
-            this.firebaseService.put(fullData, nodo, fullData.id).subscribe(res=>{});  
+            this.firebaseService.put(fullData, nodo, fullData.id).subscribe(res=>{
+              console.log(res);
+            });  
           })})).subscribe();
        
 
